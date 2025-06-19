@@ -1,0 +1,9 @@
+@import "@unlogg/ui/globals.css";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+.logo-font {
+  font-family: Sora, sans-serif;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}

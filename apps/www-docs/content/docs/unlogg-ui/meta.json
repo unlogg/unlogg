@@ -1,0 +1,15 @@
+{
+  "title": "Unlogg UI",
+  "description": "The UI framework for Unlogg",
+  "icon": "Paintbrush",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "installation",
+    "cli",
+    "---Components---",
+    "...components",
+    "..."
+  ]
+}

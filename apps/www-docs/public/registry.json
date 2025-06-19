@@ -1,0 +1,17 @@
+{
+  "registry": [
+    {
+      "name": "test-component",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/test.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
