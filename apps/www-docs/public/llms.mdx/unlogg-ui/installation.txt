@@ -1,0 +1,123 @@
+# Installation
+URL: /unlogg-ui/installation
+
+A simple guide to set up commerce ui with the required dependencies and structure.
+
+This project is built with **Next.js**, using **TypeScript** and **Tailwind CSS** for all components.
+
+##
+
+<Steps>
+  <Step>
+    ### Install Tailwind CSS
+
+    The components are styled using **Tailwind CSS v.4**.
+
+    Follow the official [installation guide](https://tailwindcss.com/docs/installation) to set it up in your project. If you are still using Tailwind CSS v.3, you can follow the [Tailwindcss v.4 migration guide](https://tailwindcss.com/docs/upgrade-guide).
+  </Step>
+
+  <Step>
+    ### Install `lucide-react` icons
+
+    For the components that use icons, we use **Lucide React** icons.
+
+    <Tabs items={['npm', 'pnpm', 'bun']}>
+      ```bash tab="npm"
+      npm install lucide-react
+      ```
+
+      ```bash tab="pnpm"
+      pnpm add lucide-react
+      ```
+
+      ```bash tab="bun"
+      bun add lucide-react
+      ```
+    </Tabs>
+  </Step>
+
+  <Step>
+    ### Add a Utility Helper
+
+    To make it easier to conditionally apply Tailwind CSS classes, add this `cn` helper function to your project.
+
+    ```ts title="lib/utils.ts"
+    import { clsx, type ClassValue } from 'clsx'
+    import { twMerge } from 'tailwind-merge'
+
+    export function cn(...inputs: ClassValue[]) {
+      return twMerge(clsx(inputs))
+    }
+    ```
+
+    You might need to install the `clsx` and `tailwind-merge` packages.
+
+    <Tabs items={['npm', 'pnpm', 'bun']}>
+      ```bash tab="npm"
+      npm install clsx tailwind-merge
+      ```
+
+      ```bash tab="pnpm"
+      pnpm add clsx tailwind-merge
+      ```
+
+      ```bash tab="bun"
+      bun add clsx tailwind-merge
+      ```
+    </Tabs>
+  </Step>
+
+  <Step>
+    ### Add your first component
+
+    Now that you have set up the required dependencies, you can start adding components to your project.
+
+    For example, to add the `StarRating` component, you can just:
+
+    <Tabs items={['pnpm', 'npm','bun']}>
+      ```bash tab="pnpm"
+      pnpm shadcn@latest add https://unlogg.com/r/star-rating-basic-ex-01.json
+      ```
+
+      ```bash tab="npm"
+      npx shadcn@latest add https://unlogg.com/r/star-rating-basic-ex-01.json
+      ```
+
+      ```bash tab="bun"
+      bun shadcn@latest add https://unlogg.com/r/star-rating-basic-ex-01.json
+      ```
+    </Tabs>
+
+    And then import the component in your project like:
+
+    ```ts title="layouts/review.tsx"
+    "use client";
+
+    import StarRatingBasic from "@/components/unlogg-ui/test";
+    import { useState } from "react";
+
+    export default function Rating() {
+      const [rating, setRating] = useState(3);
+      return (
+        <div className="flex flex-row items-center gap-4">
+          <StarRatingBasic value={rating} onChange={setRating} maxStars={5} />
+          <p>({rating})</p>
+           {/* Rest of your code... */}
+        </div>
+      );
+    }
+    ```
+
+    <Step>
+      ## Done! 🎉
+
+      You can now manually *copy-paste* the components or use the [CLI](/docs/cli) to add components, blocks, and pages to your project.
+
+      Some components also rely on other third-party libraries like [shadcn/ui](https://ui.shadcn.com/docs/installation) and [Motion](https://motion.dev). These dependencies are specified in the component documentation.
+
+      <Callout title="We recommend using the CLI">
+        If you are using the CLI to add components, you don't need to worry about the dependencies. The CLI will take care of installing them for you. See the [CLI documentation](/docs/cli) for more information.
+      </Callout>
+    </Step>
+  </Step>
+</Steps>

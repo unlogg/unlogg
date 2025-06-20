@@ -1,7 +1,10 @@
-import { RootProvider } from "fumadocs-ui/provider";
+// import { RootProvider } from "fumadocs-ui/provider";
 import { DM_Sans, Geist_Mono, Sora } from "next/font/google";
 import type { ReactNode } from "react";
 import "./global.css";
+import { Provider } from "./provider";
+import { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 
 const geistSans = DM_Sans({
   subsets: ["latin"],
@@ -27,8 +30,14 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  description: "Official documentation for unlogg",
+  metadataBase: new URL(siteConfig.url),
+  title: "unlogg",
+};

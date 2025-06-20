@@ -37,7 +37,7 @@ export default async function Page(props: {
             {/* <ActionButtons slug={params.slug ?? []} /> */}
             <ViewOptions
               slug={params.slug ?? []}
-              markdownUrl={`${page.url}.mdx`}
+              // markdownUrl={`${page.url}.mdx`}
               githubUrl={`https://github.com`}
             />
           </div>
@@ -56,15 +56,37 @@ export async function generateStaticParams() {
   return source.generateParams();
 }
 
-export async function generateMetadata(props: {
+// export async function generateMetadata(props: {
+//   params: Promise<{ slug?: string[] }>;
+// }) {
+//   const params = await props.params;
+//   const page = source.getPage(params.slug);
+//   if (!page) notFound();
+
+//   return {
+//     title: page.data.title,
+//     description: page.data.description,
+//   };
+// }
+
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ slug?: string[] }>;
 }) {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
+  const { slug = [] } = await params;
+  const page = source.getPage(slug);
   if (!page) notFound();
-
+  const image = ["/docs-og", ...slug, "image.png"].join("/");
   return {
     title: page.data.title,
     description: page.data.description,
+    openGraph: {
+      images: image,
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: image,
+    },
   };
 }
