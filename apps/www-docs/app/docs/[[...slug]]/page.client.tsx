@@ -131,14 +131,14 @@ export function GitHubLink({ url }: { url: string }) {
 
 export function ViewOptions(props: {
   slug: string[];
-  markdownUrl: string;
+  // markdownUrl: string;
   githubUrl: string;
 }) {
   const baseUrl = siteConfig.url;
   const mdPageUrl = getMdxUrl(props.slug);
   const gpt = `https://chatgpt.com/?${new URLSearchParams({
     hints: "search",
-    q: `Read ${baseUrl}${props.markdownUrl}, I want to ask questions about it.`,
+    q: `Read ${baseUrl}${mdPageUrl}, I want to ask questions about it.`,
   })}`;
 
   const [isLoading, setLoading] = useState(false);

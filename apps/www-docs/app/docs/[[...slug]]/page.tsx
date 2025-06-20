@@ -37,7 +37,7 @@ export default async function Page(props: {
             {/* <ActionButtons slug={params.slug ?? []} /> */}
             <ViewOptions
               slug={params.slug ?? []}
-              markdownUrl={`${page.url}.mdx`}
+              // markdownUrl={`${page.url}.mdx`}
               githubUrl={`https://github.com`}
             />
           </div>
