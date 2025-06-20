@@ -16,75 +16,20 @@ import { siteConfig } from "@/config/site";
 
 const cache = new Map<string, string>();
 
-// export const ActionButtons = ({ slug }: { slug: string[] }) => {
-//   const [isLoading, setLoading] = useState(false);
-//   const [checkedCopy, onClickCopy] = useCopyButton(async () => {
-//     setLoading(true);
-//     const url = `/llms.mdx/${slug.join("/")}`;
-//     console.log("Copying LLM text from URL:", url);
-//     try {
-//       const cached = cache.get(url);
-
-//       if (cached) {
-//         await navigator.clipboard.writeText(cached);
-//       } else {
-//         await navigator.clipboard.write([
-//           new ClipboardItem({
-//             "text/plain": fetch(url).then(async (res) => {
-//               const content = await res.text();
-//               cache.set(url, content);
-
-//               return content;
-//             }),
-//           }),
-//         ]);
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   });
-
-//   const [checkedOpen, onClickOpen] = useCopyButton(async () => {
-//     setLoading(true);
-//     const url = `/llms.mdx/${slug.join("/")}`;
-//     // use nextjs navigation to open the URL in a new tab
-//     window.open(url, "_blank");
-//     setLoading(false);
-//   });
-
-//   return (
-//     <DropdownButton
-//       icon={<Copy className="size-4" />}
-//       buttonText="Copy Page"
-//       onButtonClick={(e) => onClickCopy(e)}
-//       checked={checkedCopy}
-//       options={[
-//         {
-//           icon: <Copy className="size-4" />,
-//           label: "Copy Page",
-//           description: "Copy page as Markdown for LLMs",
-//           value: "copy",
-//           onClick: (e) => onClickCopy(e),
-//         },
-
-//         {
-//           icon: <ExternalLink className="size-4" />,
-//           label: "View as Markdown",
-//           description: "View this page in plain text",
-//           value: "d",
-//           onClick: (e) => onClickOpen(e),
-//         },
-//       ]}
-//     />
-//   );
-// };
+// Helper function to construct the MDX file URL from slug
+function getMdxUrl(slug: string[]): string {
+  if (slug.length === 0) {
+    return "/llms.mdx/index.txt";
+  }
+  return `/llms.mdx/${slug.join("/")}.txt`;
+}
 
 export function LLMCopyButton({ slug }: { slug: string[] }) {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
     setLoading(true);
 
-    const url = `/llms.mdx/${slug.join("/")}`;
+    const url = getMdxUrl(slug);
     console.log("Copying LLM text from URL:", url);
     try {
       const cached = cache.get(url);
@@ -134,7 +79,7 @@ export function LLMViewMarkdownButton({ slug }: { slug: string[] }) {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
     setLoading(true);
-    const url = `/llms.mdx/${slug.join("/")}`;
+    const url = getMdxUrl(slug);
     // use nextjs navigation to open the URL in a new tab
     window.open(url, "_blank");
     setLoading(false);
@@ -190,7 +135,7 @@ export function ViewOptions(props: {
   githubUrl: string;
 }) {
   const baseUrl = siteConfig.url;
-  const mdPageUrl = `/llms.mdx/${props.slug.join("/")}`;
+  const mdPageUrl = getMdxUrl(props.slug);
   const gpt = `https://chatgpt.com/?${new URLSearchParams({
     hints: "search",
     q: `Read ${baseUrl}${props.markdownUrl}, I want to ask questions about it.`,
@@ -224,7 +169,7 @@ export function ViewOptions(props: {
   });
 
   const handleViewAsMarkdown = () => {
-    const url = `/llms.mdx/${props.slug.join("/")}`;
+    const url = getMdxUrl(props.slug);
     window.open(url, "_blank")?.focus();
   };
 

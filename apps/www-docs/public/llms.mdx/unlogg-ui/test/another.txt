@@ -1,0 +1,6 @@
+# Another
+URL: /unlogg-ui/test/another
+
+Use the CLI to add components, blocks and pages to your project.
+
+Hello world!

@@ -3,18 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "pnpm generate-llm",
     "build": "next build",
     "build:registry": "tsx ./scripts/build-registry.ts",
     "dev": "next dev --turbo",
     "start": "next start",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "generate-llm": "tsx ./scripts/generate-llm-text.ts"
   },
   "dependencies": {
+    "@orama/orama": "^3.1.7",
     "@unlogg/ui": "workspace:*",
-    "fumadocs-core": "15.5.0",
-    "fumadocs-mdx": "11.6.6",
+    "fumadocs-core": "15.5.3",
+    "fumadocs-mdx": "11.6.9",
     "fumadocs-typescript": "^4.0.5",
-    "fumadocs-ui": "15.5.0",
+    "fumadocs-ui": "15.5.3",
     "lucide-react": "^0.475.0",
     "motion": "^12.16.0",
     "next": "15.3.3",
