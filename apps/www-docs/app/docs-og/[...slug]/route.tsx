@@ -6,13 +6,30 @@ import { generateOGImage } from "./og";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-// Use absolute paths based on process.cwd() to ensure they work in all environments
-const dmRegularFont = readFileSync(
-  join(process.cwd(), "public/fonts/DMSans-regular.ttf")
-);
-const soraBoldFont = readFileSync(
-  join(process.cwd(), "public/fonts/Sora-Bold.ttf")
-);
+// // Use absolute paths based on process.cwd() to ensure they work in all environments
+// const dmRegularFont = readFileSync(
+//   join(process.cwd(), "public/fonts/DMSans-regular.ttf")
+// );
+// const soraBoldFont = readFileSync(
+//   join(process.cwd(), "public/fonts/Sora-Bold.ttf")
+// );
+
+async function loadGoogleFont(font: string, weight: number) {
+  const url = `https://fonts.googleapis.com/css2?family=${font}:wght@${weight}`;
+  const css = await (await fetch(url)).text();
+  const resource = css.match(
+    /src: url\((.+)\) format\('(opentype|truetype)'\)/
+  );
+
+  if (resource) {
+    const response = await fetch(resource[1]);
+    if (response.status == 200) {
+      return await response.arrayBuffer();
+    }
+  }
+
+  throw new Error("❌ Failed to load font data!");
+}
 
 export async function GET(
   _req: Request,
@@ -23,6 +40,8 @@ export async function GET(
   if (!page) notFound();
 
   try {
+    // Fetch fonts from Google Fonts or CDN
+
     return generateOGImage({
       title: page.data.title,
       description: page.data.description,
@@ -30,13 +49,13 @@ export async function GET(
         {
           name: "Sora",
           // data: fontBold,
-          data: soraBoldFont,
+          data: await loadGoogleFont("Sora", 600),
           weight: 600,
           style: "normal",
         },
         {
           name: "DM Sans",
-          data: dmRegularFont,
+          data: await loadGoogleFont("DM Sans", 400),
           weight: 400,
           style: "normal",
         },
