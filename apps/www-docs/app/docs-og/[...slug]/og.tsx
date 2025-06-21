@@ -39,7 +39,14 @@ export function generate({
         width: "100%",
         height: "100%",
         color: "white",
-        backgroundColor: "rgb(10,10,10)",
+        // backgroundColor: "rgb(10,10,10)",
+        fontFamily: "DM Sans, sans-serif",
+        // create linear gradient for background color from bottom left to top right
+        backgroundImage:
+          "linear-gradient(to top right, rgb(10, 10, 10), rgb(39, 52, 0))",
+        padding: "2rem",
+        boxSizing: "border-box",
+        overflow: "hidden",
       }}
     >
       <div
@@ -55,6 +62,7 @@ export function generate({
           style={{
             fontWeight: 600,
             fontSize: "76px",
+            color: primaryTextColor,
           }}
         >
           {props.title}
@@ -97,8 +105,10 @@ export function generate({
 
           <p
             style={{
-              fontSize: "46px",
+              fontSize: "56px",
               fontWeight: 600,
+              fontFamily: "Sora, sans-serif",
+              color: "rgba(240,240,240,0.7)",
             }}
           >
             unlogg
