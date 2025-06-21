@@ -4,21 +4,15 @@ import { notFound } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { generateOGImage } from "./og";
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
-// const font = readFileSync("./app/docs-og/[...slug]/DMSans-regular.ttf");
-// const fontBold = readFileSync("./app/docs-og/[...slug]/Sora-Bold.ttf");
-
-const dmRegularFont = readFileSync("./public/fonts/DMSans-regular.ttf");
-const soraBoldFont = readFileSync("./public/fonts/Sora-Bold.ttf");
-
-// Make sure the font exists in the specified path:
-// const dmRegularFontP = fetch(
-//   new URL("../../../public/fonts/DMSans-Regular.ttf", import.meta.url)
-// ).then((res) => res.arrayBuffer());
-
-// const soraBoldFontP = fetch(
-//   new URL("../../../public/fonts/Sora-Bold.ttf", import.meta.url)
-// ).then((res) => res.arrayBuffer());
+// Use absolute paths based on process.cwd() to ensure they work in all environments
+const dmRegularFont = readFileSync(
+  join(process.cwd(), "public/fonts/DMSans-regular.ttf")
+);
+const soraBoldFont = readFileSync(
+  join(process.cwd(), "public/fonts/Sora-Bold.ttf")
+);
 
 export async function GET(
   _req: Request,
@@ -29,11 +23,6 @@ export async function GET(
   if (!page) notFound();
 
   try {
-    // const [dmRegularFont, soraBoldFont] = await Promise.all([
-    //   dmRegularFontP,
-    //   soraBoldFontP,
-    // ]);
-
     return generateOGImage({
       title: page.data.title,
       description: page.data.description,
