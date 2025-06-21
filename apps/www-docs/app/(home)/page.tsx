@@ -13,7 +13,7 @@ import { Separator } from "@unlogg/ui/components/separator";
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col justify-center text-center">
-      <h1 className="text-3xl logo-font text-white">unlogg</h1>
+      <h1 className="text-3xl logo-font text-white">unloggss</h1>
       <Button variant="secondary">Get started</Button>
     </main>
   );

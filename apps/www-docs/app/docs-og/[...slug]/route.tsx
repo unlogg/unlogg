@@ -3,7 +3,10 @@ import { source } from "@/lib/source";
 import { notFound } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { generateOGImage } from "./og";
+import { readFileSync } from "node:fs";
 
+const font = readFileSync("./app/docs-og/[...slug]/DMSans-regular.ttf");
+const fontBold = readFileSync("./app/docs-og/[...slug]/Sora-Bold.ttf");
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ slug: string[] }> }
@@ -15,6 +18,20 @@ export async function GET(
   return generateOGImage({
     title: page.data.title,
     description: page.data.description,
+    fonts: [
+      {
+        name: "Sora",
+        data: fontBold,
+        weight: 600,
+        style: "normal",
+      },
+      {
+        name: "DM Sans",
+        data: font,
+        weight: 400,
+        style: "normal",
+      },
+    ],
 
     // site: "unlogg",
     // primaryColor: "#353532",
