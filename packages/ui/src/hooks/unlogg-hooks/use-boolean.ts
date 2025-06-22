@@ -31,4 +31,5 @@ function useBoolean(defaultValue = false): UseBooleanReturn {
   return { value, setValue, setTrue, setFalse, toggle };
 }
 
-export default useBoolean;
+export { useBoolean };
+export type { UseBooleanReturn };

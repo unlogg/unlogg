@@ -30,4 +30,5 @@ function useToggle<T = boolean>(
   return [option, toggle as UseToggleAction<T>];
 }
 
-export default useToggle;
+export { useToggle };
+export type { UseToggleReturnValue, UseToggleAction };

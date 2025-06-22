@@ -1,14 +1,11 @@
 import React from "react";
-import useToggle from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
+import { useToggle } from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
 import { Button } from "@unlogg/ui/components/button";
 
 const ExampleToggleComponent: React.FC = () => {
-  const [color, toggleColor] = useToggle<"blue" | "orange" | "cyan" | "teal">([
-    "blue",
-    "orange",
-    "cyan",
-    "teal",
-  ]);
+  const [color, toggleColor] = useToggle<"blue" | "violet" | "orange" | "teal">(
+    ["blue", "violet", "orange", "teal"]
+  );
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>

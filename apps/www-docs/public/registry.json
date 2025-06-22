@@ -48,9 +48,28 @@
       "dependencies": [
         "lucide-react"
       ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-boolean.json"
+      ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-local-storage.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -80,6 +99,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle.ts",
           "type": "registry:hook",
           "target": "/hooks/use-toggle.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-local-storage.ts"
         }
       ]
     }

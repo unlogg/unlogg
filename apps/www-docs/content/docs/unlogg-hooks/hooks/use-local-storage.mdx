@@ -1,0 +1,93 @@
+---
+title: useLocalStorage
+description: A custom React hook to manage local storage with ease.
+---
+
+
+
+
+## Example
+
+<ComponentPreview 
+  name="use-local-storage-ex-01"     
+  classNameComponentContainer='min-h-[200px]' 
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-local-storage"     
+  classNameComponentContainer='min-h-[200px]' 
+>
+<CLIInstall  name="use-local-storage"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-local-storage"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+- Automatically initializes `localStorage` with a default value if the key does not exist.
+- Handles JSON serialization and deserialization for complex data types.
+- Provides a simple API for reading and updating values.
+- Includes error handling for environments where `localStorage` is unavailable (e.g., server-side rendering).
+
+## Server-Side Rendering 
+
+  This hook checks if `localStorage` is available before accessing it. If used in a non-browser environment (e.g., during server-side rendering), it will return the `defaultValue` without attempting to access `localStorage`.
+
+
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    key: {
+      description: "The key used to store the value in local storage.",
+      type: "string",
+    },
+    defaultValue: {
+      description: "The default value to use if no value is found in local storage.",
+      type: "T",
+    },
+  }}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+    value: {
+      description: "The current value stored in local storage.",
+      type: "T",
+    },
+    setValue: {
+      description: "Function to update the value in local storage.",
+      type: "(value: T) => void",
+    },
+  }}
+/>

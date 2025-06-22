@@ -55,13 +55,13 @@ const getComponentFiles = async (files: File[], registryType: string) => {
         target: `/components/unlogg-ui/${fileName}`,
       };
     }
-    console.log("files", files);
+    // console.log("files", files);
     const normalizedPath = file.path.startsWith("/")
       ? file.path
       : `/${file.path}`.replace("@/", "");
 
     const filePath = path.join(REGISTRY_BASE_PATH, normalizedPath);
-    console.log("REGISTRY_BASE_PATH", REGISTRY_BASE_PATH);
+
     const fileContent = await fs.readFile(filePath, "utf-8");
 
     const fileName = normalizedPath.split("/").pop() || "";

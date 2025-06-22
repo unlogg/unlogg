@@ -1,7 +1,7 @@
 import type { Registry } from "@/registry/schema";
-import * as React from "react";
-import useBoolean from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
-import useToggle from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
+import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
+import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
+import { useToggle } from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
 
 export const hooks: Registry = [
   {
@@ -30,5 +30,18 @@ export const hooks: Registry = [
       },
     ],
     component: useToggle,
+  },
+  {
+    name: "use-local-storage",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage.ts",
+        type: "registry:hook",
+        target: "/hooks/use-local-storage.ts",
+      },
+    ],
+    component: useLocalStorage,
   },
 ];

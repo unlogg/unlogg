@@ -3,7 +3,7 @@ title: useBoolean
 description: A custom React hook to manage boolean state with toggle functionality.
 ---
 
-
+## Example
 
 <ComponentPreview 
   name="use-boolean-ex-01"     
@@ -45,9 +45,47 @@ Update the import paths to match your project setup
 </ComponentInstall>
 
 
+## Notes
+- Provides a simple way to manage boolean state with built-in toggle functionality.
+- Includes functions to set the state to `true`, `false`, or toggle the current state
 
 
+## API Reference
 
+### Parameters
 
+<TypeTable
+  type={{
+    defaultValue: {
+      description: "The initial boolean value for the state.",
+      type: "boolean",
+      default: "false",
+    },
+  }}
+/>
 
-
+### Returns
+<TypeTable
+  type={{
+    value: {
+      description: "The current boolean state value.",
+      type: "boolean",
+    },
+    setValue: {
+      description: "Function to manually set the boolean state.",
+      type: "React.Dispatch<React.SetStateAction<boolean>>",
+    },
+    setTrue: {
+      description: "Function to set the state to `true`.",
+      type: "() => void",
+    },
+    setFalse: {
+      description: "Function to set the state to `false`.",
+      type: "() => void",
+    },
+    toggle: {
+      description: "Function to toggle the boolean state.",
+      type: "() => void",
+    },
+  }}
+/>

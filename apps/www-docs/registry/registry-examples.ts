@@ -38,7 +38,7 @@ export const examples: Registry = [
     name: "use-toggle-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    // registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
@@ -47,6 +47,21 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-toggle-ex-01")
+    ),
+  },
+  {
+    name: "use-local-storage-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-local-storage.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-local-storage-ex-01")
     ),
   },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@unlogg/ui/components/button";
-import useBoolean from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
+import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
 
 export default function UseBoolean_Ex_01() {
   const { value, setTrue, setFalse, toggle } = useBoolean(false);
