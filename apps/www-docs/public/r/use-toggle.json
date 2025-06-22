@@ -1,0 +1,15 @@
+{
+  "name": "use-toggle",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useReducer } from \"react\";\n\ntype UseToggleAction<T> = (value?: React.SetStateAction<T>) => void;\ntype UseToggleReturnValue<T> = [T, UseToggleAction<T>];\n\n/**\n * A custom React hook that toggles between values in a given array.\n * Defaults to toggling between `false` and `true`.\n *\n * @template T - The type of the toggle value.\n * @param {readonly T[]} [options=[false, true]] - An array of values to toggle between.\n * @returns {UseToggleReturnValue<T>} - A tuple containing the current value and a function to toggle the value.\n */\n\nfunction useToggle<T = boolean>(\n  options: readonly T[] = [false, true] as any\n): UseToggleReturnValue<T> {\n  const [[option], toggle] = useReducer(\n    (state: T[], action: React.SetStateAction<T>) => {\n      const val = action instanceof Function ? action(state[0]) : action;\n      const i = Math.abs(state.indexOf(val));\n\n      return state.slice(i).concat(state.slice(0, i));\n    },\n    options as T[]\n  );\n\n  return [option, toggle as UseToggleAction<T>];\n}\n\nexport default useToggle;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-toggle.ts",
+      "target": "/hooks/use-toggle.ts"
+    }
+  ]
+}

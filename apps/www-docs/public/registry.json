@@ -8,8 +8,78 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/components/unlogg-ui/test.tsx",
+          "path": "../../packages/ui/src/components/unlogg-ui/test/test.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "test-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/test-component.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/test/test-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-boolean-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-toggle-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-boolean",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-boolean.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-toggle",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-toggle.ts"
         }
       ]
     }

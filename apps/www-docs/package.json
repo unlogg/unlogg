@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prebuild": "pnpm generate-llm",
+    "prebuild": "pnpm generate-llm && pnpm build:registry",
     "build": "next build",
     "build:registry": "tsx ./scripts/build-registry.ts",
     "dev": "next dev --turbo",

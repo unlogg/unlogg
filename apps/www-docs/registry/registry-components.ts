@@ -8,12 +8,12 @@ export const components: Registry = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "../../packages/ui/src/components/unlogg-ui/test.tsx",
+        path: "../../packages/ui/src/components/unlogg-ui/test/test.tsx",
         type: "registry:component",
       },
     ],
     component: React.lazy(
-      () => import("../../../packages/ui/src/components/unlogg-ui/test")
+      () => import("../../../packages/ui/src/components/unlogg-ui/test/test")
     ),
   },
 ];

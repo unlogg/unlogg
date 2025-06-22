@@ -3,7 +3,7 @@ URL: /unlogg-ui/components/test
 
 A test component for Unlogg UI
 
-<ComponentPreview name="test-component" classNameComponentContainer="min-h-[200px]" />
+<ComponentPreview name="test-ex-01" classNameComponentContainer="min-h-[200px]" />
 
 ## Install
 

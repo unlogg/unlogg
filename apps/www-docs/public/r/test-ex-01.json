@@ -1,0 +1,18 @@
+{
+  "name": "test-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/test-component.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport Test from \"@/components/ui/test\";\nimport { useState } from \"react\";\n\nexport default function FaceRating_01_Ex_01() {\n  return (\n    <div className=\"flex flex-col items-center gap-4\">\n      A test example\n      <Test />\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/test/test-ex-01.tsx",
+      "target": "/components/unlogg-ui/test-ex-01.tsx"
+    }
+  ]
+}
