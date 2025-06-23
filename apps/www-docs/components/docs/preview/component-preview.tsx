@@ -25,6 +25,8 @@ import { useState } from "react";
 import type { ComponentPreviewProps } from "types/component";
 import { ComponentLoader } from "../component-loader";
 import { ComponentCodePreview } from "./component-preview-code";
+import { ActiveThemeProvider } from "@/components/active-theme";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 
 const prePath =
   process.env.NODE_ENV === "development"
@@ -321,13 +323,16 @@ export function ComponentPreview({
           </div>
         </TabsList>
         <TabsContent value="preview">
-          <div className="preview flex min-h-[450px] w-full justify-center p-4">
-            <ComponentLoader
-              name={displayExampleName ? displayExampleName : name}
-              hasReTrigger={hasReTrigger}
-              classNameComponentContainer={classNameComponentContainer}
-            />
-          </div>
+          <ActiveThemeProvider>
+            <ThemeCustomizer />
+            <div className="preview flex min-h-[450px] w-full justify-center p-4">
+              <ComponentLoader
+                name={displayExampleName ? displayExampleName : name}
+                hasReTrigger={hasReTrigger}
+                classNameComponentContainer={classNameComponentContainer}
+              />
+            </div>
+          </ActiveThemeProvider>
         </TabsContent>
         <TabsContent value="code">
           <div className="flex w-full flex-col gap-4">
