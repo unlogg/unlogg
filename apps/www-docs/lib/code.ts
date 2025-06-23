@@ -17,6 +17,12 @@ function extractExtension(componentName: string): {
   return { baseName: componentName, lang: "tsx" }; // Default to tsx if no extension found
 }
 
+const replaceImports = (code: string): string => {
+  code = code.replace(/@unlogg\/ui\/components\//g, "@/components/ui/");
+  code = code.replace(/@unlogg\/ui\/hooks\/unlogg-hooks\//g, "@/hooks/");
+  return code;
+};
+
 export async function extractMultipleSourceCodes(
   componentNames: string[]
 ): Promise<SourceCodes> {
@@ -62,7 +68,11 @@ export async function extractMultipleSourceCodes(
     const fullPath = path.join(basePath, sanitizedFilePath);
 
     try {
-      const code = await fs.readFile(fullPath, "utf8");
+      let code = await fs.readFile(fullPath, "utf8");
+
+      // Replace imports in the code
+      code = replaceImports(code);
+
       const highlightedCode = await codeToHtml({ code, lang });
       results[componentName] = { code, highlightedCode };
     } catch (error) {

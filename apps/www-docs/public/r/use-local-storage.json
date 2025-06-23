@@ -1,0 +1,15 @@
+{
+  "name": "use-local-storage",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useState, useEffect } from \"react\";\n\ntype UseLocalStorageOptions<T> = {\n  key: string;\n  defaultValue: T;\n};\n\ntype UseLocalStorageReturn<T> = [T, (value: T) => void];\n\nfunction useLocalStorage<T>({\n  key,\n  defaultValue,\n}: UseLocalStorageOptions<T>): UseLocalStorageReturn<T> {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    if (typeof window === \"undefined\") {\n      // Return default value if running in a non-browser environment\n      return defaultValue;\n    }\n\n    try {\n      const item = localStorage.getItem(key);\n      return item ? (JSON.parse(item) as T) : defaultValue;\n    } catch (error) {\n      console.error(`Error accessing localStorage key \"${key}\":`, error);\n      return defaultValue;\n    }\n  });\n\n  const setValue = (value: T) => {\n    if (typeof window === \"undefined\") {\n      console.warn(\"localStorage is not available in this environment.\");\n      return;\n    }\n\n    try {\n      setStoredValue(value);\n      localStorage.setItem(key, JSON.stringify(value));\n    } catch (error) {\n      console.error(`Error setting localStorage key \"${key}\":`, error);\n    }\n  };\n\n  useEffect(() => {\n    if (typeof window === \"undefined\") {\n      return;\n    }\n\n    try {\n      const item = localStorage.getItem(key);\n      if (item === null) {\n        localStorage.setItem(key, JSON.stringify(defaultValue));\n      }\n    } catch (error) {\n      console.error(`Error initializing localStorage key \"${key}\":`, error);\n    }\n  }, [key, defaultValue]);\n\n  return [storedValue, setValue];\n}\n\nexport { useLocalStorage };\nexport type { UseLocalStorageOptions, UseLocalStorageReturn };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-local-storage.ts",
+      "target": "/hooks/use-local-storage.ts"
+    }
+  ]
+}

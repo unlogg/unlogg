@@ -1,8 +1,10 @@
 {
   "extends": "@unlogg/typescript-config/react-library.json",
   "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "@unlogg/ui/*": ["./src/*"]
     }
   },

@@ -8,7 +8,7 @@
     {
       "type": "registry:component",
       "content": "import { Button } from \"@/components/ui/button\";\n\nconst Hello = () => {\n  return (\n    <div className=\"bg-blue-800\">\n      Helloss\n      <Button>Hello</Button>\n    </div>\n  );\n};\n\nexport default Hello;\n",
-      "path": "/../../packages/ui/src/components/unlogg-ui/test.tsx",
+      "path": "/../../packages/ui/src/components/unlogg-ui/test/test.tsx",
       "target": "/components/unlogg-ui/test.tsx"
     }
   ]

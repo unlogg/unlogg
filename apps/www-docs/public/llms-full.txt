@@ -11,6 +11,283 @@ Welcome to the docs!
 </Callout>
 
 
+# useBoolean
+URL: /unlogg-hooks/hooks/use-boolean
+
+A custom React hook to manage boolean state with toggle functionality.
+
+## Example
+
+<ComponentPreview name="use-boolean-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-boolean" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-boolean" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-boolean" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Provides a simple way to manage boolean state with built-in toggle functionality.
+* Includes functions to set the state to `true`, `false`, or toggle the current state
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  defaultValue: {
+    description: "The initial boolean value for the state.",
+    type: "boolean",
+    default: "false",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  value: {
+    description: "The current boolean state value.",
+    type: "boolean",
+  },
+  setValue: {
+    description: "Function to manually set the boolean state.",
+    type: "React.Dispatch<React.SetStateAction<boolean>>",
+  },
+  setTrue: {
+    description: "Function to set the state to `true`.",
+    type: "() => void",
+  },
+  setFalse: {
+    description: "Function to set the state to `false`.",
+    type: "() => void",
+  },
+  toggle: {
+    description: "Function to toggle the boolean state.",
+    type: "() => void",
+  },
+}}
+/>
+
+
+# useLocalStorage
+URL: /unlogg-hooks/hooks/use-local-storage
+
+A custom React hook to manage local storage with ease.
+
+## Example
+
+<ComponentPreview name="use-local-storage-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-local-storage" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-local-storage" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-local-storage" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Automatically initializes `localStorage` with a default value if the key does not exist.
+* Handles JSON serialization and deserialization for complex data types.
+* Provides a simple API for reading and updating values.
+* Includes error handling for environments where `localStorage` is unavailable (e.g., server-side rendering).
+
+## Server-Side Rendering
+
+This hook checks if `localStorage` is available before accessing it. If used in a non-browser environment (e.g., during server-side rendering), it will return the `defaultValue` without attempting to access `localStorage`.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  key: {
+    description: "The key used to store the value in local storage.",
+    type: "string",
+  },
+  defaultValue: {
+    description: "The default value to use if no value is found in local storage.",
+    type: "T",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  value: {
+    description: "The current value stored in local storage.",
+    type: "T",
+  },
+  setValue: {
+    description: "Function to update the value in local storage.",
+    type: "(value: T) => void",
+  },
+}}
+/>
+
+
+# useToggle
+URL: /unlogg-hooks/hooks/use-toggle
+
+A custom React hook to toggle between given values.
+
+## Example
+
+<ComponentPreview name="use-toggle-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-toggle" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-toggle" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-toggle" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Allows toggling between any set of values, not just `true` and `false`. You can provide an array of values to toggle between.
+
+* Default to toggling between `false` and `true` if no options are provided.
+
+* The `toggle` function can optionally accept a value to set directly, bypassing the toggle logic.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "An array of values to toggle between. Defaults to `[false, true]`.",
+    type: "readonly T[]",
+    default: "[false, true]",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  value: {
+    description: "The current value of the toggle.",
+    type: "T",
+  },
+  toggle: {
+    description: "Function to toggle the value. Optionally accepts a value to set directly.",
+    type: "(value?: React.SetStateAction<T>) => void",
+  },
+}}
+/>
+
+
+# Overview
+URL: /unlogg-hooks
+
+A collection of reusable hooks for building dashboard and web apps.
+
+## What are unlogg/hooks?
+
+**unlogg/hooks** is a collection of reusable hooks for building dashboard and web apps. It’s a great way to speed up your development process and create a consistent look and feel across your site.
+
+## How are the hooks built?
+
+All the hooks are built with `React` and are designed to be easy to use and customize. They’re built with TypeScript, so you get all the benefits of type safety and autocompletion in your IDE.
+
+## Can I customize the hooks?
+
+YES! You can customize the hooks however you like!
+
+Since this is a "copy-paste" library, you can easily copy the hooks' code and paste it into your project (or install via the CLI). You can then modify the code to fit your needs, or use the hooks as a starting point for building your own.
+
+## License
+
+**unlogg/hooks** is licensed under the MIT License. You are free to use it in personal and commercial projects. If you find it useful, please consider giving back by contributing to the project or spreading the word.
+
+For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+
+## FAQ
+
+<Accordions>
+  <Accordion title="Can I use this in my project?">
+    Definitely! **unlogg/hooks** is free for personal and commercial projects.
+    For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+  </Accordion>
+
+  <Accordion title="Is this project ready to use?">
+    Almost! We’re constantly adding new hooks and improving existing ones.
+    You can of course use what’s here now, but be aware that things might change a little bit.
+  </Accordion>
+
+  <Accordion title="Can I contribute?">
+    Yes, we'd love your help! You can open an issue or submit a pull request on our GitHub repository.
+
+    Check [CONTRIBUTING.md](https://github.com/unlogg/blob/main/CONTRIBUTING.md) for more information on how to contribute.
+  </Accordion>
+</Accordions>
+
+
+# Installation
+URL: /unlogg-hooks/installation
+
+How to use unlogg/hooks in your project
+
+**No installation is required!  🎉**
+
+Since this is a "copy-paste" collection of hooks, you can easily copy the components' code and paste it into your project
+
+You can then modify the code to fit your needs, or use the components as a starting point for building your own.
+
+If you want, you can use the [CLI](/docs/unlogg-ui/cli) to quickly add hooks to your projects.
+(This is the same guide and CLI we use for `unlogg/ui`)
+
+
 # CLI
 URL: /unlogg-ui/cli
 
@@ -96,7 +373,7 @@ URL: /unlogg-ui/components/test
 
 A test component for Unlogg UI
 
-<ComponentPreview name="test-component" classNameComponentContainer="min-h-[200px]" />
+<ComponentPreview name="test-ex-01" classNameComponentContainer="min-h-[200px]" />
 
 ## Install
 

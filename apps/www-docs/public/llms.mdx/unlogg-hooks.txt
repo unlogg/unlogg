@@ -1,0 +1,44 @@
+# Overview
+URL: /unlogg-hooks
+
+A collection of reusable hooks for building dashboard and web apps.
+
+## What are unlogg/hooks?
+
+**unlogg/hooks** is a collection of reusable hooks for building dashboard and web apps. It’s a great way to speed up your development process and create a consistent look and feel across your site.
+
+## How are the hooks built?
+
+All the hooks are built with `React` and are designed to be easy to use and customize. They’re built with TypeScript, so you get all the benefits of type safety and autocompletion in your IDE.
+
+## Can I customize the hooks?
+
+YES! You can customize the hooks however you like!
+
+Since this is a "copy-paste" library, you can easily copy the hooks' code and paste it into your project (or install via the CLI). You can then modify the code to fit your needs, or use the hooks as a starting point for building your own.
+
+## License
+
+**unlogg/hooks** is licensed under the MIT License. You are free to use it in personal and commercial projects. If you find it useful, please consider giving back by contributing to the project or spreading the word.
+
+For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+
+## FAQ
+
+<Accordions>
+  <Accordion title="Can I use this in my project?">
+    Definitely! **unlogg/hooks** is free for personal and commercial projects.
+    For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+  </Accordion>
+
+  <Accordion title="Is this project ready to use?">
+    Almost! We’re constantly adding new hooks and improving existing ones.
+    You can of course use what’s here now, but be aware that things might change a little bit.
+  </Accordion>
+
+  <Accordion title="Can I contribute?">
+    Yes, we'd love your help! You can open an issue or submit a pull request on our GitHub repository.
+
+    Check [CONTRIBUTING.md](https://github.com/unlogg/blob/main/CONTRIBUTING.md) for more information on how to contribute.
+  </Accordion>
+</Accordions>

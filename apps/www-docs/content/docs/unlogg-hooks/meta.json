@@ -1,0 +1,15 @@
+{
+  "title": "Hooks",
+  "description": "Copy & paste hooks for react",
+  "icon": "Atom",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "installation",
+    "cli",
+    "---Hooks---",
+    "...hooks",
+    "..."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "use-toggle-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-boolean.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "import React from \"react\";\nimport { useToggle } from \"@/hooks/use-toggle\";\nimport { Button } from \"@/hooks/button\";\n\nconst ExampleToggleComponent: React.FC = () => {\n  const [color, toggleColor] = useToggle<\"blue\" | \"violet\" | \"orange\" | \"teal\">(\n    [\"blue\", \"violet\", \"orange\", \"teal\"]\n  );\n\n  return (\n    <div style={{ textAlign: \"center\", marginTop: \"20px\" }}>\n      <div\n        className=\"flex items-center justify-center rounded-md h-20 w-20 mx-auto\"\n        style={{\n          backgroundColor: color,\n        }}\n      >\n        <span className=\"text-white font-bold\">{color}</span>\n      </div>\n      <Button\n        className=\"mt-3\"\n        variant=\"secondary\"\n        onClick={() => toggleColor()}\n      >\n        Toggle Color\n      </Button>\n    </div>\n  );\n};\n\nexport default ExampleToggleComponent;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-toggle-ex-01.tsx"
+    }
+  ]
+}

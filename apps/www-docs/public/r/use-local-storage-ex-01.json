@@ -1,0 +1,18 @@
+{
+  "name": "use-local-storage-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-local-storage.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "import React from \"react\";\nimport { useLocalStorage } from \"@/hooks/use-local-storage\";\nimport { Button } from \"@/hooks/button\";\n\nconst ColorSchemeSelector: React.FC = () => {\n  const [colorScheme, setColorScheme] = useLocalStorage({\n    key: \"color-scheme\",\n    defaultValue: \"dark\",\n  });\n\n  const toggleColorScheme = () => {\n    setColorScheme(colorScheme === \"dark\" ? \"light\" : \"dark\");\n  };\n\n  return (\n    <div>\n      <div\n        style={{\n          backgroundColor: colorScheme === \"dark\" ? \"#333\" : \"#fff\",\n          color: colorScheme === \"dark\" ? \"#fff\" : \"#000\",\n          padding: \"20px\",\n          textAlign: \"center\",\n        }}\n      >\n        <h1 className=\"text-2xl font-bold mb-4\">\n          Color Scheme with useLocalStorage\n        </h1>\n        <p className=\"text-left\">\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do\n          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad\n          minim veniam, quis nostrud exercitation ullamco laboris nisi ut\n          aliquip ex ea commodo consequat. Duis aute irure dolor in\n          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla\n          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n          culpa qui officia deserunt mollit anim id est laborum.\n        </p>\n        <hr\n          style={{\n            margin: \"20px 0\",\n            borderColor: colorScheme === \"dark\" ? \"#555\" : \"#ccc\",\n          }}\n          className=\"my-4\"\n        />\n        <h1>Current Color Scheme: {colorScheme}</h1>\n        <button\n          onClick={toggleColorScheme}\n          className=\"border border-gray-300 rounded px-4 py-2\"\n        >\n          Switch to {colorScheme === \"dark\" ? \"Light\" : \"Dark\"} Mode\n        </button>\n      </div>\n      <p>This gets saved to local storage:</p>\n      <pre className=\"text-left\">\n        {JSON.stringify({ colorScheme }, null, 2)}\n      </pre>\n    </div>\n  );\n};\n\nexport default ColorSchemeSelector;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-local-storage-ex-01.tsx"
+    }
+  ]
+}
