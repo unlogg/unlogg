@@ -11,6 +11,7 @@ import { getComponentByName } from "@/registry";
 import { RotateCw } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { ComponentDisplayProps } from "types/component";
+import { ActiveThemeProvider } from "../active-theme";
 
 type ComponentLoaderProps = {
   name: string;

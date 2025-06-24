@@ -1,0 +1,15 @@
+{
+  "name": "use-interval",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\n\ntype UseIntervalOptions = {\n  callback: () => void;\n  delay: number | null;\n};\n\n/**\n * Custom React hook that repeatedly calls a callback function at a specified interval.\n *\n * The callback is always the latest version passed to the hook, even if it changes between intervals.\n * The interval is cleared automatically when the component unmounts or when the delay changes.\n *\n * @param options - An object containing:\n *   @param callback - The function to be called at each interval.\n *   @param delay - The delay in milliseconds for the interval. If `null` or not a number, the interval is not set.\n *\n * @example\n * useInterval({ callback: () => console.log('Tick'), delay: 1000 });\n */\nfunction useInterval({ callback, delay }: UseIntervalOptions) {\n  const savedCallback = useRef<() => void>(callback);\n\n  // Remember the latest callback.\n  useEffect(() => {\n    savedCallback.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay === null || typeof delay !== \"number\") return;\n\n    const handler = () => {\n      if (savedCallback.current) {\n        savedCallback.current();\n      }\n    };\n\n    const id = setInterval(handler, delay);\n\n    // Cleanup function to clear the interval\n    return () => clearInterval(id);\n  }, [delay]);\n}\n\nexport { useInterval };\nexport type { UseIntervalOptions };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-interval.ts",
+      "target": "/hooks/use-interval.ts"
+    }
+  ]
+}

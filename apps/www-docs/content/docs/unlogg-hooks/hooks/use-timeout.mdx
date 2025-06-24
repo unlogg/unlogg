@@ -1,0 +1,71 @@
+---
+title: useTimeout
+description: A custom React hook to manage timeout functionality.
+---
+
+## Example
+
+<ComponentPreview
+  name="use-timeout-ex-01"
+  classNameComponentContainer='min-h-[200px]'
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-timeout"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-timeout"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-timeout"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+- Provides a simple way to manage timeout functionality.
+- Includes functions to set the timeout duration and trigger the timeout.
+
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    callback: {
+      description: "Function to be called after the specified delay.",
+      type: "() => void",
+      required: true,
+    },
+    delay: {
+      description: "Delay in milliseconds before the callback is executed. If null, the timeout is not set.",
+      type: "number | null",
+      required: true,
+    },
+  }}
+/>
+

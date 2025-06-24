@@ -3,6 +3,7 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { BookIcon } from "lucide-react";
 import Image from "next/image";
 import { Logo } from "./logo";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 
 /**
  * Shared layout configurations
@@ -67,5 +68,9 @@ export const baseOptions: BaseLayoutProps = {
       // secondary items will be displayed differently on navbar
       secondary: false,
     },
+    // {
+    //   type: "custom",
+    //   children: <ThemeCustomizer />,
+    // },
   ],
 };
