@@ -43,6 +43,54 @@
       ]
     },
     {
+      "name": "use-interval-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-interval.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-interval-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-interval-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-interval.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-interval-ex-02.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-timeout-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-timeout.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-timeout-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-toggle-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -85,6 +133,34 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean.ts",
           "type": "registry:hook",
           "target": "/hooks/use-boolean.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-interval",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-interval.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-interval.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-timeout",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-timeout.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-timeout.ts"
         }
       ]
     },

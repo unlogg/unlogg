@@ -1,0 +1,15 @@
+{
+  "name": "use-timeout",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\n\ntype UseTimeoutOptions = {\n  callback: () => void;\n  delay: number | null;\n};\n\n/**\n * Custom React hook that executes a callback function after a specified delay.\n * The callback is always the latest version passed to the hook.\n *\n * @param options - An object containing:\n *   - callback: The function to execute after the delay.\n *   - delay: The delay in milliseconds before executing the callback. If `null` or not a number, the timeout is not set.\n *\n * @remarks\n * The timeout is cleared and reset whenever the `delay` changes.\n * The callback reference is updated on every render to ensure the latest function is called.\n *\n * @example\n * useTimeout({ callback: () => console.log('Timeout!'), delay: 1000 });\n */\nfunction useTimeout({ callback, delay }: UseTimeoutOptions) {\n  const savedCallback = useRef<() => void>(undefined);\n\n  // Remember the latest callback.\n  useEffect(() => {\n    savedCallback.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay === null || typeof delay !== \"number\") return;\n\n    const handler = () => {\n      if (savedCallback.current) {\n        savedCallback.current();\n      }\n    };\n\n    const id = setTimeout(handler, delay);\n\n    return () => clearTimeout(id);\n  }, [delay]);\n}\n\nexport { useTimeout };\nexport type { UseTimeoutOptions };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-timeout.ts",
+      "target": "/hooks/use-timeout.ts"
+    }
+  ]
+}

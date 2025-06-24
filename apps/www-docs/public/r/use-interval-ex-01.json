@@ -1,0 +1,18 @@
+{
+  "name": "use-interval-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-interval.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { useInterval } from \"@/hooks/use-interval\";\n\n/**\n * Example component: DashboardCounter\n * Demonstrates useInterval by incrementing a counter every second.\n */\nfunction UseInterval_Ex_01() {\n  const [count, setCount] = useState(0);\n\n  useInterval({\n    callback: () => setCount((prev) => prev + 1),\n    delay: 1000, // 1 second\n  });\n\n  return (\n    <div\n      className=\"bg-background border text-center\"\n      style={{\n        padding: 24,\n\n        borderRadius: 8,\n        width: 240,\n      }}\n    >\n      <h2>Live Updates</h2>\n      <div className=\"text-4xl font-bold text-primary font-mono\">{count}</div>\n      <p>Updates every second</p>\n    </div>\n  );\n}\n\nexport default UseInterval_Ex_01;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-interval-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-interval-ex-01.tsx"
+    }
+  ]
+}

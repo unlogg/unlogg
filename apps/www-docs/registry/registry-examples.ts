@@ -34,6 +34,53 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-boolean-ex-01")
     ),
   },
+
+  {
+    name: "use-interval-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-interval.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-interval-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-interval-ex-01")
+    ),
+  },
+
+  {
+    name: "use-interval-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-interval.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-interval-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-interval-ex-02")
+    ),
+  },
+  {
+    name: "use-timeout-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-timeout.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-timeout-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-timeout-ex-01")
+    ),
+  },
   {
     name: "use-toggle-ex-01",
     type: "registry:example",
