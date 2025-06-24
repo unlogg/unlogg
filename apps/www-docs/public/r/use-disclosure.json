@@ -1,0 +1,15 @@
+{
+  "name": "use-disclosure",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useState, useCallback } from \"react\";\n\ntype UseDisclosureOptions = {\n  onOpen?: () => void;\n  onClose?: () => void;\n};\n\ntype UseDisclosureHandlers = {\n  open: () => void;\n  close: () => void;\n  toggle: () => void;\n};\n\nfunction useDisclosure(\n  initialState: boolean = false,\n  options: UseDisclosureOptions = {}\n): [boolean, UseDisclosureHandlers] {\n  const [opened, setOpened] = useState(initialState);\n\n  const open = useCallback(() => {\n    setOpened((prev) => {\n      if (!prev) {\n        options.onOpen?.();\n        return true;\n      }\n      return prev;\n    });\n  }, [options.onOpen]);\n\n  const close = useCallback(() => {\n    setOpened((prev) => {\n      if (prev) {\n        options.onClose?.();\n        return false;\n      }\n      return prev;\n    });\n  }, [options.onClose]);\n\n  const toggle = useCallback(() => {\n    setOpened((prev) => {\n      if (prev) {\n        options.onClose?.();\n        return false;\n      } else {\n        options.onOpen?.();\n        return true;\n      }\n    });\n  }, [options.onOpen, options.onClose]);\n\n  return [opened, { open, close, toggle }];\n}\n\nexport { useDisclosure };\nexport type { UseDisclosureOptions, UseDisclosureHandlers };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-disclosure.ts",
+      "target": "/hooks/use-disclosure.ts"
+    }
+  ]
+}
