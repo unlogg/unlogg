@@ -43,6 +43,19 @@
       ]
     },
     {
+      "name": "use-disclosure-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-disclosure-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-interval-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -133,6 +146,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean.ts",
           "type": "registry:hook",
           "target": "/hooks/use-boolean.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-disclosure",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-disclosure.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-disclosure.ts"
         }
       ]
     },
