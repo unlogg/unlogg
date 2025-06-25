@@ -1,5 +1,7 @@
 import type { Registry } from "@/registry/schema";
 import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
+import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
+import { useDebounceValue } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-value";
 import { useDisclosure } from "@unlogg/ui/hooks/unlogg-hooks/use-disclosure";
 import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
 import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
@@ -18,6 +20,32 @@ export const hooks: Registry = [
       },
     ],
     component: useBoolean,
+  },
+  {
+    name: "use-debounced-callback",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback.ts",
+        type: "registry:hook",
+        target: "/hooks/use-debounce-callback.ts",
+      },
+    ],
+    component: useDebounceCallback,
+  },
+  {
+    name: "use-debounced-value",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value.ts",
+        type: "registry:hook",
+        target: "/hooks/use-debounce-value.ts",
+      },
+    ],
+    component: useDebounceValue,
   },
 
   {

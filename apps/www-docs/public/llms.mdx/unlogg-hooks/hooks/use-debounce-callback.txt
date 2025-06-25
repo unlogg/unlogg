@@ -1,0 +1,70 @@
+# useDebounceCallback  
+URL: /unlogg-hooks/hooks/use-debounce-callback
+
+A custom React hook to debounce callback functions.
+
+You can use the `useDebounceCallback` hook to create a debounced version of a callback function. This is particularly useful when you want to limit the rate at which a function can be executed, such as in scenarios where a user is typing input or making API calls.
+
+For example, in an API call scenario, you could use this hook to ensure that the API is not called on every keystroke but rather after the user has stopped typing for a specified delay.
+
+The difference between `useDebounceCallback` and `useDebounceValue` is that the former is specifically designed for debouncing callback functions.
+
+## Example
+
+<ComponentPreview name="use-debounce-callback-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-debounce-callback" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-debounce-callback" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-debounce-value" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  callback: {
+    description: "The function to debounce.",
+    type: "(...args: any[]) => void",
+    default: "—",
+  },
+  delay: {
+    description: "The debounce delay in milliseconds.",
+    type: "number",
+    default: "—",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  "debouncedCallback": {
+    description: "The debounced callback function.",
+    type: "(...args: any[]) => void",
+  },
+  "handlers.cancel": {
+    description: "Function to cancel any pending debounced callback.",
+    type: "() => void",
+  },
+}}
+/>
