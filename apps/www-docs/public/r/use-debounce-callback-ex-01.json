@@ -1,0 +1,15 @@
+{
+  "name": "use-debounce-callback-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Input } from \"@/hooks/input\";\nimport { useDebounceCallback } from \"@/hooks/use-debounce-callback\";\n\nexport function DebounceCallbackExample() {\n  const [input, setInput] = React.useState(\"\");\n  const [loading, setLoading] = React.useState(false);\n  const [result, setResult] = React.useState<string | null>(null);\n\n  // Simulate an API call\n  const fakeApiCall = (query: string) =>\n    new Promise<string>((resolve) =>\n      setTimeout(() => resolve(`Result for \"${query}\"`), 800)\n    );\n\n  const [debouncedCallback, { cancel }] = useDebounceCallback(\n    async (value: string) => {\n      setLoading(true);\n      setResult(null);\n      const res = await fakeApiCall(value);\n      setResult(res);\n      setLoading(false);\n    },\n    700\n  );\n\n  React.useEffect(() => {\n    if (input.trim() === \"\") {\n      setResult(null);\n      setLoading(false);\n      cancel();\n      return;\n    }\n    debouncedCallback(input);\n    return () => cancel();\n  }, [input, debouncedCallback, cancel]);\n\n  return (\n    <div className=\"max-w-md mx-auto mt-10 p-6 bg-background rounded-lg shadow space-y-6\">\n      <h2 className=\"text-xl font-semibold\">Debounced API Call Example</h2>\n      <Input\n        placeholder=\"Type a search query...\"\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        className=\"w-full\"\n      />\n      <div className=\"space-y-2\">\n        <div>\n          <span className=\"font-medium\">Immediate value:</span>\n          <span className=\"ml-2 text-muted-foreground\">{input}</span>\n        </div>\n        <div>\n          <span className=\"font-medium\">API status:</span>\n          <span className=\"ml-2\">\n            {loading\n              ? <span className=\"text-yellow-600\">Loading...</span>\n              : result\n                ? <span className=\"text-green-700\">{result}</span>\n                : <span className=\"text-gray-400\">No result</span>\n            }\n          </span>\n        </div>\n      </div>\n      <p className=\"text-sm text-gray-500\">\n        👉 The API call is triggered 700ms after you stop typing.\n      </p>\n    </div>\n  );\n}\n\nexport default DebounceCallbackExample;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-debounce-callback-ex-01.tsx"
+    }
+  ]
+}

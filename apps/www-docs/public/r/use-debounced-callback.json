@@ -1,0 +1,15 @@
+{
+  "name": "use-debounced-callback",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useRef, useEffect, useCallback } from \"react\";\n\ntype UseDebounceCallbackHandlers = {\n  cancel: () => void;\n};\n\n/**\n * Custom React hook that returns a debounced version of a callback function and a handler to cancel it.\n *\n * @template TArgs The argument types for the callback.\n * @param callback - The function to debounce.\n * @param delay - The debounce delay in milliseconds.\n * @returns A tuple containing the debounced callback and an object with a `cancel` handler.\n *\n * @example\n * const [debouncedFn, { cancel }] = useDebounceCallback((val) => { ... }, 300);\n * debouncedFn(\"value\");\n * cancel(); // cancels any pending invocation\n */\nfunction useDebounceCallback<TArgs extends any[]>(\n  callback: (...args: TArgs) => void,\n  delay: number\n): [(...args: TArgs) => void, UseDebounceCallbackHandlers] {\n  const callbackRef = useRef(callback);\n  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(\n    undefined\n  );\n\n  useEffect(() => {\n    callbackRef.current = callback;\n  }, [callback]);\n\n  const debouncedFn = useCallback(\n    (...args: TArgs) => {\n      if (timeoutRef.current) {\n        clearTimeout(timeoutRef.current);\n      }\n      timeoutRef.current = setTimeout(() => {\n        callbackRef.current(...args);\n      }, delay);\n    },\n    [delay]\n  );\n\n  const cancel = useCallback(() => {\n    if (timeoutRef.current) {\n      clearTimeout(timeoutRef.current);\n      timeoutRef.current = undefined;\n    }\n  }, []);\n\n  useEffect(() => {\n    return () => {\n      if (timeoutRef.current) {\n        clearTimeout(timeoutRef.current);\n      }\n    };\n  }, []);\n\n  return [debouncedFn, { cancel }];\n}\n\nexport { useDebounceCallback };\nexport type { UseDebounceCallbackHandlers };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback.ts",
+      "target": "/hooks/use-debounce-callback.ts"
+    }
+  ]
+}

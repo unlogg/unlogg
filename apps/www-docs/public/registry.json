@@ -43,6 +43,32 @@
       ]
     },
     {
+      "name": "use-debounce-callback-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-debounce-value-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-disclosure-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -146,6 +172,34 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean.ts",
           "type": "registry:hook",
           "target": "/hooks/use-boolean.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-debounced-callback",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-debounce-callback.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-debounced-value",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-debounce-value.ts"
         }
       ]
     },
