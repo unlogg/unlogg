@@ -1,5 +1,6 @@
 import type { Registry } from "@/registry/schema";
 import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
+import { useClickOutside } from "@unlogg/ui/hooks/unlogg-hooks/use-click-outside";
 import { useCountdown } from "@unlogg/ui/hooks/unlogg-hooks/use-countdown";
 import { useCounter } from "@unlogg/ui/hooks/unlogg-hooks/use-counter";
 import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
@@ -23,6 +24,19 @@ export const hooks: Registry = [
       },
     ],
     component: useBoolean,
+  },
+  {
+    name: "use-click-outside",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside.ts",
+        type: "registry:hook",
+        target: "/hooks/use-click-outside.ts",
+      },
+    ],
+    component: useClickOutside,
   },
   {
     name: "use-countdown",

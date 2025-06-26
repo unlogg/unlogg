@@ -1,0 +1,58 @@
+# useInterval
+URL: /unlogg-hooks/state/use-interval
+
+A custom React hook to manage interval functionality.
+
+## Example
+
+<ComponentPreview name="use-interval-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-interval" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-interval" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-interval" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Provides a simple way to manage interval functionality.
+* Includes functions to set the interval duration and trigger the interval.
+
+## Examples
+
+Use `useInterval` to create a simple countdown timer that updates every second:
+
+<ComponentPreview name="use-interval-ex-02" classNameComponentContainer="min-h-[200px]" />
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  callback: {
+    description: "Function to be called at each interval.",
+    type: "() => void",
+    required: true,
+  },
+  delay: {
+    description: "Delay in milliseconds for the interval. If null or not a number, the interval is not set.",
+    type: "number | null",
+    required: true,
+  },
+}}
+/>

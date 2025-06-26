@@ -1,0 +1,95 @@
+---
+title: useClickOutside
+description: A custom React hook to detect clicks outside a specified element.
+
+---
+
+
+`useClickOutside` is a custom React hook that allows you to detect clicks outside of a specified element. This is particularly useful for closing dropdowns, modals, or any UI component when the user clicks outside of it.
+
+## Example
+
+<ComponentPreview
+  name="use-click-outside-ex-01"
+  classNameComponentContainer='min-h-[200px]'
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-click-outside"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-click-outside"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-boolean"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+
+- `useClickOutside` is useful for closing popovers, modals, dropdowns, or any UI element when a user clicks or taps outside of it.
+- You can specify which events to listen for (e.g., `mousedown`, `touchstart`).
+- You can provide additional nodes that should not trigger the outside click handler (e.g., buttons or other elements).
+- The hook returns a ref that must be attached to the element you want to monitor for outside clicks.
+- The handler will not be called if the click is inside the referenced element or any of the excluded nodes.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    handler: {
+      description: "Function that is called on outside click.",
+      type: "(event: Event) => void",
+      required: true,
+    },
+    events: {
+      description: "Optional list of events that trigger outside click.",
+      type: "string[]",
+      default: "['mousedown', 'touchstart']",
+      required: false,
+    },
+    nodes: {
+      description: "Optional list of nodes that should not trigger outside click event.",
+      type: "(Element | null)[]",
+      default: "[]",
+      required: false,
+    },
+  }}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+    ref: {
+      description: "A ref object that must be passed to the element based on which outside clicks should be captured.",
+      type: "React.RefObject<T>",
+    },
+  }}
+/>

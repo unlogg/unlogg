@@ -1,0 +1,65 @@
+# useToggle
+URL: /unlogg-hooks/state/use-toggle
+
+A custom React hook to toggle between given values.
+
+## Example
+
+<ComponentPreview name="use-toggle-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-toggle" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-toggle" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-toggle" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Allows toggling between any set of values, not just `true` and `false`. You can provide an array of values to toggle between.
+
+* Default to toggling between `false` and `true` if no options are provided.
+
+* The `toggle` function can optionally accept a value to set directly, bypassing the toggle logic.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "An array of values to toggle between. Defaults to `[false, true]`.",
+    type: "readonly T[]",
+    default: "[false, true]",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  value: {
+    description: "The current value of the toggle.",
+    type: "T",
+  },
+  toggle: {
+    description: "Function to toggle the value. Optionally accepts a value to set directly.",
+    type: "(value?: React.SetStateAction<T>) => void",
+  },
+}}
+/>

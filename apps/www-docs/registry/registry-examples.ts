@@ -36,6 +36,22 @@ export const examples: Registry = [
   },
 
   {
+    name: "use-click-outside-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-click-outside.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-click-outside-ex-01")
+    ),
+  },
+
+  {
     name: "use-counter-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
