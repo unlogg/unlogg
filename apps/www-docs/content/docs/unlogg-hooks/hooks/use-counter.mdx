@@ -1,0 +1,104 @@
+---
+title: useCounter
+description: A custom React hook to manage counter state.
+---
+
+You can use the `useCounter` hook to increment, decrement, and reset the counter value, making it easy to implement counters in your components.
+
+You can also configure the counter with optional parameters for minimum, maximum, and step values, allowing for more control over the counter behavior.
+
+
+## Example
+
+<ComponentPreview
+  name="use-counter-ex-01"
+  classNameComponentContainer='min-h-[200px]'
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-countdown"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-counter"  />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-counter"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+- Provides a simple way to manage counter state.
+- Includes functions to increment, decrement, and reset the counter.
+- Supports optional configuration for minimum, maximum, and step values.
+- When `max` or `min` values are set, the counter will not exceed these limits when incrementing or decrementing.
+
+
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    initialValue: {
+      description: "The initial value for the counter.",
+      type: "number",
+      default: "0",
+    },
+    options: {
+      description: "Optional configuration for the counter behavior.",
+      type: "{ min?: number; max?: number; step?: number; }",
+      default: "{}",
+    },
+  }}
+/>
+
+### Returns
+<TypeTable
+  type={{
+    count: {
+      description: "The current counter value.",
+      type: "number",
+    },
+    setCount: {
+      description: "Function to manually set the counter value.",
+      type: "React.Dispatch<React.SetStateAction<number>>",
+    },
+    increment: {
+      description: "Function to increment the counter by the step value.",
+      type: "() => void",
+    },
+    decrement: {
+      description: "Function to decrement the counter by the step value.",
+      type: "() => void",
+    },
+    reset: {
+      description: "Function to reset the counter to the initial value.",
+      type: "() => void",
+    },
+  }}
+/>

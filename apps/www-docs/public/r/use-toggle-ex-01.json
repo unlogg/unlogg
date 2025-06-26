@@ -5,7 +5,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://unlogg.com/r/use-boolean.json"
+    "https://unlogg.com/r/use-toggle.json"
   ],
   "files": [
     {

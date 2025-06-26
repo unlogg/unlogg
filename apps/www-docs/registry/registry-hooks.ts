@@ -1,10 +1,13 @@
 import type { Registry } from "@/registry/schema";
 import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
+import { useCountdown } from "@unlogg/ui/hooks/unlogg-hooks/use-countdown";
+import { useCounter } from "@unlogg/ui/hooks/unlogg-hooks/use-counter";
 import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
 import { useDebounceValue } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-value";
 import { useDisclosure } from "@unlogg/ui/hooks/unlogg-hooks/use-disclosure";
 import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
 import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
+import { useStateHistory } from "@unlogg/ui/hooks/unlogg-hooks/use-state-history";
 import { useTimeout } from "@unlogg/ui/hooks/unlogg-hooks/use-timeout";
 import { useToggle } from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
 export const hooks: Registry = [
@@ -20,6 +23,32 @@ export const hooks: Registry = [
       },
     ],
     component: useBoolean,
+  },
+  {
+    name: "use-countdown",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-countdown.ts",
+        type: "registry:hook",
+        target: "/hooks/use-countdown.ts",
+      },
+    ],
+    component: useCountdown,
+  },
+  {
+    name: "use-counter",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-counter.ts",
+        type: "registry:hook",
+        target: "/hooks/use-counter.ts",
+      },
+    ],
+    component: useCounter,
   },
   {
     name: "use-debounced-callback",
@@ -114,5 +143,18 @@ export const hooks: Registry = [
       },
     ],
     component: useLocalStorage,
+  },
+  {
+    name: "use-state-history",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-state-history.ts",
+        type: "registry:hook",
+        target: "/hooks/use-state-history.ts",
+      },
+    ],
+    component: useStateHistory,
   },
 ];

@@ -1,0 +1,18 @@
+{
+  "name": "use-countdown-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-countdown.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/hooks/button\";\nimport { useCountdown } from \"@/hooks/use-countdown\";\n\nexport default function UseCountdown_Ex_01() {\n  const [intervalValue, setIntervalValue] = React.useState(1000);\n\n  const [count, { startCountdown, stopCountdown, resetCountdown, isActive }] =\n    useCountdown({\n      countStart: 60,\n      intervalMs: intervalValue,\n      onComplete: () => {\n        console.log(\"Countdown completed!\");\n      },\n    });\n\n  return (\n    <div className=\"flex flex-col items-center gap-6 p-6\">\n      <div className=\"text-center\">\n        <div className=\"text-4xl font-mono font-bold mb-2\">{count}</div>\n        <div className=\"text-sm text-muted-foreground\">\n          Status: {isActive ? \"Running\" : \"Stopped\"}\n        </div>\n      </div>\n\n      <div className=\"flex gap-2\">\n        <Button\n          onClick={startCountdown}\n          disabled={isActive || count === 0}\n          variant=\"default\"\n        >\n          Start\n        </Button>\n        <Button onClick={stopCountdown} disabled={!isActive} variant=\"outline\">\n          Stop\n        </Button>\n        <Button onClick={resetCountdown} variant=\"outline\">\n          Reset\n        </Button>\n      </div>\n\n      <div className=\"flex flex-col items-center gap-2\">\n        <label className=\"text-sm font-medium\">Interval (ms):</label>\n        <div className=\"flex gap-2\">\n          {[500, 1000, 2000].map((ms) => (\n            <Button\n              key={ms}\n              onClick={() => setIntervalValue(ms)}\n              variant={intervalValue === ms ? \"default\" : \"outline\"}\n              size=\"sm\"\n              disabled={isActive}\n            >\n              {ms}ms\n            </Button>\n          ))}\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-countdown-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-countdown-ex-01.tsx"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+---
+title: useStateHistory
+description: A custom React hook to manage state history with undo/redo functionality.
+---
+
+You can use the `useStateHistory` hook to manage state with built-in undo and redo functionality. This is particularly useful for applications where you need to track changes and allow users to revert to previous states, such as in form inputs or complex data structures.
+
+## Example
+
+<ComponentPreview
+  name="use-state-history-ex-01"
+  classNameComponentContainer='min-h-[200px]'
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-state-history"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-state-history"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-state-history" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+- Provides a simple way to manage state with built-in undo/redo functionality.
+- Includes functions to set the state, go back, go forward, and clear the history.
+
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    initialValue: {
+      description: "The initial value for the state.",
+      type: "T",
+      default: "—",
+    },
+    options: {
+      description: "Optional configuration for the state history behavior.",
+      type: "{ maxHistorySize?: number; }",
+      default: "{ maxHistorySize: 50 }",
+    },
+  }}
+/>
+
+### Returns
+<TypeTable
+  type={{
+    value: {
+      description: "The current state value.",
+      type: "T",
+    },
+    setValue: {
+      description: "Function to set a new state value (adds to history).",
+      type: "(value: T | (prev: T) => T) => void",
+    },
+    back: {
+      description: "Go back one step in the history.",
+      type: "() => void",
+    },
+    forward: {
+      description: "Go forward one step in the history.",
+      type: "() => void",
+    },
+    go: {
+      description: "Go to a specific index in the history.",
+      type: "(index: number) => void",
+    },
+    clear: {
+      description: "Clear the history and reset to the initial value.",
+      type: "() => void",
+    },
+    canGoBack: {
+      description: "Boolean indicating if going back is possible.",
+      type: "boolean",
+    },
+    canGoForward: {
+      description: "Boolean indicating if going forward is possible.",
+      type: "boolean",
+    },
+    history: {
+      description: "Array of all history values.",
+      type: "T[]",
+    },
+    currentIndex: {
+      description: "Current position in the history.",
+      type: "number",
+    },
+  }}
+/>
