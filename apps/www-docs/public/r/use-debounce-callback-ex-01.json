@@ -4,6 +4,9 @@
   "dependencies": [
     "lucide-react"
   ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-debounce-callback.json"
+  ],
   "files": [
     {
       "type": "registry:example",

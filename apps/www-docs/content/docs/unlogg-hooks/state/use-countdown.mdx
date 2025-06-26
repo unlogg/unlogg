@@ -1,0 +1,106 @@
+---
+title: useCountdown
+description: A custom React hook to manage countdown timers.
+---
+
+## Example
+
+<ComponentPreview
+  name="use-countdown-ex-01"
+  classNameComponentContainer='min-h-[200px]'
+/>
+
+
+## Install
+<ComponentInstall
+  name="use-countdown"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-countdown"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-countdown"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+
+</ManualInstall>
+
+
+</ComponentInstall>
+
+
+## Notes
+- Provides a simple way to manage countdown timers.
+- Includes functions to start, stop, and reset the countdown.
+
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+    options: {
+      description: "Configuration options for the countdown.",
+      type: "UseCountdownOptions",
+      default: "—",
+    },
+    "options.countStart": {
+      description: "The initial value to start counting down from.",
+      type: "number",
+      default: "—",
+    },
+    "options.intervalMs": {
+      description: "The interval in milliseconds between countdown ticks.",
+      type: "number",
+      default: "1000",
+    },
+    "options.onComplete": {
+      description: "Optional callback invoked when the countdown reaches zero.",
+      type: "() => void",
+      default: "undefined",
+    },
+  }}
+/>
+
+### Returns
+<TypeTable
+  type={{
+    count: {
+      description: "The current countdown value.",
+      type: "number",
+    },
+    "handlers.startCountdown": {
+      description: "Function to start the countdown if count is greater than zero.",
+      type: "() => void",
+    },
+    "handlers.stopCountdown": {
+      description: "Function to stop the countdown and clear the interval.",
+      type: "() => void",
+    },
+    "handlers.resetCountdown": {
+      description: "Function to reset the countdown to initial value and stop it.",
+      type: "() => void",
+    },
+    "handlers.isActive": {
+      description: "Boolean indicating if the countdown is currently active.",
+      type: "boolean",
+    },
+  }}
+/>

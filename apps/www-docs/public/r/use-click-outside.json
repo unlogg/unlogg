@@ -1,0 +1,15 @@
+{
+  "name": "use-click-outside",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\n\ntype UseClickOutsideHandler = (event: Event) => void;\ntype UseClickOutsideEvents = string[];\ntype UseClickOutsideNodes = (Element | null)[];\n\n/**\n * A custom React hook that detects click and touch events outside of given element or elements group.\n *\n * @param {UseClickOutsideHandler} handler - Function that is called on outside click\n * @param {UseClickOutsideEvents} [events=['mousedown', 'touchstart']] - Optional list of events that trigger outside click\n * @param {UseClickOutsideNodes} [nodes=[]] - Optional list of nodes that should not trigger outside click event\n * @returns {React.RefObject<T>} - A ref object that must be passed to the element based on which outside clicks should be captured\n */\n\nfunction useClickOutside<T extends HTMLElement = HTMLElement>(\n  handler: UseClickOutsideHandler,\n  events: UseClickOutsideEvents = [\"mousedown\", \"touchstart\"],\n  nodes: UseClickOutsideNodes = []\n): React.RefObject<T | null> {\n  const ref = useRef<T | null>(null);\n\n  useEffect(() => {\n    const listener = (event: Event) => {\n      const { target } = event;\n\n      if (!target || !ref.current) {\n        return;\n      }\n\n      // Check if click is outside the main element\n      if (ref.current.contains(target as Node)) {\n        return;\n      }\n\n      // Check if click is inside any of the excluded nodes\n      if (nodes.some((node) => node?.contains(target as Node))) {\n        return;\n      }\n\n      handler(event);\n    };\n\n    events.forEach((event) => {\n      document.addEventListener(event, listener);\n    });\n\n    return () => {\n      events.forEach((event) => {\n        document.removeEventListener(event, listener);\n      });\n    };\n  }, [handler, events, nodes]);\n\n  return ref;\n}\n\nexport { useClickOutside };\nexport type {\n  UseClickOutsideHandler,\n  UseClickOutsideEvents,\n  UseClickOutsideNodes,\n};\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-click-outside.ts",
+      "target": "/hooks/use-click-outside.ts"
+    }
+  ]
+}

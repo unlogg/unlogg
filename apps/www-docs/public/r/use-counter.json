@@ -1,0 +1,15 @@
+{
+  "name": "use-counter",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\ntype UseCounterOptions = {\n  min?: number;\n  max?: number;\n  step?: number;\n};\n\ntype UseCounterReturn = {\n  count: number;\n  setCount: React.Dispatch<React.SetStateAction<number>>;\n  increment: () => void;\n  decrement: () => void;\n  reset: () => void;\n};\n\n/**\n * A custom React hook that provides counter functionality with optional constraints.\n *\n * @param initialValue - The initial value for the counter (default: 0).\n * @param options - Optional configuration for the counter behavior.\n * @param options.min - The minimum value the counter can reach.\n * @param options.max - The maximum value the counter can reach.\n * @param options.step - The step size for increment/decrement operations (default: 1).\n *\n * @returns An object containing:\n *   - `count`: The current counter value.\n *   - `setCount`: Function to manually set the counter value.\n *   - `increment`: Function to increment the counter by the step value.\n *   - `decrement`: Function to decrement the counter by the step value.\n *   - `reset`: Function to reset the counter to the initial value.\n *\n * @example\n * const { count, setCount, increment, decrement, reset } = useCounter(0, {\n *   min: 0,\n *   max: 100,\n *   step: 5,\n * });\n */\nfunction useCounter(\n  initialValue = 0,\n  options: UseCounterOptions = {}\n): UseCounterReturn {\n  const { min, max, step = 1 } = options;\n\n  // Helper function to clamp values within bounds\n  const clampValue = React.useCallback(\n    (value: number) => {\n      let clampedValue = value;\n      if (min !== undefined) clampedValue = Math.max(clampedValue, min);\n      if (max !== undefined) clampedValue = Math.min(clampedValue, max);\n      return clampedValue;\n    },\n    [min, max]\n  );\n\n  const [count, _setCount] = React.useState(() => clampValue(initialValue));\n\n  // Override setCount to always clamp the value\n  const setCount: React.Dispatch<React.SetStateAction<number>> =\n    React.useCallback(\n      (value) => {\n        if (typeof value === \"function\") {\n          _setCount((prevCount) => clampValue(value(prevCount)));\n        } else {\n          _setCount(clampValue(value));\n        }\n      },\n      [clampValue]\n    );\n\n  const increment = React.useCallback(() => {\n    setCount((prevCount) => prevCount + step);\n  }, [setCount, step]);\n\n  const decrement = React.useCallback(() => {\n    setCount((prevCount) => prevCount - step);\n  }, [setCount, step]);\n\n  const reset = React.useCallback(() => {\n    setCount(initialValue);\n  }, [setCount, initialValue]);\n\n  return { count, setCount, increment, decrement, reset };\n}\n\nexport { useCounter };\nexport type { UseCounterOptions, UseCounterReturn };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-counter.ts",
+      "target": "/hooks/use-counter.ts"
+    }
+  ]
+}

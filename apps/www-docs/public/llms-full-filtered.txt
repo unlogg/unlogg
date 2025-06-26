@@ -11,8 +11,69 @@ Welcome to the docs!
 </Callout>
 
 
+# Overview
+URL: /unlogg-hooks
+
+A collection of reusable hooks for building dashboard and web apps.
+
+## What are unlogg/hooks?
+
+**unlogg/hooks** is a collection of reusable hooks for building dashboard and web apps. It’s a great way to speed up your development process and create a consistent look and feel across your site.
+
+## How are the hooks built?
+
+All the hooks are built with `React` and are designed to be easy to use and customize. They’re built with TypeScript, so you get all the benefits of type safety and autocompletion in your IDE.
+
+## Can I customize the hooks?
+
+YES! You can customize the hooks however you like!
+
+Since this is a "copy-paste" library, you can easily copy the hooks' code and paste it into your project (or install via the CLI). You can then modify the code to fit your needs, or use the hooks as a starting point for building your own.
+
+## License
+
+**unlogg/hooks** is licensed under the MIT License. You are free to use it in personal and commercial projects. If you find it useful, please consider giving back by contributing to the project or spreading the word.
+
+For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+
+## FAQ
+
+<Accordions>
+  <Accordion title="Can I use this in my project?">
+    Definitely! **unlogg/hooks** is free for personal and commercial projects.
+    For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+  </Accordion>
+
+  <Accordion title="Is this project ready to use?">
+    Almost! We’re constantly adding new hooks and improving existing ones.
+    You can of course use what’s here now, but be aware that things might change a little bit.
+  </Accordion>
+
+  <Accordion title="Can I contribute?">
+    Yes, we'd love your help! You can open an issue or submit a pull request on our GitHub repository.
+
+    Check [CONTRIBUTING.md](https://github.com/unlogg/blob/main/CONTRIBUTING.md) for more information on how to contribute.
+  </Accordion>
+</Accordions>
+
+
+# Installation
+URL: /unlogg-hooks/installation
+
+How to use unlogg/hooks in your project
+
+**No installation is required!  🎉**
+
+Since this is a "copy-paste" collection of hooks, you can easily copy the components' code and paste it into your project
+
+You can then modify the code to fit your needs, or use the components as a starting point for building your own.
+
+If you want, you can use the [CLI](/docs/unlogg-ui/cli) to quickly add hooks to your projects.
+(This is the same guide and CLI we use for `unlogg/ui`)
+
+
 # useBoolean
-URL: /unlogg-hooks/hooks/use-boolean
+URL: /unlogg-hooks/state/use-boolean
 
 A custom React hook to manage boolean state with toggle functionality.
 
@@ -87,8 +148,186 @@ A custom React hook to manage boolean state with toggle functionality.
 />
 
 
+# useCountdown
+URL: /unlogg-hooks/state/use-countdown
+
+A custom React hook to manage countdown timers.
+
+## Example
+
+<ComponentPreview name="use-countdown-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-countdown" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-countdown" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-countdown" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Provides a simple way to manage countdown timers.
+* Includes functions to start, stop, and reset the countdown.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "Configuration options for the countdown.",
+    type: "UseCountdownOptions",
+    default: "—",
+  },
+  "options.countStart": {
+    description: "The initial value to start counting down from.",
+    type: "number",
+    default: "—",
+  },
+  "options.intervalMs": {
+    description: "The interval in milliseconds between countdown ticks.",
+    type: "number",
+    default: "1000",
+  },
+  "options.onComplete": {
+    description: "Optional callback invoked when the countdown reaches zero.",
+    type: "() => void",
+    default: "undefined",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  count: {
+    description: "The current countdown value.",
+    type: "number",
+  },
+  "handlers.startCountdown": {
+    description: "Function to start the countdown if count is greater than zero.",
+    type: "() => void",
+  },
+  "handlers.stopCountdown": {
+    description: "Function to stop the countdown and clear the interval.",
+    type: "() => void",
+  },
+  "handlers.resetCountdown": {
+    description: "Function to reset the countdown to initial value and stop it.",
+    type: "() => void",
+  },
+  "handlers.isActive": {
+    description: "Boolean indicating if the countdown is currently active.",
+    type: "boolean",
+  },
+}}
+/>
+
+
+# useCounter
+URL: /unlogg-hooks/state/use-counter
+
+A custom React hook to manage counter state.
+
+You can use the `useCounter` hook to increment, decrement, and reset the counter value, making it easy to implement counters in your components.
+
+You can also configure the counter with optional parameters for minimum, maximum, and step values, allowing for more control over the counter behavior.
+
+## Example
+
+<ComponentPreview name="use-counter-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-countdown" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-counter" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-counter" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Provides a simple way to manage counter state.
+* Includes functions to increment, decrement, and reset the counter.
+* Supports optional configuration for minimum, maximum, and step values.
+* When `max` or `min` values are set, the counter will not exceed these limits when incrementing or decrementing.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  initialValue: {
+    description: "The initial value for the counter.",
+    type: "number",
+    default: "0",
+  },
+  options: {
+    description: "Optional configuration for the counter behavior.",
+    type: "{ min?: number; max?: number; step?: number; }",
+    default: "{}",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  count: {
+    description: "The current counter value.",
+    type: "number",
+  },
+  setCount: {
+    description: "Function to manually set the counter value.",
+    type: "React.Dispatch<React.SetStateAction<number>>",
+  },
+  increment: {
+    description: "Function to increment the counter by the step value.",
+    type: "() => void",
+  },
+  decrement: {
+    description: "Function to decrement the counter by the step value.",
+    type: "() => void",
+  },
+  reset: {
+    description: "Function to reset the counter to the initial value.",
+    type: "() => void",
+  },
+}}
+/>
+
+
 # useDebounceCallback  
-URL: /unlogg-hooks/hooks/use-debounce-callback
+URL: /unlogg-hooks/state/use-debounce-callback
 
 A custom React hook to debounce callback functions.
 
@@ -160,7 +399,7 @@ The difference between `useDebounceCallback` and `useDebounceValue` is that the 
 
 
 # useDebounceValue
-URL: /unlogg-hooks/hooks/use-debounce-value
+URL: /unlogg-hooks/state/use-debounce-value
 
 A custom React hook to manage debounced state values.
 
@@ -235,7 +474,7 @@ For example, you can use this hook to debounce a search input value, ensuring th
 
 
 # useDisclosure
-URL: /unlogg-hooks/hooks/use-disclosure
+URL: /unlogg-hooks/state/use-disclosure
 
 A react hook to manage boolean state with toggle functionality.
 
@@ -308,7 +547,7 @@ A react hook to manage boolean state with toggle functionality.
 
 
 # useInterval
-URL: /unlogg-hooks/hooks/use-interval
+URL: /unlogg-hooks/state/use-interval
 
 A custom React hook to manage interval functionality.
 
@@ -368,7 +607,7 @@ Use `useInterval` to create a simple countdown timer that updates every second:
 
 
 # useLocalStorage
-URL: /unlogg-hooks/hooks/use-local-storage
+URL: /unlogg-hooks/state/use-local-storage
 
 A custom React hook to manage local storage with ease.
 
@@ -440,8 +679,111 @@ This hook checks if `localStorage` is available before accessing it. If used in 
 />
 
 
+# useStateHistory
+URL: /unlogg-hooks/state/use-state-history
+
+A custom React hook to manage state history with undo/redo functionality.
+
+You can use the `useStateHistory` hook to manage state with built-in undo and redo functionality. This is particularly useful for applications where you need to track changes and allow users to revert to previous states, such as in form inputs or complex data structures.
+
+## Example
+
+<ComponentPreview name="use-state-history-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-state-history" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-state-history" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-state-history" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Provides a simple way to manage state with built-in undo/redo functionality.
+* Includes functions to set the state, go back, go forward, and clear the history.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  initialValue: {
+    description: "The initial value for the state.",
+    type: "T",
+    default: "—",
+  },
+  options: {
+    description: "Optional configuration for the state history behavior.",
+    type: "{ maxHistorySize?: number; }",
+    default: "{ maxHistorySize: 50 }",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  value: {
+    description: "The current state value.",
+    type: "T",
+  },
+  setValue: {
+    description: "Function to set a new state value (adds to history).",
+    type: "(value: T | (prev: T) => T) => void",
+  },
+  back: {
+    description: "Go back one step in the history.",
+    type: "() => void",
+  },
+  forward: {
+    description: "Go forward one step in the history.",
+    type: "() => void",
+  },
+  go: {
+    description: "Go to a specific index in the history.",
+    type: "(index: number) => void",
+  },
+  clear: {
+    description: "Clear the history and reset to the initial value.",
+    type: "() => void",
+  },
+  canGoBack: {
+    description: "Boolean indicating if going back is possible.",
+    type: "boolean",
+  },
+  canGoForward: {
+    description: "Boolean indicating if going forward is possible.",
+    type: "boolean",
+  },
+  history: {
+    description: "Array of all history values.",
+    type: "T[]",
+  },
+  currentIndex: {
+    description: "Current position in the history.",
+    type: "number",
+  },
+}}
+/>
+
+
 # useTimeout
-URL: /unlogg-hooks/hooks/use-timeout
+URL: /unlogg-hooks/state/use-timeout
 
 A custom React hook to manage timeout functionality.
 
@@ -495,7 +837,7 @@ A custom React hook to manage timeout functionality.
 
 
 # useToggle
-URL: /unlogg-hooks/hooks/use-toggle
+URL: /unlogg-hooks/state/use-toggle
 
 A custom React hook to toggle between given values.
 
@@ -561,65 +903,81 @@ A custom React hook to toggle between given values.
 />
 
 
-# Overview
-URL: /unlogg-hooks
+# useClickOutside
+URL: /unlogg-hooks/ui-and-dom/use-click-outside
 
-A collection of reusable hooks for building dashboard and web apps.
+A custom React hook to detect clicks outside a specified element.
 
-## What are unlogg/hooks?
+`useClickOutside` is a custom React hook that allows you to detect clicks outside of a specified element. This is particularly useful for closing dropdowns, modals, or any UI component when the user clicks outside of it.
 
-**unlogg/hooks** is a collection of reusable hooks for building dashboard and web apps. It’s a great way to speed up your development process and create a consistent look and feel across your site.
+## Example
 
-## How are the hooks built?
+<ComponentPreview name="use-click-outside-ex-01" classNameComponentContainer="min-h-[200px]" />
 
-All the hooks are built with `React` and are designed to be easy to use and customize. They’re built with TypeScript, so you get all the benefits of type safety and autocompletion in your IDE.
+## Install
 
-## Can I customize the hooks?
+<ComponentInstall name="use-click-outside" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-click-outside" />
 
-YES! You can customize the hooks however you like!
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
 
-Since this is a "copy-paste" library, you can easily copy the hooks' code and paste it into your project (or install via the CLI). You can then modify the code to fit your needs, or use the hooks as a starting point for building your own.
+      <ComponentSource name="use-boolean" />
 
-## License
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
 
-**unlogg/hooks** is licensed under the MIT License. You are free to use it in personal and commercial projects. If you find it useful, please consider giving back by contributing to the project or spreading the word.
+## Notes
 
-For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
+* `useClickOutside` is useful for closing popovers, modals, dropdowns, or any UI element when a user clicks or taps outside of it.
+* You can specify which events to listen for (e.g., `mousedown`, `touchstart`).
+* You can provide additional nodes that should not trigger the outside click handler (e.g., buttons or other elements).
+* The hook returns a ref that must be attached to the element you want to monitor for outside clicks.
+* The handler will not be called if the click is inside the referenced element or any of the excluded nodes.
 
-## FAQ
+## API Reference
 
-<Accordions>
-  <Accordion title="Can I use this in my project?">
-    Definitely! **unlogg/hooks** is free for personal and commercial projects.
-    For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) file.
-  </Accordion>
+### Parameters
 
-  <Accordion title="Is this project ready to use?">
-    Almost! We’re constantly adding new hooks and improving existing ones.
-    You can of course use what’s here now, but be aware that things might change a little bit.
-  </Accordion>
+<TypeTable
+  type={{
+  handler: {
+    description: "Function that is called on outside click.",
+    type: "(event: Event) => void",
+    required: true,
+  },
+  events: {
+    description: "Optional list of events that trigger outside click.",
+    type: "string[]",
+    default: "['mousedown', 'touchstart']",
+    required: false,
+  },
+  nodes: {
+    description: "Optional list of nodes that should not trigger outside click event.",
+    type: "(Element | null)[]",
+    default: "[]",
+    required: false,
+  },
+}}
+/>
 
-  <Accordion title="Can I contribute?">
-    Yes, we'd love your help! You can open an issue or submit a pull request on our GitHub repository.
+### Returns
 
-    Check [CONTRIBUTING.md](https://github.com/unlogg/blob/main/CONTRIBUTING.md) for more information on how to contribute.
-  </Accordion>
-</Accordions>
-
-
-# Installation
-URL: /unlogg-hooks/installation
-
-How to use unlogg/hooks in your project
-
-**No installation is required!  🎉**
-
-Since this is a "copy-paste" collection of hooks, you can easily copy the components' code and paste it into your project
-
-You can then modify the code to fit your needs, or use the components as a starting point for building your own.
-
-If you want, you can use the [CLI](/docs/unlogg-ui/cli) to quickly add hooks to your projects.
-(This is the same guide and CLI we use for `unlogg/ui`)
+<TypeTable
+  type={{
+  ref: {
+    description: "A ref object that must be passed to the element based on which outside clicks should be captured.",
+    type: "React.RefObject<T>",
+  },
+}}
+/>
 
 
 # Overview

@@ -35,9 +35,60 @@
       "dependencies": [
         "lucide-react"
       ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-boolean.json"
+      ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-click-outside-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-click-outside.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-counter-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-counter.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-counter-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-countdown-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-countdown.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-countdown-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -47,6 +98,9 @@
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-debounce-callback.json"
       ],
       "files": [
         {
@@ -61,6 +115,9 @@
       "dependencies": [
         "lucide-react"
       ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-debounce-value.json"
+      ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value-ex-01.tsx",
@@ -73,6 +130,9 @@
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-disclosure.json"
       ],
       "files": [
         {
@@ -136,7 +196,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-boolean.json"
+        "https://unlogg.com/r/use-toggle.json"
       ],
       "files": [
         {
@@ -162,6 +222,22 @@
       ]
     },
     {
+      "name": "use-state-history-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-state-history.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-state-history-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-boolean",
       "type": "registry:hook",
       "dependencies": [
@@ -172,6 +248,48 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-boolean.ts",
           "type": "registry:hook",
           "target": "/hooks/use-boolean.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-click-outside",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-click-outside.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-countdown",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-countdown.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-countdown.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-counter",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-counter.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-counter.ts"
         }
       ]
     },
@@ -270,6 +388,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage.ts",
           "type": "registry:hook",
           "target": "/hooks/use-local-storage.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-state-history",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-state-history.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-state-history.ts"
         }
       ]
     }

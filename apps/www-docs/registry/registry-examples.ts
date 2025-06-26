@@ -23,7 +23,7 @@ export const examples: Registry = [
     name: "use-boolean-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    // registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-boolean-ex-01.tsx",
@@ -36,10 +36,58 @@ export const examples: Registry = [
   },
 
   {
+    name: "use-click-outside-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-click-outside.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-click-outside-ex-01")
+    ),
+  },
+
+  {
+    name: "use-counter-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-counter.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-counter-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-counter-ex-01")
+    ),
+  },
+
+  {
+    name: "use-countdown-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-countdown.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-countdown-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-countdown-ex-01")
+    ),
+  },
+
+  {
     name: "use-debounce-callback-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    // registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-debounce-callback.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback-ex-01.tsx",
@@ -55,7 +103,7 @@ export const examples: Registry = [
     name: "use-debounce-value-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    // registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-debounce-value.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value-ex-01.tsx",
@@ -70,7 +118,7 @@ export const examples: Registry = [
     name: "use-disclosure-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    // registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-disclosure.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-disclosure-ex-01.tsx",
@@ -132,7 +180,7 @@ export const examples: Registry = [
     name: "use-toggle-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
-    registryDependencies: ["https://unlogg.com/r/use-boolean.json"],
+    registryDependencies: ["https://unlogg.com/r/use-toggle.json"],
     files: [
       {
         path: "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
@@ -156,6 +204,22 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-local-storage-ex-01")
+    ),
+  },
+
+  {
+    name: "use-state-history-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-state-history.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-state-history-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-state-history-ex-01")
     ),
   },
 ];

@@ -8,8 +8,11 @@
     "index",
     "installation",
     "cli",
-    "---Hooks---",
-    "...hooks",
+
+    "---State Management---",
+    "...state",
+    "---UI & DOM---",
+    "...ui-and-dom",
     "..."
   ]
 }

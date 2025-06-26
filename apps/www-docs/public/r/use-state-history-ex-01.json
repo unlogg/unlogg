@@ -1,0 +1,18 @@
+{
+  "name": "use-state-history-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-state-history.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Button } from \"@/hooks/button\";\nimport { Input } from \"@/hooks/input\";\nimport { useStateHistory } from \"@/hooks/use-state-history\";\n\nexport default function UseStateHistory_Ex_01() {\n  const [\n    value,\n    {\n      setValue,\n      back,\n      forward,\n      clear,\n      canGoBack,\n      canGoForward,\n      history,\n      currentIndex,\n    },\n  ] = useStateHistory<number>(0, { maxHistorySize: 10 });\n\n  const [inputValue, setInputValue] = React.useState(\"\");\n\n  const increment = () => setValue((prev) => prev + 1);\n  const decrement = () => setValue((prev) => prev - 1);\n\n  const handleSetValue = () => {\n    const num = parseInt(inputValue);\n    if (!isNaN(num)) {\n      setValue(num);\n      setInputValue(\"\");\n    }\n  };\n\n  return (\n    <div className=\"flex flex-col items-center gap-6 p-6\">\n      <div className=\"text-center\">\n        <div className=\"text-4xl font-mono font-bold mb-2\">{value}</div>\n        <div className=\"text-sm text-muted-foreground\">\n          History: {currentIndex + 1} / {history.length}\n        </div>\n      </div>\n\n      <div className=\"flex gap-2\">\n        <Button onClick={decrement} variant=\"outline\" size=\"sm\">\n          -1\n        </Button>\n        <Button onClick={increment} variant=\"default\" size=\"sm\">\n          +1\n        </Button>\n      </div>\n\n      <div className=\"flex items-center gap-2\">\n        <Input\n          type=\"number\"\n          placeholder=\"Set value\"\n          value={inputValue}\n          onChange={(e) => setInputValue(e.target.value)}\n          className=\"w-24\"\n        />\n        <Button onClick={handleSetValue} size=\"sm\" variant=\"outline\">\n          Set\n        </Button>\n      </div>\n\n      <div className=\"flex gap-2\">\n        <Button\n          onClick={back}\n          disabled={!canGoBack}\n          variant=\"outline\"\n          size=\"sm\"\n        >\n          ← Back\n        </Button>\n        <Button\n          onClick={forward}\n          disabled={!canGoForward}\n          variant=\"outline\"\n          size=\"sm\"\n        >\n          Forward →\n        </Button>\n        <Button onClick={clear} variant=\"outline\" size=\"sm\">\n          Clear History\n        </Button>\n      </div>\n\n      <div className=\"text-center\">\n        <div className=\"text-sm font-medium mb-2\">History:</div>\n        <div className=\"flex gap-1 flex-wrap justify-center max-w-xs\">\n          {history.map((historyValue, index) => (\n            <span\n              key={index}\n              className={`px-2 py-1 text-xs rounded ${\n                index === currentIndex\n                  ? \"bg-primary text-primary-foreground\"\n                  : \"bg-muted text-muted-foreground\"\n              }`}\n            >\n              {historyValue}\n            </span>\n          ))}\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-state-history-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-state-history-ex-01.tsx"
+    }
+  ]
+}

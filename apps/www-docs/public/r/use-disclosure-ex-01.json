@@ -4,6 +4,9 @@
   "dependencies": [
     "lucide-react"
   ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-disclosure.json"
+  ],
   "files": [
     {
       "type": "registry:example",

@@ -1,0 +1,73 @@
+# useDebounceValue
+URL: /unlogg-hooks/state/use-debounce-value
+
+A custom React hook to manage debounced state values.
+
+You can use the `useDebounceValue` hook to manage state values that need to be debounced. This is particularly useful for scenarios like form inputs, where you want to avoid excessive updates while the user is typing.
+
+For example, you can use this hook to debounce a search input value, ensuring that the search function is not called on every keystroke but rather *after* the user has stopped typing for a specified delay.
+
+## Example
+
+<ComponentPreview name="use-debounce-value-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="use-debounce-value" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-debounce-value" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-debounce-value" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  initialValue: {
+    description: "The initial value to be debounced.",
+    type: "T",
+    default: "—",
+  },
+  delay: {
+    description: "The debounce delay in milliseconds.",
+    type: "number",
+    default: "—",
+  },
+  options: {
+    description: "Optional configuration object.",
+    type: "{ onDebounce?: (value: T) => void }",
+    default: "{}",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  "debouncedValue": {
+    description: "The current debounced value.",
+    type: "T",
+  },
+  "handlers.setValue": {
+    description: "Function to manually set the value to be debounced.",
+    type: "(val: T) => void",
+  },
+}}
+/>
