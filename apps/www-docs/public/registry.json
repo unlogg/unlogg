@@ -62,6 +62,22 @@
       ]
     },
     {
+      "name": "use-clipboard-copy-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-clipboard-copy.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-clipboard-copy-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-counter-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -137,6 +153,54 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-disclosure-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-element-size-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-element-size.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-element-size-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-hover-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-hover.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-hover-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-is-client-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-is-client.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -222,6 +286,54 @@
       ]
     },
     {
+      "name": "use-media-query-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-media-query.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-media-query-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-mobile-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-mobile.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-scroll-into-view-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-scroll-into-view.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-state-history-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -233,6 +345,22 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-state-history-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-window-size-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-window-size.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-window-size-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -262,6 +390,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-click-outside.ts",
           "type": "registry:hook",
           "target": "/hooks/use-click-outside.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-clipboard-copy",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-clipboard-copy.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-clipboard-copy.ts"
         }
       ]
     },
@@ -336,6 +478,48 @@
       ]
     },
     {
+      "name": "use-element-size",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-element-size.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-element-size.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-hover",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-hover.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-hover.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-is-client",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-is-client.ts"
+        }
+      ]
+    },
+    {
       "name": "use-interval",
       "type": "registry:hook",
       "dependencies": [
@@ -392,6 +576,48 @@
       ]
     },
     {
+      "name": "use-media-query",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-media-query.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-media-query.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-mobile",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-mobile.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-mobile.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-scroll-into-view",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-scroll-into-view.ts"
+        }
+      ]
+    },
+    {
       "name": "use-state-history",
       "type": "registry:hook",
       "dependencies": [
@@ -402,6 +628,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-state-history.ts",
           "type": "registry:hook",
           "target": "/hooks/use-state-history.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-window-size",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-window-size.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-window-size.ts"
         }
       ]
     }

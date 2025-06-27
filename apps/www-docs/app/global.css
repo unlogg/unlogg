@@ -10,7 +10,9 @@
   font-weight: 600;
 }
 
-a[href="/docs/unlogg-hooks/ui-and-dom/use-click-outside"]::after {
+a[href="/docs/unlogg-hooks/state/use-countdown"]::after,
+a[href="/docs/unlogg-hooks/ui-and-dom/use-click-outside"]::after,
+a[href="/docs/unlogg-hooks/utilities/use-clipboard-copy"]::after {
   content: "New";
   font-family:
     DM Sans,

@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { BookIcon } from "lucide-react";
+import { AtomIcon, BookIcon } from "lucide-react";
 import Image from "next/image";
 import { Logo } from "./logo";
 import { ThemeCustomizer } from "@/components/theme-customizer";
@@ -65,6 +65,14 @@ export const baseOptions: BaseLayoutProps = {
       icon: <BookIcon />,
       text: "UI",
       url: "/docs/unlogg-ui",
+      // secondary items will be displayed differently on navbar
+      secondary: false,
+    },
+
+    {
+      icon: <AtomIcon />,
+      text: "Hooks",
+      url: "/docs/unlogg-hooks",
       // secondary items will be displayed differently on navbar
       secondary: false,
     },

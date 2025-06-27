@@ -1,0 +1,257 @@
+# useMediaQuery
+URL: /unlogg-hooks/ui-and-dom/use-media-query
+
+A custom React hook that tracks the state of a media query using the Match Media API.
+
+`useMediaQuery` is a custom React hook that tracks the state of a CSS media query using the browser's Match Media API. It provides a simple boolean interface to conditionally render content or apply logic based on media queries like screen size, user preferences, or device capabilities.
+
+## Example
+
+<ComponentPreview name="use-media-query-ex-01" classNameComponentContainer="min-h-[800px]" />
+
+## Install
+
+<ComponentInstall name="use-media-query" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-media-query" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-media-query" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses the browser's native `matchMedia` API for efficient media query tracking
+* Automatically handles server-side rendering scenarios
+* Provides options for SSR-safe initialization
+* Cleans up event listeners automatically on unmount
+* Supports all standard CSS media query features
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  query: {
+    description: "The media query to track.",
+    type: "string",
+    default: "—",
+  },
+  options: {
+    description: "The options for customizing the behavior of the hook (optional).",
+    type: "UseMediaQueryOptions",
+    default: "{}",
+  },
+  "options.defaultValue": {
+    description: "The default value to return if the hook is being run on the server.",
+    type: "boolean",
+    default: "false",
+  },
+  "options.initializeWithValue": {
+    description: "If true (default), the hook will initialize reading the media query. In SSR, you should set it to false, returning options.defaultValue or false initially.",
+    type: "boolean",
+    default: "true",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  matches: {
+    description: "The current state of the media query (true if the query matches, false otherwise).",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+function ResponsiveComponent() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+  return (
+    <div>
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
+      {isDarkMode && <p>Dark mode is enabled</p>}
+      {prefersReducedMotion && <p>Reduced motion preferred</p>}
+    </div>
+  );
+}
+```
+
+### SSR-Safe Usage
+
+```tsx
+function SSRComponent() {
+  const isMobile = useMediaQuery('(max-width: 768px)', {
+    defaultValue: false,
+    initializeWithValue: false
+  });
+
+  return (
+    <div>
+      {isMobile ? 'Mobile View' : 'Desktop View'}
+    </div>
+  );
+}
+```
+
+## Common Media Queries
+
+### Breakpoints
+
+```tsx
+// Standard breakpoints
+const isMobile = useMediaQuery('(max-width: 640px)');
+const isTablet = useMediaQuery('(min-width: 641px) and (max-width: 1024px)');
+const isDesktop = useMediaQuery('(min-width: 1025px)');
+const isLarge = useMediaQuery('(min-width: 1280px)');
+
+// Custom breakpoints
+const isSmall = useMediaQuery('(max-width: 480px)');
+const isWide = useMediaQuery('(min-width: 1600px)');
+```
+
+### User Preferences
+
+```tsx
+// Color scheme
+const isDark = useMediaQuery('(prefers-color-scheme: dark)');
+const isLight = useMediaQuery('(prefers-color-scheme: light)');
+
+// Motion preferences
+const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+// Contrast preferences
+const highContrast = useMediaQuery('(prefers-contrast: high)');
+const lowContrast = useMediaQuery('(prefers-contrast: low)');
+```
+
+### Device Capabilities
+
+```tsx
+// Orientation
+const isPortrait = useMediaQuery('(orientation: portrait)');
+const isLandscape = useMediaQuery('(orientation: landscape)');
+
+// Input capabilities
+const canHover = useMediaQuery('(hover: hover)');
+const hasPointer = useMediaQuery('(pointer: fine)');
+
+// Display capabilities
+const isRetina = useMediaQuery('(min-resolution: 2dppx)');
+const isPrint = useMediaQuery('print');
+```
+
+## Advanced Examples
+
+### Responsive Layout Hook
+
+```tsx
+function useResponsiveLayout() {
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const isTablet = useMediaQuery('(min-width: 641px) and (max-width: 1024px)');
+  const isDesktop = useMediaQuery('(min-width: 1025px)');
+
+  return {
+    isMobile,
+    isTablet,
+    isDesktop,
+    columns: isMobile ? 1 : isTablet ? 2 : 3,
+    showSidebar: isDesktop,
+    compactLayout: isMobile || isTablet
+  };
+}
+```
+
+### Theme-Aware Component
+
+```tsx
+function ThemeAwareComponent() {
+  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersHighContrast = useMediaQuery('(prefers-contrast: high)');
+  
+  const theme = React.useMemo(() => ({
+    dark: prefersDark,
+    highContrast: prefersHighContrast,
+    className: `
+      ${prefersDark ? 'dark' : 'light'}
+      ${prefersHighContrast ? 'high-contrast' : ''}
+    `.trim()
+  }), [prefersDark, prefersHighContrast]);
+
+  return (
+    <div className={theme.className}>
+      <p>Theme-aware content</p>
+    </div>
+  );
+}
+```
+
+### Performance-Aware Component
+
+```tsx
+function PerformanceAwareComponent() {
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const isLowEndDevice = useMediaQuery('(max-device-memory: 1)');
+  const isSlowConnection = useMediaQuery('(prefers-reduced-data: reduce)');
+
+  const shouldOptimize = prefersReducedMotion || isLowEndDevice || isSlowConnection;
+
+  return (
+    <div>
+      {shouldOptimize ? (
+        <StaticContent />
+      ) : (
+        <AnimatedContent />
+      )}
+    </div>
+  );
+}
+```
+
+## TypeScript
+
+The hook is fully typed and exports its option types:
+
+```tsx
+import { useMediaQuery, UseMediaQueryOptions } from "@/hooks/use-media-query";
+
+const options: UseMediaQueryOptions = {
+  defaultValue: false,
+  initializeWithValue: true
+};
+
+const isMobile: boolean = useMediaQuery('(max-width: 768px)', options);
+```
+
+## Use Cases
+
+* **Responsive Design**: Conditional rendering based on screen size
+* **Accessibility**: Respecting user preferences for motion, contrast, etc.
+* **Performance Optimization**: Adapting content for device capabilities
+* **Progressive Enhancement**: Enabling features based on device support
+* **Theme Detection**: Automatically adapting to system color scheme
+* **Print Styles**: Conditional rendering for print media
+* **Device Orientation**: Adapting layout for portrait/landscape
+* **Touch vs Mouse**: Different interactions for different input methods

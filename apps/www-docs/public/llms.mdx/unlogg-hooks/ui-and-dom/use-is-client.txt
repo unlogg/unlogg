@@ -1,0 +1,193 @@
+# useIsClient
+URL: /unlogg-hooks/ui-and-dom/use-is-client
+
+A custom React hook that determines if the code is running on the client side (in the browser).
+
+`useIsClient` is a custom React hook that determines whether the code is running on the client side (in the browser) as opposed to the server. This hook is essential for SSR applications to prevent hydration mismatches and safely access browser-only APIs. It returns `false` during server-side rendering and `true` after the component mounts on the client.
+
+## Example
+
+<ComponentPreview name="use-is-client-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-is-client" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-is-client" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-is-client" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Returns `false` during server-side rendering and `true` after client hydration
+* Prevents hydration mismatches in SSR applications
+* Enables safe access to browser-only APIs like `window`, `document`, `localStorage`
+* Automatically handles the server/client state transition
+* Zero dependencies with minimal performance overhead
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  "No parameters": {
+    description: "This hook takes no parameters.",
+    type: "—",
+    default: "—",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isClient: {
+    description: "A boolean indicating whether the code is running on the client side.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIsClient } from "@/hooks/use-is-client";
+```
+
+## Advanced Usage
+
+### Progressive Enhancement
+
+You can use the hook to progressively enhance your components:
+
+```tsx
+function EnhancedComponent() {
+  const isClient = useIsClient();
+
+  return (
+    <div>
+      {/* Always rendered (core functionality) */}
+      <BasicContent />
+      
+      {/* Progressive enhancement */}
+      {isClient && (
+        <>
+          <InteractiveFeatures />
+          <ClientOnlyWidgets />
+        </>
+      )}
+    </div>
+  );
+}
+```
+
+### Safe Browser API Access
+
+Combine with `useEffect` for safe browser API access:
+
+```tsx
+function BrowserInfo() {
+  const isClient = useIsClient();
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    if (isClient) {
+      // Safe to access browser APIs
+      setInfo({
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        onLine: navigator.onLine,
+      });
+    }
+  }, [isClient]);
+
+  if (!isClient) return <div>Loading browser info...</div>;
+
+  return (
+    <div>
+      <p>Browser: {info?.userAgent}</p>
+      <p>Language: {info?.language}</p>
+      <p>Online: {info?.onLine ? "Yes" : "No"}</p>
+    </div>
+  );
+}
+```
+
+### Preventing Layout Shift
+
+Use placeholders to prevent layout shift during hydration:
+
+```tsx
+function ResponsiveComponent() {
+  const isClient = useIsClient();
+
+  return (
+    <div>
+      {!isClient ? (
+        // Placeholder with same dimensions
+        <div className="h-48 bg-gray-200 animate-pulse rounded" />
+      ) : (
+        <DynamicContent />
+      )}
+    </div>
+  );
+}
+```
+
+### Local Storage Integration
+
+```tsx
+function UserPreferences() {
+  const isClient = useIsClient();
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    if (isClient) {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+  }, [isClient]);
+
+  const updateTheme = (newTheme: string) => {
+    setTheme(newTheme);
+    if (isClient) {
+      localStorage.setItem('theme', newTheme);
+    }
+  };
+
+  return (
+    <div className={`theme-${theme}`}>
+      <button onClick={() => updateTheme(theme === 'light' ? 'dark' : 'light')}>
+        {isClient ? `Switch to ${theme === 'light' ? 'dark' : 'light'} theme` : 'Loading...'}
+      </button>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Server-Side Rendering**: Prevent hydration mismatches in Next.js, Remix, or other SSR frameworks
+* **Progressive Enhancement**: Add client-only features without breaking server rendering
+* **Browser API Access**: Safely use `window`, `document`, `localStorage`, `sessionStorage`, etc.
+* **Third-Party Widgets**: Conditionally render client-only components like maps, charts, or social widgets
+* **Feature Detection**: Enable features only when JavaScript is available
+* **Performance Optimization**: Defer heavy client-side components until after hydration
+* **Conditional Imports**: Load client-only libraries or components dynamically
+* **Analytics Integration**: Initialize tracking scripts only on the client side

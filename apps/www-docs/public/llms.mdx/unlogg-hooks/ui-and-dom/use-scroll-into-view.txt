@@ -1,0 +1,212 @@
+# useScrollIntoView
+URL: /unlogg-hooks/ui-and-dom/use-scroll-into-view
+
+A custom React hook that handles scroll behavior for any scrollable element with animation and reduced-motion support.
+
+`useScrollIntoView` is a custom React hook that provides smooth scrolling functionality to any element. It works similarly to the native `element.scrollIntoView()` method but with enhanced features including automatic reduced-motion detection and customizable scroll behavior.
+
+## Example
+
+<ComponentPreview name="use-scroll-into-view-ex-01" classNameComponentContainer="min-h-[700px]" />
+
+## Install
+
+<ComponentInstall name="use-scroll-into-view" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-scroll-into-view" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-scroll-into-view" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Automatically respects `prefers-reduced-motion` user preference
+* Uses `requestAnimationFrame` for smooth execution
+* Provides cancel functionality for ongoing scroll animations
+* Works with any scrollable container
+* Supports all native `scrollIntoView` options
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "Optional scroll configuration options.",
+    type: "ScrollIntoViewOptions",
+    default: "{ behavior: 'smooth', block: 'start', inline: 'nearest' }",
+  },
+  "options.behavior": {
+    description: "Scroll behavior ('auto' or 'smooth').",
+    type: "'auto' | 'smooth'",
+    default: "'smooth'",
+  },
+  "options.block": {
+    description: "Vertical alignment of the element.",
+    type: "'start' | 'center' | 'end' | 'nearest'",
+    default: "'start'",
+  },
+  "options.inline": {
+    description: "Horizontal alignment of the element.",
+    type: "'start' | 'center' | 'end' | 'nearest'",
+    default: "'nearest'",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  ref: {
+    description: "A ref object that must be attached to the element you want to scroll to.",
+    type: "React.RefObject<T | null>",
+  },
+  handlers: {
+    description: "An object containing scroll control functions.",
+    type: "UseScrollIntoViewReturn",
+  },
+  "handlers.scrollIntoView": {
+    description: "Function to trigger scrolling with optional override options.",
+    type: "(options?: ScrollIntoViewOptions) => void",
+  },
+  "handlers.cancel": {
+    description: "Function to cancel ongoing smooth scrolling.",
+    type: "() => void",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useScrollIntoView } from "@/hooks/use-scroll-into-view";
+
+function ScrollExample() {
+  const [targetRef, { scrollIntoView }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+
+  return (
+    <div>
+      <button onClick={() => scrollIntoView()}>
+        Scroll to target
+      </button>
+      <div style={{ height: "200vh" }}>
+        <div ref={targetRef}>Target element</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Navigation Menu
+
+```tsx
+function NavigationMenu() {
+  const [homeRef, { scrollIntoView: scrollToHome }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+  
+  const [aboutRef, { scrollIntoView: scrollToAbout }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+
+  return (
+    <div>
+      <nav>
+        <button onClick={() => scrollToHome()}>Home</button>
+        <button onClick={() => scrollToAbout()}>About</button>
+      </nav>
+      
+      <section ref={homeRef}>Home Content</section>
+      <section ref={aboutRef}>About Content</section>
+    </div>
+  );
+}
+```
+
+### Override Options
+
+```tsx
+function FlexibleScroll() {
+  const [targetRef, { scrollIntoView }] = useScrollIntoView();
+
+  return (
+    <div>
+      <button 
+        onClick={() => scrollIntoView({ behavior: "auto", block: "start" })}
+      >
+        Instant scroll to top
+      </button>
+      <button 
+        onClick={() => scrollIntoView({ behavior: "smooth", block: "center" })}
+      >
+        Smooth scroll to center
+      </button>
+      <div ref={targetRef}>Target</div>
+    </div>
+  );
+}
+```
+
+### With Scroll Cancellation
+
+```tsx
+function CancellableScroll() {
+  const [targetRef, { scrollIntoView, cancel }] = useScrollIntoView();
+
+  const handleSlowScroll = () => {
+    scrollIntoView({ behavior: "smooth" });
+    
+    // Cancel after 1 second if needed
+    setTimeout(() => {
+      cancel();
+    }, 1000);
+  };
+
+  return (
+    <div>
+      <button onClick={handleSlowScroll}>Start scroll</button>
+      <button onClick={cancel}>Cancel scroll</button>
+      <div ref={targetRef}>Target</div>
+    </div>
+  );
+}
+```
+
+## Accessibility
+
+The hook automatically respects the user's `prefers-reduced-motion` setting:
+
+* When `prefers-reduced-motion: reduce` is set, smooth scrolling is automatically disabled
+* All scroll animations become instant (`behavior: "auto"`)
+* This ensures a comfortable experience for users with motion sensitivity
+
+## Use Cases
+
+* **Single Page Navigation**: Create smooth scrolling between sections
+* **Documentation Sites**: Table of contents navigation
+* **Landing Pages**: Smooth scrolling to different sections
+* **Form Navigation**: Jump to form sections or error fields
+* **Image Galleries**: Navigate between gallery items
+* **Timeline Components**: Scroll to specific timeline events
+* **Chat Applications**: Scroll to latest messages or specific conversations
+* **Data Tables**: Scroll to specific rows or columns
