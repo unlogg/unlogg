@@ -1,0 +1,15 @@
+{
+  "name": "use-document-title",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/**\n * A custom React hook that sets the document title.\n *\n * This hook uses useLayoutEffect to synchronously update the document title,\n * ensuring the title is set before the browser paints. It's designed for client-only\n * applications and will not run during server-side rendering.\n *\n * @param title - The title to set for the document. If null or undefined, the title won't be changed.\n * @param options - Configuration options for the hook\n * @param options.restoreOnUnmount - Whether to restore the previous title when the component unmounts\n *\n * @example\n * function MyPage() {\n *   useDocumentTitle(\"My Page Title\");\n *\n *   return <div>Page content</div>;\n * }\n *\n * @example\n * function DynamicPage() {\n *   const [count, setCount] = useState(0);\n *   useDocumentTitle(`Count: ${count}`, { restoreOnUnmount: true });\n *\n *   return (\n *     <button onClick={() => setCount(c => c + 1)}>\n *       Increment count\n *     </button>\n *   );\n * }\n *\n * @example\n * function ConditionalTitle() {\n *   const [showTitle, setShowTitle] = useState(false);\n *   useDocumentTitle(showTitle ? \"Custom Title\" : null);\n *\n *   return (\n *     <button onClick={() => setShowTitle(!showTitle)}>\n *       {showTitle ? \"Remove\" : \"Set\"} Custom Title\n *     </button>\n *   );\n * }\n */\nfunction useDocumentTitle(\n  title: string | null | undefined,\n  options: {\n    restoreOnUnmount?: boolean;\n  } = {}\n): void {\n  const { restoreOnUnmount = false } = options;\n\n  // Store the original title when the hook is first used\n  const originalTitleRef = React.useRef<string | null>(null);\n\n  React.useLayoutEffect(() => {\n    // Only run on client side\n    if (typeof document === \"undefined\") {\n      return;\n    }\n\n    // Store the original title on first run\n    if (originalTitleRef.current === null) {\n      originalTitleRef.current = document.title;\n    }\n\n    // Set the new title if provided\n    if (title != null) {\n      document.title = title;\n    }\n\n    // Cleanup function to restore original title if requested\n    return () => {\n      if (restoreOnUnmount && originalTitleRef.current !== null) {\n        document.title = originalTitleRef.current;\n      }\n    };\n  }, [title, restoreOnUnmount]);\n\n  // Cleanup on unmount if restoreOnUnmount is true\n  React.useLayoutEffect(() => {\n    return () => {\n      if (\n        restoreOnUnmount &&\n        originalTitleRef.current !== null &&\n        typeof document !== \"undefined\"\n      ) {\n        document.title = originalTitleRef.current;\n      }\n    };\n  }, [restoreOnUnmount]);\n}\n\nexport { useDocumentTitle };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-document-title.ts",
+      "target": "/hooks/use-document-title.ts"
+    }
+  ]
+}

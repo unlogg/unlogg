@@ -31,8 +31,6 @@ For example, you can use this hook to debounce a search input value, ensuring th
   </ManualInstall>
 </ComponentInstall>
 
-## Notes
-
 ## API Reference
 
 ### Parameters

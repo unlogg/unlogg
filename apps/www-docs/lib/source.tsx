@@ -12,8 +12,15 @@ export const source = loader({
       // // you can access its file information
       // console.log(file?.data);
       const isNew = file?.data.isNew ?? false;
+      const isAlpha = file?.data.isAlpha ?? false;
 
-      node.name = <SidebarItem name={node.name as string} isNew={isNew} />;
+      node.name = (
+        <SidebarItem
+          name={node.name as string}
+          isNew={isNew}
+          isAlpha={isAlpha}
+        />
+      );
 
       return node;
     },

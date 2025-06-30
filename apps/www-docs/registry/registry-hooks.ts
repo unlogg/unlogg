@@ -7,10 +7,14 @@ import { useCounter } from "@unlogg/ui/hooks/unlogg-hooks/use-counter";
 import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
 import { useDebounceValue } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-value";
 import { useDisclosure } from "@unlogg/ui/hooks/unlogg-hooks/use-disclosure";
+import { useDocumentTitle } from "@unlogg/ui/hooks/unlogg-hooks/use-document-title";
 import { useElementSize } from "@unlogg/ui/hooks/unlogg-hooks/use-element-size";
-import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
 import { useHover } from "@unlogg/ui/hooks/unlogg-hooks/use-hover";
+import { useIdle } from "@unlogg/ui/hooks/unlogg-hooks/use-idle";
+import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
 import { useIsClient } from "@unlogg/ui/hooks/unlogg-hooks/use-is-client";
+import { useIsOnline } from "@unlogg/ui/hooks/unlogg-hooks/use-is-online";
+import { useLeavePage } from "@unlogg/ui/hooks/unlogg-hooks/use-leave-page";
 import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
 import { useMediaQuery } from "@unlogg/ui/hooks/unlogg-hooks/use-media-query";
 import { useMobile } from "@unlogg/ui/hooks/unlogg-hooks/use-mobile";
@@ -127,6 +131,19 @@ export const hooks: Registry = [
     component: useDisclosure,
   },
   {
+    name: "use-document-title",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-document-title.ts",
+        type: "registry:hook",
+        target: "/hooks/use-document-title.ts",
+      },
+    ],
+    component: useDocumentTitle,
+  },
+  {
     name: "use-element-size",
     type: "registry:hook",
     dependencies: ["lucide-react"],
@@ -153,6 +170,19 @@ export const hooks: Registry = [
     component: useHover,
   },
   {
+    name: "use-idle",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-idle.ts",
+        type: "registry:hook",
+        target: "/hooks/use-idle.ts",
+      },
+    ],
+    component: useIdle,
+  },
+  {
     name: "use-is-client",
     type: "registry:hook",
     dependencies: ["lucide-react"],
@@ -164,6 +194,32 @@ export const hooks: Registry = [
       },
     ],
     component: useIsClient,
+  },
+  {
+    name: "use-is-online",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-is-online.ts",
+        type: "registry:hook",
+        target: "/hooks/use-is-online.ts",
+      },
+    ],
+    component: useIsOnline,
+  },
+  {
+    name: "use-leave-page",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page.ts",
+        type: "registry:hook",
+        target: "/hooks/use-leave-page.ts",
+      },
+    ],
+    component: useLeavePage,
   },
 
   {

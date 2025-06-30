@@ -431,8 +431,6 @@ For example, you can use this hook to debounce a search input value, ensuring th
   </ManualInstall>
 </ComponentInstall>
 
-## Notes
-
 ## API Reference
 
 ### Parameters
@@ -477,8 +475,6 @@ For example, you can use this hook to debounce a search input value, ensuring th
 URL: /unlogg-hooks/state/use-disclosure
 
 A react hook to manage boolean state with toggle functionality.
-
-## Example
 
 <ComponentPreview name="use-disclosure-ex-01" classNameComponentContainer="min-h-[200px]" />
 
@@ -609,9 +605,9 @@ Use `useInterval` to create a simple countdown timer that updates every second:
 # useLocalStorage
 URL: /unlogg-hooks/state/use-local-storage
 
-A custom React hook to manage local storage with ease.
+Manage local storage with ease in React applications.
 
-## Example
+`useLocalStorage` provides a straightforward API to read and update values stored in `localStorage`, automatically handling JSON serialization and deserialization.
 
 <ComponentPreview name="use-local-storage-ex-01" classNameComponentContainer="min-h-[200px]" />
 
@@ -641,6 +637,22 @@ A custom React hook to manage local storage with ease.
 * Handles JSON serialization and deserialization for complex data types.
 * Provides a simple API for reading and updating values.
 * Includes error handling for environments where `localStorage` is unavailable (e.g., server-side rendering).
+
+## Examples
+
+### Todo List with Persistence
+
+<ComponentPreview name="use-local-storage-ex-02" classNameComponentContainer="min-h-[400px]" />
+
+## Use Cases
+
+* **Theme Preferences**: Store user's preferred color scheme, theme settings, or UI preferences
+* **Form Data**: Persist form inputs to prevent data loss during accidental page refreshes
+* **Shopping Cart**: Save cart items locally before user authentication
+* **User Settings**: Store user-specific configuration options and preferences
+* **Todo Lists**: Maintain task lists that persist across browser sessions
+* **Recently Viewed**: Track recently accessed items or pages
+* **Feature Flags**: Store client-side feature toggle states
 
 ## Server-Side Rendering
 
@@ -2581,6 +2593,1331 @@ function RobustCopyButton({ text }: { text: string }) {
 * **Form Data**: Allow copying of generated content like passwords or IDs
 * **Error Messages**: Enable copying of error details for support requests
 * **Configuration Values**: Copy configuration snippets and settings
+
+
+# useDocumentTitle
+URL: /unlogg-hooks/utilities/use-document-title
+
+A custom React hook that sets the document title with React.useLayoutEffect.
+
+`useDocumentTitle` is a custom React hook that sets the document title using `useLayoutEffect` for synchronous updates. It's designed for client-only applications and will not run during server-side rendering. The hook provides options for restoring the original title when the component unmounts, making it perfect for dynamic title management.
+
+## Example
+
+<ComponentPreview name="use-document-title-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-document-title" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-document-title" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-document-title" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses `useLayoutEffect` for synchronous DOM updates before paint
+* Only runs on client-side (safe for SSR applications)
+* Supports optional title restoration on component unmount
+* Accepts null/undefined to skip title updates
+* Stores original title for restoration purposes
+* Ideal for client-only applications and dynamic title updates
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  title: {
+    description: "The title to set for the document. If null or undefined, the title won't be changed.",
+    type: "string | null | undefined",
+    default: "—",
+  },
+  options: {
+    description: "Configuration options for the hook behavior.",
+    type: "object",
+    default: "{}",
+  },
+}}
+/>
+
+### Options
+
+<TypeTable
+  type={{
+  restoreOnUnmount: {
+    description: "Whether to restore the previous title when the component unmounts.",
+    type: "boolean",
+    default: "false",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  "void": {
+    description: "This hook does not return any value.",
+    type: "void",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
+function MyPage() {
+  useDocumentTitle("My Page Title");
+  
+  return <div>Page content</div>;
+}
+```
+
+## Advanced Usage
+
+### Dynamic Title Updates
+
+Update the title based on component state:
+
+```tsx
+function DynamicPage() {
+  const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null);
+  
+  // Dynamic title based on state
+  useDocumentTitle(
+    user ? `${user.name}'s Dashboard (${count} items)` : `Dashboard (${count} items)`
+  );
+  
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>Items: {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>
+        Add Item
+      </button>
+    </div>
+  );
+}
+```
+
+### Conditional Title Setting
+
+Set title only when certain conditions are met:
+
+```tsx
+function ConditionalTitle() {
+  const [isImportant, setIsImportant] = useState(false);
+  const [notification, setNotification] = useState(null);
+  
+  // Only set title when there's an important notification
+  useDocumentTitle(
+    isImportant && notification ? `🔔 ${notification}` : null
+  );
+  
+  return (
+    <div>
+      <button onClick={() => setIsImportant(!isImportant)}>
+        {isImportant ? "Mark Normal" : "Mark Important"}
+      </button>
+      <input 
+        value={notification || ""}
+        onChange={(e) => setNotification(e.target.value)}
+        placeholder="Enter notification..."
+      />
+    </div>
+  );
+}
+```
+
+### Restore Original Title
+
+Use the `restoreOnUnmount` option for temporary title changes:
+
+```tsx
+function TemporaryModal({ isOpen, onClose }) {
+  // This will restore the original title when modal closes
+  useDocumentTitle(
+    isOpen ? "🎯 Important: Review Required" : null,
+    { restoreOnUnmount: true }
+  );
+  
+  if (!isOpen) return null;
+  
+  return (
+    <div className="modal">
+      <h2>Important Action Required</h2>
+      <p>Please review the following...</p>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
+}
+```
+
+### Page Navigation with Breadcrumbs
+
+Create breadcrumb-style titles for navigation:
+
+```tsx
+function ProductPage({ category, product }) {
+  const title = useMemo(() => {
+    const parts = ["MyStore"];
+    if (category) parts.push(category.name);
+    if (product) parts.push(product.name);
+    return parts.join(" > ");
+  }, [category, product]);
+  
+  useDocumentTitle(title);
+  
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        {category && (
+          <>
+            <span> > </span>
+            <Link to={`/category/${category.id}`}>{category.name}</Link>
+          </>
+        )}
+        {product && (
+          <>
+            <span> > </span>
+            <span>{product.name}</span>
+          </>
+        )}
+      </nav>
+      {/* Product content */}
+    </div>
+  );
+}
+```
+
+### Real-time Updates
+
+Update title with live data:
+
+```tsx
+function LiveCounter() {
+  const [count, setCount] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  
+  // Update title with current count when active
+  useDocumentTitle(isActive ? `Live Count: ${count}` : null);
+  
+  useEffect(() => {
+    if (!isActive) return;
+    
+    const interval = setInterval(() => {
+      setCount(c => c + 1);
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [isActive]);
+  
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => setIsActive(!isActive)}>
+        {isActive ? "Stop" : "Start"} Live Title
+      </button>
+    </div>
+  );
+}
+```
+
+### Form with Validation Status
+
+Show form status in the title:
+
+```tsx
+function ContactForm() {
+  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [errors, setErrors] = useState({});
+  const [isDirty, setIsDirty] = useState(false);
+  
+  const isValid = Object.keys(errors).length === 0;
+  const titleSuffix = isDirty ? (isValid ? " ✓" : " ⚠️") : "";
+  
+  useDocumentTitle(`Contact Form${titleSuffix}`);
+  
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setIsDirty(true);
+    // Validation logic here...
+  };
+  
+  return (
+    <form>
+      <input 
+        value={formData.name}
+        onChange={(e) => handleChange("name", e.target.value)}
+        placeholder="Name"
+      />
+      <input 
+        value={formData.email}
+        onChange={(e) => handleChange("email", e.target.value)}
+        placeholder="Email"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+## Use Cases
+
+* **Page Identification**: Set descriptive titles for different pages and views
+* **Dynamic Content**: Update titles based on loaded data or user actions
+* **Notification System**: Show urgent information in the browser tab
+* **Form Management**: Indicate form status or validation state
+* **Real-time Updates**: Display live data like unread messages or timer counts
+* **Modal Dialogs**: Temporarily change title when important dialogs are open
+* **Navigation Context**: Show current location in multi-level navigation
+* **Progress Tracking**: Display progress status for long-running operations
+
+
+# useIdle
+URL: /unlogg-hooks/utilities/use-idle
+
+A custom React hook that detects if the user is idle by monitoring various DOM events.
+
+`useIdle` is a custom React hook that detects when a user becomes idle by monitoring DOM events such as mouse movements, key presses, clicks, and scrolls. It's perfect for implementing features like auto-logout, hiding UI elements during inactivity, or triggering actions when users step away from their devices.
+
+## Example
+
+<ComponentPreview name="use-idle-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-idle" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-idle" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-idle" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Monitors multiple DOM events by default: keydown, click, scroll, wheel, mousemove, touchmove
+* Timeout duration is required as the first parameter
+* Configurable event list for specific use cases
+* Automatically cleans up event listeners on unmount
+* Client-side only (safe for SSR applications)
+* Efficient event handling with proper throttling via timeout
+* Initial state defaults to `true` (idle by default)
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  timeout: {
+    description: "The duration in milliseconds after which the user is considered idle if no events are detected.",
+    type: "number",
+    required: true,
+  },
+  options: {
+    description: "Optional configuration object to override default idle detection options.",
+    type: "UseIdleOptions",
+    default: "undefined",
+  },
+}}
+/>
+
+### UseIdleOptions
+
+<TypeTable
+  type={{
+  events: {
+    description: "Array of DOM event names that reset the idle timer.",
+    type: "(keyof DocumentEventMap)[]",
+    default: "['keydown', 'click', 'scroll', 'wheel', 'mousemove', 'touchmove']",
+  },
+  initialState: {
+    description: "Initial idle state.",
+    type: "boolean",
+    default: "true",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isIdle: {
+    description: "A boolean indicating whether the user is currently idle.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIdle } from "@/hooks/use-idle";
+
+function IdleIndicator() {
+  const isIdle = useIdle(5000); // User is idle after 5 seconds
+  
+  return (
+    <div>
+      Status: {isIdle ? 'User is idle' : 'User is active'}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Auto-Logout System
+
+Implement automatic logout after a period of inactivity:
+
+```tsx
+function AutoLogout() {
+  const isIdle = useIdle(30000); // 30 seconds
+  const [showWarning, setShowWarning] = useState(false);
+  
+  useEffect(() => {
+    if (isIdle) {
+      setShowWarning(true);
+      // Show warning for 10 seconds before logout
+      const logoutTimer = setTimeout(() => {
+        logout();
+      }, 10000);
+      
+      return () => clearTimeout(logoutTimer);
+    } else {
+      setShowWarning(false);
+    }
+  }, [isIdle]);
+  
+  if (showWarning) {
+    return (
+      <div className="warning-modal">
+        <h2>Session Warning</h2>
+        <p>You will be logged out in 10 seconds due to inactivity.</p>
+        <button onClick={() => setShowWarning(false)}>
+          Stay Logged In
+        </button>
+      </div>
+    );
+  }
+  
+  return <div>Your session is active</div>;
+}
+```
+
+### Custom Event Monitoring
+
+Monitor only specific types of user activity:
+
+```tsx
+function MouseTracker() {
+  // Only track mouse-related activity
+  const isMouseIdle = useIdle(5000, {
+    events: ['mousemove', 'click']
+  });
+  
+  return (
+    <div>
+      Mouse status: {isMouseIdle ? 'Inactive' : 'Active'}
+      <p>This only responds to mouse movement and clicks</p>
+    </div>
+  );
+}
+
+function KeyboardTracker() {
+  // Only track keyboard activity
+  const isKeyboardIdle = useIdle(3000, {
+    events: ['keydown']
+  });
+  
+  return (
+    <div>
+      Keyboard status: {isKeyboardIdle ? 'Inactive' : 'Active'}
+      <p>Type something to reset the idle state</p>
+    </div>
+  );
+}
+```
+
+### Auto-Save Functionality
+
+Automatically save content when user stops typing:
+
+```tsx
+function AutoSaveEditor() {
+  const [content, setContent] = useState('');
+  const [savedContent, setSavedContent] = useState('');
+  const [lastSaved, setLastSaved] = useState(null);
+  
+  // Detect when user stops typing (2 second delay)
+  const isIdle = useIdle(2000, { 
+    events: ['keydown'] // Only keyboard events
+  });
+  
+  useEffect(() => {
+    if (isIdle && content !== savedContent && content.trim()) {
+      // Auto-save the content
+      saveContent(content);
+      setSavedContent(content);
+      setLastSaved(new Date());
+    }
+  }, [isIdle, content, savedContent]);
+  
+  const saveContent = async (text) => {
+    // Your save logic here
+    console.log('Auto-saving:', text);
+  };
+  
+  return (
+    <div>
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Start typing... (auto-saves when you stop)"
+      />
+      {lastSaved && (
+        <p>Last saved: {lastSaved.toLocaleTimeString()}</p>
+      )}
+    </div>
+  );
+}
+```
+
+### Screen Saver Mode
+
+Hide sensitive content when user is away:
+
+```tsx
+function SensitiveContent() {
+  const isIdle = useIdle(10000); // 10 seconds
+  
+  if (isIdle) {
+    return (
+      <div className="screen-saver">
+        <h2>Screen Locked</h2>
+        <p>Move your mouse or press any key to continue</p>
+        <div className="loading-animation">🔒</div>
+      </div>
+    );
+  }
+  
+  return (
+    <div>
+      <h1>Confidential Information</h1>
+      <p>This sensitive content is hidden when you're away</p>
+      {/* Your sensitive content here */}
+    </div>
+  );
+}
+```
+
+### Multiple Idle Timers
+
+Track different types of inactivity simultaneously:
+
+```tsx
+function MultipleIdleStates() {
+  const quickIdle = useIdle(2000);   // 2 seconds
+  const mediumIdle = useIdle(10000); // 10 seconds
+  const longIdle = useIdle(60000);   // 1 minute
+  
+  return (
+    <div>
+      <div>Quick idle (2s): {quickIdle ? '💤' : '👀'}</div>
+      <div>Medium idle (10s): {mediumIdle ? '😴' : '🙂'}</div>
+      <div>Long idle (1m): {longIdle ? '🌙' : '☀️'}</div>
+      
+      {longIdle && (
+        <div>Consider taking a break! You've been inactive for over a minute.</div>
+      )}
+    </div>
+  );
+}
+```
+
+### Gaming Pause Feature
+
+Automatically pause games when player becomes inactive:
+
+```tsx
+function GameComponent() {
+  const [gameState, setGameState] = useState('playing');
+  const isIdle = useIdle(5000, { 
+    events: ['keydown', 'click'] // Game-relevant events
+  });
+  
+  useEffect(() => {
+    if (isIdle && gameState === 'playing') {
+      setGameState('paused');
+      console.log('Game auto-paused due to inactivity');
+    } else if (!isIdle && gameState === 'paused') {
+      // Optional: Auto-resume or require manual resume
+      // setGameState('playing');
+    }
+  }, [isIdle, gameState]);
+  
+  return (
+    <div>
+      <h2>Game Status: {gameState}</h2>
+      {gameState === 'paused' && (
+        <div>
+          <p>Game paused due to inactivity</p>
+          <button onClick={() => setGameState('playing')}>
+            Resume Game
+          </button>
+        </div>
+      )}
+      {/* Game content */}
+    </div>
+  );
+}
+```
+
+### Analytics and User Behavior
+
+Track user engagement patterns:
+
+```tsx
+function EngagementTracker() {
+  const [engagementData, setEngagementData] = useState({
+    totalTime: 0,
+    activeTime: 0,
+    idleTime: 0
+  });
+  
+  const isIdle = useIdle(3000);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEngagementData(prev => ({
+        totalTime: prev.totalTime + 1,
+        activeTime: isIdle ? prev.activeTime : prev.activeTime + 1,
+        idleTime: isIdle ? prev.idleTime + 1 : prev.idleTime
+      }));
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [isIdle]);
+  
+  const engagementRate = (engagementData.activeTime / engagementData.totalTime * 100).toFixed(1);
+  
+  return (
+    <div>
+      <h3>User Engagement Analytics</h3>
+      <div>Total Time: {engagementData.totalTime}s</div>
+      <div>Active Time: {engagementData.activeTime}s</div>
+      <div>Idle Time: {engagementData.idleTime}s</div>
+      <div>Engagement Rate: {engagementRate}%</div>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Auto-Logout**: Automatically log users out after periods of inactivity for security
+* **Screen Savers**: Hide sensitive content when users step away
+* **Auto-Save**: Save user work automatically when they stop typing or editing
+* **Game Pausing**: Pause games when players become inactive
+* **Power Management**: Reduce resource usage during idle periods
+* **Analytics**: Track user engagement and activity patterns
+* **Session Management**: Extend or warn about session timeouts
+* **Content Protection**: Hide confidential information during inactivity
+
+
+# useIsOnline
+URL: /unlogg-hooks/utilities/use-is-online
+
+Detect the users online status and network connection information.
+
+`useIsOnline` is a custom React hook that detects when a user is online or offline and optionally provides detailed network connection information using the experimental Network Information API.
+
+<Callout type="warning" title="Experimental API" className="mb-8">
+  The Network Information API is experimental and may not be available in all browsers.
+  See the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection#browser_compatibility" target="_blank" rel="noopener noreferrer">MDN documentation</a> for more details.
+</Callout>
+
+<ComponentPreview name="use-is-online-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-is-online" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-is-online" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-is-online" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## How to test
+
+Try these methods to test offline/online detection:
+Disconnect your WiFi or ethernet cable
+Use browser developer tools to simulate offline mode
+Switch between WiFi and cellular data (mobile)
+Use airplane mode on mobile devices
+
+## Notes
+
+* Monitors `navigator.onLine` for basic online/offline detection
+* Uses experimental `navigator.connection` API for detailed network information
+* Automatically handles browser compatibility and logs warnings when APIs are unavailable
+* Client-side only (safe for SSR applications)
+* Useful for adaptive content loading, offline mode, and network-aware functionality
+
+## API Reference
+
+### Parameters
+
+This hook takes no parameters.
+
+### Returns
+
+<TypeTable
+  type={{
+  isOnline: {
+    description: "A boolean indicating whether the user is currently online.",
+    type: "boolean",
+  },
+  networkInfo: {
+    description: "An object containing detailed network connection information (undefined if not supported).",
+    type: "NetworkInformation | undefined",
+  },
+}}
+/>
+
+### NetworkInformation
+
+<TypeTable
+  type={{
+  downlink: {
+    description: "The effective bandwidth estimate in megabits per second.",
+    type: "number | undefined",
+  },
+  downlinkMax: {
+    description: "The maximum downlink speed in megabits per second.",
+    type: "number | undefined",
+  },
+  effectiveType: {
+    description: "The effective connection type (slow-2g, 2g, 3g, 4g).",
+    type: "'slow-2g' | '2g' | '3g' | '4g' | undefined",
+  },
+  rtt: {
+    description: "The estimated round-trip time in milliseconds.",
+    type: "number | undefined",
+  },
+  saveData: {
+    description: "Whether the user has requested a reduced data usage mode.",
+    type: "boolean | undefined",
+  },
+  type: {
+    description: "The type of connection being used.",
+    type: "'bluetooth' | 'cellular' | 'ethernet' | 'none' | 'wifi' | 'wimax' | 'other' | 'unknown' | undefined",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIsOnline } from "@/hooks/use-is-online";
+
+function NetworkStatus() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  return (
+    <div>
+      <p>Status: {isOnline ? "Online" : "Offline"}</p>
+      {networkInfo && (
+        <p>Connection: {networkInfo.effectiveType}</p>
+      )}
+    </div>
+  );
+}
+```
+
+## Examples
+
+### Display network information
+
+<ComponentPreview name="use-is-online-ex-02" classNameComponentContainer="min-h-[600px]" />
+
+### Adaptive Content Loading
+
+Load different content based on network conditions:
+
+```tsx
+function AdaptiveContent() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  const getImageQuality = () => {
+    if (!isOnline) return 'cached';
+    if (networkInfo?.saveData) return 'low';
+    if (networkInfo?.effectiveType === 'slow-2g' || networkInfo?.effectiveType === '2g') {
+      return 'compressed';
+    }
+    return 'high';
+  };
+  
+  const imageQuality = getImageQuality();
+  
+  return (
+    <div>
+      {imageQuality === 'cached' && (
+        <div>Showing cached content - you're offline</div>
+      )}
+      {imageQuality === 'low' && (
+        <img src="image-low.webp" alt="Low quality for data saver" />
+      )}
+      {imageQuality === 'compressed' && (
+        <img src="image-compressed.webp" alt="Compressed for slow connection" />
+      )}
+      {imageQuality === 'high' && (
+        <img src="image-high.webp" alt="High quality image" />
+      )}
+    </div>
+  );
+}
+```
+
+### Offline Mode with Sync
+
+Implement offline functionality with data synchronization:
+
+```tsx
+function OfflineApp() {
+  const { isOnline } = useIsOnline();
+  const [pendingActions, setPendingActions] = useState([]);
+  const [cachedData, setCachedData] = useState([]);
+  
+  // Sync pending actions when back online
+  useEffect(() => {
+    if (isOnline && pendingActions.length > 0) {
+      syncPendingActions(pendingActions);
+      setPendingActions([]);
+    }
+  }, [isOnline, pendingActions]);
+  
+  const handleUserAction = (action) => {
+    if (isOnline) {
+      // Execute immediately
+      executeAction(action);
+    } else {
+      // Queue for later sync
+      setPendingActions(prev => [...prev, action]);
+      // Update local cache
+      updateLocalCache(action);
+    }
+  };
+  
+  return (
+    <div>
+      {!isOnline && (
+        <div className="offline-banner">
+          You're offline. Actions will sync when connection is restored.
+          {pendingActions.length > 0 && (
+            <span>({pendingActions.length} pending)</span>
+          )}
+        </div>
+      )}
+      
+      <button onClick={() => handleUserAction('like')}>
+        Like Post
+      </button>
+    </div>
+  );
+}
+```
+
+### Data Saver Mode
+
+Respect user's data saving preferences:
+
+```tsx
+function DataAwareComponent() {
+  const { networkInfo } = useIsOnline();
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  
+  useEffect(() => {
+    if (networkInfo?.saveData) {
+      setAutoplayEnabled(false);
+      console.log('Data saver mode detected - disabling autoplay');
+    }
+  }, [networkInfo?.saveData]);
+  
+  return (
+    <div>
+      <video
+        src="video.mp4"
+        autoPlay={autoplayEnabled}
+        controls
+      />
+      
+      {networkInfo?.saveData && (
+        <div className="data-saver-notice">
+          📱 Data saver mode active - autoplay disabled
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Network-Aware API Calls
+
+Adjust API behavior based on connection quality:
+
+```tsx
+function NetworkAwareAPI() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  const fetchData = async () => {
+    if (!isOnline) {
+      return getCachedData();
+    }
+    
+    const requestOptions = {
+      // Base options
+      timeout: 10000,
+    };
+    
+    // Adjust based on connection quality
+    if (networkInfo?.effectiveType === 'slow-2g' || networkInfo?.effectiveType === '2g') {
+      requestOptions.timeout = 30000; // Longer timeout for slow connections
+      return fetchCompressedData(requestOptions);
+    }
+    
+    if (networkInfo?.saveData) {
+      return fetchMinimalData(requestOptions);
+    }
+    
+    return fetchFullData(requestOptions);
+  };
+  
+  return (
+    <div>
+      <button onClick={fetchData}>
+        Load Data
+      </button>
+      
+      {networkInfo && (
+        <div className="connection-info">
+          Connection: {networkInfo.effectiveType} 
+          ({networkInfo.downlink?.toFixed(1)} Mbps)
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Offline Mode**: Provide functionality when users lose internet connection
+* **Adaptive Loading**: Adjust content quality based on connection speed
+* **Data Saver Support**: Respect user's data saving preferences
+* **Progressive Enhancement**: Load content progressively based on network conditions
+* **Smart Prefetching**: Intelligently prefetch content on good connections
+* **Network Monitoring**: Track connection quality for analytics
+* **Error Handling**: Provide better error messages for network issues
+* **Performance Optimization**: Optimize API calls and resource loading
+
+
+# useLeavePage
+URL: /unlogg-hooks/utilities/use-leave-page
+
+A custom React hook that detects when the user is leaving the page by monitoring the mouseleave event.
+
+`useLeavePage` is a custom React hook that detects when a user is about to leave the page by monitoring when their mouse cursor leaves the browser window. This is commonly used for implementing exit-intent popups, auto-saving content, or showing retention messages to keep users engaged.
+
+## Example
+
+<ComponentPreview name="use-leave-page-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-leave-page" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-leave-page" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-leave-page" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Monitors the "mouseleave" event on the document by default
+* Detects when the cursor leaves the browser window area
+* Automatically resets when the cursor returns to the page
+* Client-side only (safe for SSR applications)
+* Useful for exit-intent functionality and user retention
+
+## API Reference
+
+### Parameters
+
+This hook takes no parameters.
+
+### Returns
+
+<TypeTable
+  type={{
+  isLeavingPage: {
+    description: "A boolean indicating whether the user is currently leaving the page (cursor outside browser window).",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useLeavePage } from "@/hooks/use-leave-page";
+
+function ExitIntentPopup() {
+  const isLeavingPage = useLeavePage();
+  
+  if (isLeavingPage) {
+    return (
+      <div className="popup">
+        <h2>Wait! Don't leave yet!</h2>
+        <p>You have unsaved changes.</p>
+      </div>
+    );
+  }
+  
+  return <div>Page content</div>;
+}
+```
+
+## Advanced Usage
+
+### Exit Intent Popup
+
+Show a popup when users are about to leave:
+
+```tsx
+function ExitIntentModal() {
+  const isLeavingPage = useLeavePage();
+  const [showModal, setShowModal] = useState(false);
+  const [hasShownModal, setHasShownModal] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage && !hasShownModal) {
+      setShowModal(true);
+      setHasShownModal(true);
+    }
+  }, [isLeavingPage, hasShownModal]);
+  
+  if (showModal) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal">
+          <h2>Before you go...</h2>
+          <p>Get 20% off your first purchase!</p>
+          <div>
+            <button onClick={() => setShowModal(false)}>
+              No Thanks
+            </button>
+            <button onClick={() => window.open('/signup', '_blank')}>
+              Get Discount
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  return <div>Your main content</div>;
+}
+```
+
+### Auto-Save on Leave
+
+Automatically save content when user leaves:
+
+```tsx
+function AutoSaveEditor() {
+  const isLeavingPage = useLeavePage();
+  const [content, setContent] = useState('');
+  const [savedContent, setSavedContent] = useState('');
+  
+  useEffect(() => {
+    if (isLeavingPage && content !== savedContent) {
+      // Auto-save when leaving
+      saveToStorage(content);
+      setSavedContent(content);
+      console.log('Content auto-saved!');
+    }
+  }, [isLeavingPage, content, savedContent]);
+  
+  const saveToStorage = (text) => {
+    localStorage.setItem('draft', text);
+  };
+  
+  return (
+    <div>
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Your content will be auto-saved when you leave..."
+      />
+      <p>Status: {isLeavingPage ? 'Saving...' : 'Editing'}</p>
+    </div>
+  );
+}
+```
+
+### Retention Message
+
+Show retention messages to keep users engaged:
+
+```tsx
+function RetentionMessage() {
+  const isLeavingPage = useLeavePage();
+  const [showRetention, setShowRetention] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage) {
+      setShowRetention(true);
+      
+      // Hide retention message after 3 seconds
+      const timer = setTimeout(() => {
+        setShowRetention(false);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isLeavingPage]);
+  
+  return (
+    <div>
+      {showRetention && (
+        <div className="retention-banner">
+          <p>🎯 Don't miss out! Complete your profile to unlock premium features.</p>
+          <button onClick={() => setShowRetention(false)}>
+            Complete Profile
+          </button>
+        </div>
+      )}
+      
+      <div>Your main content here</div>
+    </div>
+  );
+}
+```
+
+### Shopping Cart Abandonment
+
+Prevent cart abandonment with timely messages:
+
+```tsx
+function ShoppingCart() {
+  const isLeavingPage = useLeavePage();
+  const [cartItems, setCartItems] = useState([]);
+  const [showAbandonmentMessage, setShowAbandonmentMessage] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage && cartItems.length > 0) {
+      setShowAbandonmentMessage(true);
+    } else {
+      setShowAbandonmentMessage(false);
+    }
+  }, [isLeavingPage, cartItems.length]);
+  
+  return (
+    <div>
+      {showAbandonmentMessage && (
+        <div className="abandonment-popup">
+          <h3>Your cart is waiting!</h3>
+          <p>You have {cartItems.length} items in your cart.</p>
+          <button onClick={() => window.location.href = '/checkout'}>
+            Complete Purchase
+          </button>
+          <button onClick={() => setShowAbandonmentMessage(false)}>
+            Continue Shopping
+          </button>
+        </div>
+      )}
+      
+      <div className="cart-content">
+        {/* Cart items */}
+      </div>
+    </div>
+  );
+}
+```
+
+### Analytics Tracking
+
+Track exit intent for analytics:
+
+```tsx
+function ExitIntentAnalytics() {
+  const isLeavingPage = useLeavePage();
+  const [exitCount, setExitCount] = useState(0);
+  const [sessionData, setSessionData] = useState({
+    pageViews: 1,
+    timeOnPage: 0,
+    exitAttempts: 0
+  });
+  
+  useEffect(() => {
+    if (isLeavingPage) {
+      setExitCount(prev => prev + 1);
+      setSessionData(prev => ({
+        ...prev,
+        exitAttempts: prev.exitAttempts + 1
+      }));
+      
+      // Send analytics event
+      analytics.track('exit_intent', {
+        page: window.location.pathname,
+        exitAttempt: exitCount + 1,
+        timeOnPage: sessionData.timeOnPage
+      });
+    }
+  }, [isLeavingPage]);
+  
+  return (
+    <div>
+      <div className="analytics-info">
+        <p>Exit attempts this session: {exitCount}</p>
+        <p>Total exit attempts: {sessionData.exitAttempts}</p>
+      </div>
+      
+      <div>Your content here</div>
+    </div>
+  );
+}
+```
+
+### Form Abandonment Warning
+
+Warn users about unsaved form data:
+
+```tsx
+function ContactForm() {
+  const isLeavingPage = useLeavePage();
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  
+  useEffect(() => {
+    const hasData = Object.values(formData).some(value => value.trim() !== '');
+    setHasUnsavedChanges(hasData);
+  }, [formData]);
+  
+  useEffect(() => {
+    if (isLeavingPage && hasUnsavedChanges) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  }, [isLeavingPage, hasUnsavedChanges]);
+  
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+  
+  return (
+    <div>
+      {showWarning && (
+        <div className="form-warning">
+          <p>⚠️ You have unsaved changes in your form!</p>
+          <button onClick={() => console.log('Form saved!')}>
+            Save Draft
+          </button>
+        </div>
+      )}
+      
+      <form>
+        <input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => handleInputChange('name', e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+        />
+        <textarea
+          placeholder="Message"
+          value={formData.message}
+          onChange={(e) => handleInputChange('message', e.target.value)}
+        />
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Exit Intent Popups**: Show special offers or newsletters when users are about to leave
+* **Auto-Save Functionality**: Automatically save user content when they move away
+* **Cart Abandonment Prevention**: Remind users about items in their shopping cart
+* **Form Data Protection**: Warn users about unsaved form changes
+* **Analytics Tracking**: Track user exit behavior for optimization
+* **Retention Messages**: Show engaging content to keep users on the page
+* **Session Management**: Trigger session-related actions before users leave
+* **Content Protection**: Save drafts or warn about unsaved work
 
 
 # CLI

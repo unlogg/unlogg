@@ -158,6 +158,22 @@
       ]
     },
     {
+      "name": "use-document-title-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-document-title.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-document-title-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-element-size-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -190,6 +206,22 @@
       ]
     },
     {
+      "name": "use-idle-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-idle.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-idle-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-is-client-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -201,6 +233,54 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-is-online-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-is-online.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-is-online-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-is-online.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-02.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-leave-page-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-leave-page.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -281,6 +361,22 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-local-storage.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-02.tsx",
           "type": "registry:example"
         }
       ]
@@ -478,6 +574,20 @@
       ]
     },
     {
+      "name": "use-document-title",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-document-title.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-document-title.ts"
+        }
+      ]
+    },
+    {
       "name": "use-element-size",
       "type": "registry:hook",
       "dependencies": [
@@ -506,6 +616,20 @@
       ]
     },
     {
+      "name": "use-idle",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-idle.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-idle.ts"
+        }
+      ]
+    },
+    {
       "name": "use-is-client",
       "type": "registry:hook",
       "dependencies": [
@@ -516,6 +640,34 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client.ts",
           "type": "registry:hook",
           "target": "/hooks/use-is-client.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-is-online",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-is-online.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-leave-page",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-leave-page.ts"
         }
       ]
     },

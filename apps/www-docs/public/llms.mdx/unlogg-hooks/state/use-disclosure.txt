@@ -3,8 +3,6 @@ URL: /unlogg-hooks/state/use-disclosure
 
 A react hook to manage boolean state with toggle functionality.
 
-## Example
-
 <ComponentPreview name="use-disclosure-ex-01" classNameComponentContainer="min-h-[200px]" />
 
 ## Install

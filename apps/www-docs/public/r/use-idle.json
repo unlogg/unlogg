@@ -1,0 +1,15 @@
+{
+  "name": "use-idle",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\nimport { useEffect, useRef, useState } from \"react\";\n\ntype UseIdleOptions = {\n  events?: (keyof DocumentEventMap)[];\n  initialState?: boolean;\n};\n\nconst IDLE_OPTIONS: Required<UseIdleOptions> = {\n  events: [\"keydown\", \"click\", \"scroll\", \"wheel\", \"mousemove\", \"touchmove\"],\n  initialState: true,\n};\n\n/**\n * Custom React hook that tracks user inactivity (idle state) based on specified DOM events and a timeout.\n *\n * @param timeout - The duration in milliseconds after which the user is considered idle if no events are detected.\n * @param options - Optional configuration object to override default idle detection options.\n * @param options.events - Array of DOM event names (e.g., 'mousemove', 'keydown') that reset the idle timer.\n * @param options.initialState - Initial idle state (default is `true`).\n *\n * @returns A boolean indicating whether the user is currently idle (`true`) or active (`false`).\n *\n * @example\n * ```tsx\n * const isIdle = useIdle(60000); // User is idle after 60 seconds of inactivity\n * ```\n */\nfunction useIdle(timeout: number, options?: UseIdleOptions) {\n  const { events, initialState } = { ...IDLE_OPTIONS, ...options };\n  const [isIdle, setIsIdle] = useState(initialState);\n  const idleTimer = useRef(-1);\n\n  useEffect(() => {\n    const handleEvents = () => {\n      setIsIdle(false);\n\n      if (idleTimer.current) {\n        window.clearTimeout(idleTimer.current);\n      }\n\n      idleTimer.current = window.setTimeout(() => {\n        setIsIdle(true);\n      }, timeout);\n    };\n\n    events.forEach((event) => document.addEventListener(event, handleEvents));\n\n    // Do not wait for the first event to happen, start the timer immediately\n    // This ensures that the idle state is set after the specified timeout\n    idleTimer.current = window.setTimeout(() => {\n      setIsIdle(true);\n    }, timeout);\n\n    return () => {\n      events.forEach((event) =>\n        document.removeEventListener(event, handleEvents)\n      );\n      window.clearTimeout(idleTimer.current);\n      idleTimer.current = -1;\n    };\n  }, [timeout]);\n\n  return isIdle;\n}\n\nexport { useIdle };\nexport type { UseIdleOptions };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-idle.ts",
+      "target": "/hooks/use-idle.ts"
+    }
+  ]
+}

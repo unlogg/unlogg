@@ -1,0 +1,18 @@
+{
+  "name": "use-is-online-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-is-online.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { Badge } from \"@/hooks/badge\";\nimport { Card } from \"@/hooks/card\";\nimport { useIsOnline } from \"@/hooks/use-is-online\";\n\nexport default function UseIsOnline_Ex_01() {\n  const { isOnline, networkInfo } = useIsOnline();\n\n  return (\n    <div className=\"flex flex-col gap-6 p-6\">\n      <div className=\"text-center\">\n        <h3 className=\"text-lg font-semibold mb-2\">\n          Online Status Detection Hook\n        </h3>\n        <p className=\"text-sm text-muted-foreground mb-4\">\n          Monitors network connectivity and provides connection information\n        </p>\n\n        <div className=\"flex items-center justify-center gap-4 flex-wrap\">\n          <Badge\n            variant={isOnline ? \"default\" : \"destructive\"}\n            className=\"text-sm\"\n          >\n            {isOnline ? \"🟢 Online\" : \"🔴 Offline\"}\n          </Badge>\n          {networkInfo?.effectiveType && (\n            <Badge variant=\"outline\" className=\"font-mono\">\n              {networkInfo.effectiveType.toUpperCase()}\n            </Badge>\n          )}\n          {networkInfo?.saveData && (\n            <Badge variant=\"secondary\" className=\"text-xs\">\n              💾 Data Saver\n            </Badge>\n          )}\n        </div>\n      </div>\n\n      <Card className=\"w-full max-w-4xl mx-auto p-6\">\n        <h4 className=\"text-md font-semibold mb-4\">Connection Status</h4>\n        <ConnectionStatusDemo isOnline={isOnline} networkInfo={networkInfo} />\n      </Card>\n    </div>\n  );\n}\n\nfunction ConnectionStatusDemo({\n  isOnline,\n  networkInfo,\n}: {\n  isOnline: boolean;\n  networkInfo: any;\n}) {\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"text-center\">\n        <div className={`text-6xl mb-2 ${!isOnline ? \"animate-pulse\" : \"\"}`}>\n          {isOnline ? \"🌐\" : \"📡\"}\n        </div>\n        <Badge\n          variant={isOnline ? \"default\" : \"destructive\"}\n          className=\"text-sm\"\n        >\n          {isOnline ? \"Connected to Internet\" : \"No Internet Connection\"}\n        </Badge>\n      </div>\n\n      <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n        <div className=\"p-3 bg-gray-50 border border-gray-200 rounded-lg\">\n          <p className=\"text-sm text-gray-700\">\n            <strong>Status:</strong> {isOnline ? \"Online\" : \"Offline\"}\n          </p>\n        </div>\n        {networkInfo?.type && (\n          <div className=\"p-3 bg-gray-50 border border-gray-200 rounded-lg\">\n            <p className=\"text-sm text-gray-700\">\n              <strong>Connection Type:</strong> {networkInfo.type}\n            </p>\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-is-online-ex-01.tsx"
+    }
+  ]
+}

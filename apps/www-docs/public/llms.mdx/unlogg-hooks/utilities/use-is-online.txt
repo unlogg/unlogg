@@ -1,0 +1,306 @@
+# useIsOnline
+URL: /unlogg-hooks/utilities/use-is-online
+
+Detect the users online status and network connection information.
+
+`useIsOnline` is a custom React hook that detects when a user is online or offline and optionally provides detailed network connection information using the experimental Network Information API.
+
+<Callout type="warning" title="Experimental API" className="mb-8">
+  The Network Information API is experimental and may not be available in all browsers.
+  See the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection#browser_compatibility" target="_blank" rel="noopener noreferrer">MDN documentation</a> for more details.
+</Callout>
+
+<ComponentPreview name="use-is-online-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-is-online" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-is-online" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-is-online" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## How to test
+
+Try these methods to test offline/online detection:
+Disconnect your WiFi or ethernet cable
+Use browser developer tools to simulate offline mode
+Switch between WiFi and cellular data (mobile)
+Use airplane mode on mobile devices
+
+## Notes
+
+* Monitors `navigator.onLine` for basic online/offline detection
+* Uses experimental `navigator.connection` API for detailed network information
+* Automatically handles browser compatibility and logs warnings when APIs are unavailable
+* Client-side only (safe for SSR applications)
+* Useful for adaptive content loading, offline mode, and network-aware functionality
+
+## API Reference
+
+### Parameters
+
+This hook takes no parameters.
+
+### Returns
+
+<TypeTable
+  type={{
+  isOnline: {
+    description: "A boolean indicating whether the user is currently online.",
+    type: "boolean",
+  },
+  networkInfo: {
+    description: "An object containing detailed network connection information (undefined if not supported).",
+    type: "NetworkInformation | undefined",
+  },
+}}
+/>
+
+### NetworkInformation
+
+<TypeTable
+  type={{
+  downlink: {
+    description: "The effective bandwidth estimate in megabits per second.",
+    type: "number | undefined",
+  },
+  downlinkMax: {
+    description: "The maximum downlink speed in megabits per second.",
+    type: "number | undefined",
+  },
+  effectiveType: {
+    description: "The effective connection type (slow-2g, 2g, 3g, 4g).",
+    type: "'slow-2g' | '2g' | '3g' | '4g' | undefined",
+  },
+  rtt: {
+    description: "The estimated round-trip time in milliseconds.",
+    type: "number | undefined",
+  },
+  saveData: {
+    description: "Whether the user has requested a reduced data usage mode.",
+    type: "boolean | undefined",
+  },
+  type: {
+    description: "The type of connection being used.",
+    type: "'bluetooth' | 'cellular' | 'ethernet' | 'none' | 'wifi' | 'wimax' | 'other' | 'unknown' | undefined",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIsOnline } from "@/hooks/use-is-online";
+
+function NetworkStatus() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  return (
+    <div>
+      <p>Status: {isOnline ? "Online" : "Offline"}</p>
+      {networkInfo && (
+        <p>Connection: {networkInfo.effectiveType}</p>
+      )}
+    </div>
+  );
+}
+```
+
+## Examples
+
+### Display network information
+
+<ComponentPreview name="use-is-online-ex-02" classNameComponentContainer="min-h-[600px]" />
+
+### Adaptive Content Loading
+
+Load different content based on network conditions:
+
+```tsx
+function AdaptiveContent() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  const getImageQuality = () => {
+    if (!isOnline) return 'cached';
+    if (networkInfo?.saveData) return 'low';
+    if (networkInfo?.effectiveType === 'slow-2g' || networkInfo?.effectiveType === '2g') {
+      return 'compressed';
+    }
+    return 'high';
+  };
+  
+  const imageQuality = getImageQuality();
+  
+  return (
+    <div>
+      {imageQuality === 'cached' && (
+        <div>Showing cached content - you're offline</div>
+      )}
+      {imageQuality === 'low' && (
+        <img src="image-low.webp" alt="Low quality for data saver" />
+      )}
+      {imageQuality === 'compressed' && (
+        <img src="image-compressed.webp" alt="Compressed for slow connection" />
+      )}
+      {imageQuality === 'high' && (
+        <img src="image-high.webp" alt="High quality image" />
+      )}
+    </div>
+  );
+}
+```
+
+### Offline Mode with Sync
+
+Implement offline functionality with data synchronization:
+
+```tsx
+function OfflineApp() {
+  const { isOnline } = useIsOnline();
+  const [pendingActions, setPendingActions] = useState([]);
+  const [cachedData, setCachedData] = useState([]);
+  
+  // Sync pending actions when back online
+  useEffect(() => {
+    if (isOnline && pendingActions.length > 0) {
+      syncPendingActions(pendingActions);
+      setPendingActions([]);
+    }
+  }, [isOnline, pendingActions]);
+  
+  const handleUserAction = (action) => {
+    if (isOnline) {
+      // Execute immediately
+      executeAction(action);
+    } else {
+      // Queue for later sync
+      setPendingActions(prev => [...prev, action]);
+      // Update local cache
+      updateLocalCache(action);
+    }
+  };
+  
+  return (
+    <div>
+      {!isOnline && (
+        <div className="offline-banner">
+          You're offline. Actions will sync when connection is restored.
+          {pendingActions.length > 0 && (
+            <span>({pendingActions.length} pending)</span>
+          )}
+        </div>
+      )}
+      
+      <button onClick={() => handleUserAction('like')}>
+        Like Post
+      </button>
+    </div>
+  );
+}
+```
+
+### Data Saver Mode
+
+Respect user's data saving preferences:
+
+```tsx
+function DataAwareComponent() {
+  const { networkInfo } = useIsOnline();
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  
+  useEffect(() => {
+    if (networkInfo?.saveData) {
+      setAutoplayEnabled(false);
+      console.log('Data saver mode detected - disabling autoplay');
+    }
+  }, [networkInfo?.saveData]);
+  
+  return (
+    <div>
+      <video
+        src="video.mp4"
+        autoPlay={autoplayEnabled}
+        controls
+      />
+      
+      {networkInfo?.saveData && (
+        <div className="data-saver-notice">
+          📱 Data saver mode active - autoplay disabled
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Network-Aware API Calls
+
+Adjust API behavior based on connection quality:
+
+```tsx
+function NetworkAwareAPI() {
+  const { isOnline, networkInfo } = useIsOnline();
+  
+  const fetchData = async () => {
+    if (!isOnline) {
+      return getCachedData();
+    }
+    
+    const requestOptions = {
+      // Base options
+      timeout: 10000,
+    };
+    
+    // Adjust based on connection quality
+    if (networkInfo?.effectiveType === 'slow-2g' || networkInfo?.effectiveType === '2g') {
+      requestOptions.timeout = 30000; // Longer timeout for slow connections
+      return fetchCompressedData(requestOptions);
+    }
+    
+    if (networkInfo?.saveData) {
+      return fetchMinimalData(requestOptions);
+    }
+    
+    return fetchFullData(requestOptions);
+  };
+  
+  return (
+    <div>
+      <button onClick={fetchData}>
+        Load Data
+      </button>
+      
+      {networkInfo && (
+        <div className="connection-info">
+          Connection: {networkInfo.effectiveType} 
+          ({networkInfo.downlink?.toFixed(1)} Mbps)
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Offline Mode**: Provide functionality when users lose internet connection
+* **Adaptive Loading**: Adjust content quality based on connection speed
+* **Data Saver Support**: Respect user's data saving preferences
+* **Progressive Enhancement**: Load content progressively based on network conditions
+* **Smart Prefetching**: Intelligently prefetch content on good connections
+* **Network Monitoring**: Track connection quality for analytics
+* **Error Handling**: Provide better error messages for network issues
+* **Performance Optimization**: Optimize API calls and resource loading
