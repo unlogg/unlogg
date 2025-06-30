@@ -54,6 +54,8 @@ class ResizeObserverMock {
 
 Object.defineProperty(window, "ResizeObserver", {
   value: ResizeObserverMock,
+  writable: true,
+  configurable: true,
 });
 
 // Reset all mocks before each test
