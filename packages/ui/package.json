@@ -4,7 +4,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -41,14 +45,20 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.8",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@turbo/gen": "^2.4.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@unlogg/eslint-config": "workspace:*",
     "@unlogg/typescript-config": "workspace:*",
+    "@vitest/coverage-v8": "^3.2.4",
+    "jsdom": "^25.0.1",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^3.2.4"
   },
   "exports": {
     "./globals.css": "./src/styles/globals.css",

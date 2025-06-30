@@ -33,6 +33,7 @@ function useDebounceValue<T>(
 
   useEffect(() => {
     setInternalValue(initialValue);
+    setDebouncedValue(initialValue);
   }, [initialValue]);
 
   useEffect(() => {

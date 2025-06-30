@@ -1,5 +1,6 @@
 "use client";
 
+/* v8 ignore start */
 import { Button } from "@unlogg/ui/components/button";
 import { useBoolean } from "@unlogg/ui/hooks/unlogg-hooks/use-boolean";
 
