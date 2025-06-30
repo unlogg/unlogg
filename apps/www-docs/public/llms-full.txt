@@ -980,6 +980,1609 @@ A custom React hook to detect clicks outside a specified element.
 />
 
 
+# useElementSize
+URL: /unlogg-hooks/ui-and-dom/use-element-size
+
+A custom React hook that tracks an elements size using ResizeObserver.
+
+`useElementSize` is a custom React hook that tracks an element's size using the ResizeObserver API. It provides real-time updates when the element's dimensions change, making it perfect for responsive components that need to adapt based on their container size.
+
+## Example
+
+<ComponentPreview name="use-element-size-ex-01" classNameComponentContainer="min-h-[500px]" />
+
+## Install
+
+<ComponentInstall name="use-element-size" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-element-size" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-element-size" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses ResizeObserver for efficient size tracking
+* Returns 0 for width and height on first render and during SSR
+* Automatically cleans up the observer when component unmounts
+* Works with any HTML element type through generics
+* Provides rounded pixel values for consistent measurements
+
+## API Reference
+
+### Returns
+
+<TypeTable
+  type={{
+  ref: {
+    description: "A ref object that must be attached to the element you want to observe.",
+    type: "React.RefObject<T | null>",
+  },
+  size: {
+    description: "An object containing the current element dimensions.",
+    type: "ElementSize",
+  },
+  "size.width": {
+    description: "The current element width in pixels.",
+    type: "number",
+  },
+  "size.height": {
+    description: "The current element height in pixels.",
+    type: "number",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useElementSize } from "@/hooks/use-element-size";
+
+function ResponsiveComponent() {
+  const [ref, { width, height }] = useElementSize();
+
+  return (
+    <div ref={ref} className="resize-container">
+      <p>Container size: {width} × {height}</p>
+      {width > 300 && <AdditionalContent />}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Multiple Elements
+
+You can use multiple instances to track different elements:
+
+```tsx
+function MultipleElements() {
+  const [ref1, size1] = useElementSize();
+  const [ref2, size2] = useElementSize();
+
+  return (
+    <div>
+      <div ref={ref1}>Element 1: {size1.width}×{size1.height}</div>
+      <div ref={ref2}>Element 2: {size2.width}×{size2.height}</div>
+    </div>
+  );
+}
+```
+
+### Conditional Rendering
+
+```tsx
+function ConditionalContent() {
+  const [ref, { width }] = useElementSize();
+
+  return (
+    <div ref={ref}>
+      {width > 500 ? <DesktopLayout /> : <MobileLayout />}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Container Queries**: Implement container-based responsive design without CSS container queries
+* **Dynamic Layouts**: Adjust layout based on available space rather than viewport size
+* **Canvas/SVG Sizing**: Automatically resize canvas or SVG elements to their container
+* **Text Truncation**: Determine when to truncate text based on available space
+* **Grid/Masonry Layouts**: Calculate optimal grid sizes based on container dimensions
+* **Chart Responsiveness**: Resize charts and visualizations to fit their containers
+
+
+# useHover
+URL: /unlogg-hooks/ui-and-dom/use-hover
+
+A custom React hook that detects if a given element is being hovered.
+
+`useHover` is a custom React hook that detects when an element is being hovered. It accepts a ref object pointing to the element you want to monitor and returns a boolean indicating the hover state. This is useful for creating interactive UI elements that respond to mouse hover events.
+
+## Example
+
+<ComponentPreview name="use-hover-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-hover" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-hover" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-hover" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Accepts a ref object pointing to the element to monitor
+* Returns a boolean indicating hover state
+* Automatically handles event listener cleanup
+* Works with any HTML element type through generics
+* Uses native `mouseenter` and `mouseleave` events for reliable detection
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  elementRef: {
+    description: "A ref object pointing to the element to observe for hover state.",
+    type: "React.RefObject<T | null>",
+    default: "—",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isHovered: {
+    description: "A boolean indicating whether the element is currently being hovered.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useRef } from "react";
+import { useHover } from "@/hooks/use-hover";
+
+function HoverableComponent() {
+  const hoverRef = useRef(null);
+  const isHover = useHover(hoverRef);
+
+  return (
+    <div 
+      ref={hoverRef}
+      className={isHover ? "bg-blue-100" : "bg-gray-100"}
+    >
+      {isHover ? "Hovering!" : "Not hovering"}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Multiple Elements
+
+You can use multiple instances to track different elements:
+
+```tsx
+function MultipleHoverElements() {
+  const button1Ref = useRef(null);
+  const button2Ref = useRef(null);
+  
+  const isButton1Hovered = useHover(button1Ref);
+  const isButton2Hovered = useHover(button2Ref);
+
+  return (
+    <div>
+      <button ref={button1Ref}>
+        Button 1 {isButton1Hovered && "🎯"}
+      </button>
+      <button ref={button2Ref}>
+        Button 2 {isButton2Hovered && "🎯"}
+      </button>
+    </div>
+  );
+}
+```
+
+### Delayed Actions
+
+Combine with `useEffect` for delayed hover actions:
+
+```tsx
+function DelayedHoverAction() {
+  const elementRef = useRef(null);
+  const isHovered = useHover(elementRef);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    
+    if (isHovered) {
+      timer = setTimeout(() => {
+        setShowTooltip(true);
+      }, 500); // Show tooltip after 500ms
+    } else {
+      setShowTooltip(false);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isHovered]);
+
+  return (
+    <div ref={elementRef}>
+      Hover me
+      {showTooltip && <div>Tooltip content</div>}
+    </div>
+  );
+}
+```
+
+### Conditional Styling
+
+```tsx
+function ConditionalStyling() {
+  const cardRef = useRef(null);
+  const isHovered = useHover(cardRef);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`
+        transition-all duration-200
+        ${isHovered 
+          ? "scale-105 shadow-lg border-blue-300" 
+          : "scale-100 shadow-sm border-gray-200"
+        }
+      `}
+    >
+      Interactive Card
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Interactive Cards**: Add hover effects to cards and tiles
+* **Tooltip Triggers**: Show tooltips when elements are hovered
+* **Button States**: Create enhanced button hover states
+* **Image Overlays**: Show overlays when images are hovered
+* **Navigation Items**: Highlight navigation items on hover
+* **Form Field Enhancement**: Show additional information on form field hover
+* **Data Visualization**: Highlight chart elements on hover
+* **Progressive Disclosure**: Reveal additional content on hover
+
+
+# useIsClient
+URL: /unlogg-hooks/ui-and-dom/use-is-client
+
+A custom React hook that determines if the code is running on the client side (in the browser).
+
+`useIsClient` is a custom React hook that determines whether the code is running on the client side (in the browser) as opposed to the server. This hook is essential for SSR applications to prevent hydration mismatches and safely access browser-only APIs. It returns `false` during server-side rendering and `true` after the component mounts on the client.
+
+## Example
+
+<ComponentPreview name="use-is-client-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-is-client" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-is-client" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-is-client" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Returns `false` during server-side rendering and `true` after client hydration
+* Prevents hydration mismatches in SSR applications
+* Enables safe access to browser-only APIs like `window`, `document`, `localStorage`
+* Automatically handles the server/client state transition
+* Zero dependencies with minimal performance overhead
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  "No parameters": {
+    description: "This hook takes no parameters.",
+    type: "—",
+    default: "—",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isClient: {
+    description: "A boolean indicating whether the code is running on the client side.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIsClient } from "@/hooks/use-is-client";
+```
+
+## Advanced Usage
+
+### Progressive Enhancement
+
+You can use the hook to progressively enhance your components:
+
+```tsx
+function EnhancedComponent() {
+  const isClient = useIsClient();
+
+  return (
+    <div>
+      {/* Always rendered (core functionality) */}
+      <BasicContent />
+      
+      {/* Progressive enhancement */}
+      {isClient && (
+        <>
+          <InteractiveFeatures />
+          <ClientOnlyWidgets />
+        </>
+      )}
+    </div>
+  );
+}
+```
+
+### Safe Browser API Access
+
+Combine with `useEffect` for safe browser API access:
+
+```tsx
+function BrowserInfo() {
+  const isClient = useIsClient();
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    if (isClient) {
+      // Safe to access browser APIs
+      setInfo({
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        onLine: navigator.onLine,
+      });
+    }
+  }, [isClient]);
+
+  if (!isClient) return <div>Loading browser info...</div>;
+
+  return (
+    <div>
+      <p>Browser: {info?.userAgent}</p>
+      <p>Language: {info?.language}</p>
+      <p>Online: {info?.onLine ? "Yes" : "No"}</p>
+    </div>
+  );
+}
+```
+
+### Preventing Layout Shift
+
+Use placeholders to prevent layout shift during hydration:
+
+```tsx
+function ResponsiveComponent() {
+  const isClient = useIsClient();
+
+  return (
+    <div>
+      {!isClient ? (
+        // Placeholder with same dimensions
+        <div className="h-48 bg-gray-200 animate-pulse rounded" />
+      ) : (
+        <DynamicContent />
+      )}
+    </div>
+  );
+}
+```
+
+### Local Storage Integration
+
+```tsx
+function UserPreferences() {
+  const isClient = useIsClient();
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    if (isClient) {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+  }, [isClient]);
+
+  const updateTheme = (newTheme: string) => {
+    setTheme(newTheme);
+    if (isClient) {
+      localStorage.setItem('theme', newTheme);
+    }
+  };
+
+  return (
+    <div className={`theme-${theme}`}>
+      <button onClick={() => updateTheme(theme === 'light' ? 'dark' : 'light')}>
+        {isClient ? `Switch to ${theme === 'light' ? 'dark' : 'light'} theme` : 'Loading...'}
+      </button>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Server-Side Rendering**: Prevent hydration mismatches in Next.js, Remix, or other SSR frameworks
+* **Progressive Enhancement**: Add client-only features without breaking server rendering
+* **Browser API Access**: Safely use `window`, `document`, `localStorage`, `sessionStorage`, etc.
+* **Third-Party Widgets**: Conditionally render client-only components like maps, charts, or social widgets
+* **Feature Detection**: Enable features only when JavaScript is available
+* **Performance Optimization**: Defer heavy client-side components until after hydration
+* **Conditional Imports**: Load client-only libraries or components dynamically
+* **Analytics Integration**: Initialize tracking scripts only on the client side
+
+
+# useMediaQuery
+URL: /unlogg-hooks/ui-and-dom/use-media-query
+
+A custom React hook that tracks the state of a media query using the Match Media API.
+
+`useMediaQuery` is a custom React hook that tracks the state of a CSS media query using the browser's Match Media API. It provides a simple boolean interface to conditionally render content or apply logic based on media queries like screen size, user preferences, or device capabilities.
+
+## Example
+
+<ComponentPreview name="use-media-query-ex-01" classNameComponentContainer="min-h-[800px]" />
+
+## Install
+
+<ComponentInstall name="use-media-query" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-media-query" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-media-query" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses the browser's native `matchMedia` API for efficient media query tracking
+* Automatically handles server-side rendering scenarios
+* Provides options for SSR-safe initialization
+* Cleans up event listeners automatically on unmount
+* Supports all standard CSS media query features
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  query: {
+    description: "The media query to track.",
+    type: "string",
+    default: "—",
+  },
+  options: {
+    description: "The options for customizing the behavior of the hook (optional).",
+    type: "UseMediaQueryOptions",
+    default: "{}",
+  },
+  "options.defaultValue": {
+    description: "The default value to return if the hook is being run on the server.",
+    type: "boolean",
+    default: "false",
+  },
+  "options.initializeWithValue": {
+    description: "If true (default), the hook will initialize reading the media query. In SSR, you should set it to false, returning options.defaultValue or false initially.",
+    type: "boolean",
+    default: "true",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  matches: {
+    description: "The current state of the media query (true if the query matches, false otherwise).",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+function ResponsiveComponent() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+  return (
+    <div>
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
+      {isDarkMode && <p>Dark mode is enabled</p>}
+      {prefersReducedMotion && <p>Reduced motion preferred</p>}
+    </div>
+  );
+}
+```
+
+### SSR-Safe Usage
+
+```tsx
+function SSRComponent() {
+  const isMobile = useMediaQuery('(max-width: 768px)', {
+    defaultValue: false,
+    initializeWithValue: false
+  });
+
+  return (
+    <div>
+      {isMobile ? 'Mobile View' : 'Desktop View'}
+    </div>
+  );
+}
+```
+
+## Common Media Queries
+
+### Breakpoints
+
+```tsx
+// Standard breakpoints
+const isMobile = useMediaQuery('(max-width: 640px)');
+const isTablet = useMediaQuery('(min-width: 641px) and (max-width: 1024px)');
+const isDesktop = useMediaQuery('(min-width: 1025px)');
+const isLarge = useMediaQuery('(min-width: 1280px)');
+
+// Custom breakpoints
+const isSmall = useMediaQuery('(max-width: 480px)');
+const isWide = useMediaQuery('(min-width: 1600px)');
+```
+
+### User Preferences
+
+```tsx
+// Color scheme
+const isDark = useMediaQuery('(prefers-color-scheme: dark)');
+const isLight = useMediaQuery('(prefers-color-scheme: light)');
+
+// Motion preferences
+const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+// Contrast preferences
+const highContrast = useMediaQuery('(prefers-contrast: high)');
+const lowContrast = useMediaQuery('(prefers-contrast: low)');
+```
+
+### Device Capabilities
+
+```tsx
+// Orientation
+const isPortrait = useMediaQuery('(orientation: portrait)');
+const isLandscape = useMediaQuery('(orientation: landscape)');
+
+// Input capabilities
+const canHover = useMediaQuery('(hover: hover)');
+const hasPointer = useMediaQuery('(pointer: fine)');
+
+// Display capabilities
+const isRetina = useMediaQuery('(min-resolution: 2dppx)');
+const isPrint = useMediaQuery('print');
+```
+
+## Advanced Examples
+
+### Responsive Layout Hook
+
+```tsx
+function useResponsiveLayout() {
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const isTablet = useMediaQuery('(min-width: 641px) and (max-width: 1024px)');
+  const isDesktop = useMediaQuery('(min-width: 1025px)');
+
+  return {
+    isMobile,
+    isTablet,
+    isDesktop,
+    columns: isMobile ? 1 : isTablet ? 2 : 3,
+    showSidebar: isDesktop,
+    compactLayout: isMobile || isTablet
+  };
+}
+```
+
+### Theme-Aware Component
+
+```tsx
+function ThemeAwareComponent() {
+  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersHighContrast = useMediaQuery('(prefers-contrast: high)');
+  
+  const theme = React.useMemo(() => ({
+    dark: prefersDark,
+    highContrast: prefersHighContrast,
+    className: `
+      ${prefersDark ? 'dark' : 'light'}
+      ${prefersHighContrast ? 'high-contrast' : ''}
+    `.trim()
+  }), [prefersDark, prefersHighContrast]);
+
+  return (
+    <div className={theme.className}>
+      <p>Theme-aware content</p>
+    </div>
+  );
+}
+```
+
+### Performance-Aware Component
+
+```tsx
+function PerformanceAwareComponent() {
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const isLowEndDevice = useMediaQuery('(max-device-memory: 1)');
+  const isSlowConnection = useMediaQuery('(prefers-reduced-data: reduce)');
+
+  const shouldOptimize = prefersReducedMotion || isLowEndDevice || isSlowConnection;
+
+  return (
+    <div>
+      {shouldOptimize ? (
+        <StaticContent />
+      ) : (
+        <AnimatedContent />
+      )}
+    </div>
+  );
+}
+```
+
+## TypeScript
+
+The hook is fully typed and exports its option types:
+
+```tsx
+import { useMediaQuery, UseMediaQueryOptions } from "@/hooks/use-media-query";
+
+const options: UseMediaQueryOptions = {
+  defaultValue: false,
+  initializeWithValue: true
+};
+
+const isMobile: boolean = useMediaQuery('(max-width: 768px)', options);
+```
+
+## Use Cases
+
+* **Responsive Design**: Conditional rendering based on screen size
+* **Accessibility**: Respecting user preferences for motion, contrast, etc.
+* **Performance Optimization**: Adapting content for device capabilities
+* **Progressive Enhancement**: Enabling features based on device support
+* **Theme Detection**: Automatically adapting to system color scheme
+* **Print Styles**: Conditional rendering for print media
+* **Device Orientation**: Adapting layout for portrait/landscape
+* **Touch vs Mouse**: Different interactions for different input methods
+
+
+# useMobile
+URL: /unlogg-hooks/ui-and-dom/use-mobile
+
+A custom React hook that detects if the current screen width is below a mobile breakpoint.
+
+`useMobile` is a custom React hook that provides a simple boolean interface to detect if the current screen width is below a specified mobile breakpoint. It uses window resize events to track screen size changes and offers configurable breakpoint values with SSR support.
+
+## Example
+
+<ComponentPreview name="use-mobile-ex-01" classNameComponentContainer="min-h-[700px]" />
+
+## Install
+
+<ComponentInstall name="use-mobile" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-mobile" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-mobile" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses window resize events for efficient mobile detection
+* Configurable breakpoint value (default: 768px)
+* Automatically handles server-side rendering scenarios
+* Provides options for SSR-safe initialization
+* Cleans up event listeners automatically on unmount
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  breakpoint: {
+    description: "The pixel value to use as the mobile breakpoint.",
+    type: "number",
+    default: "768",
+  },
+  options: {
+    description: "The options for customizing the behavior of the hook (optional).",
+    type: "UseMobileOptions",
+    default: "{}",
+  },
+  "options.defaultValue": {
+    description: "The default value to return if the hook is being run on the server.",
+    type: "boolean",
+    default: "false",
+  },
+  "options.initializeWithValue": {
+    description: "If true (default), the hook will initialize reading the screen width. In SSR, you should set it to false, returning options.defaultValue or false initially.",
+    type: "boolean",
+    default: "true",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isMobile: {
+    description: "A boolean indicating whether the screen width is below the mobile breakpoint.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { useMobile } from "@/hooks/use-mobile";
+
+function ResponsiveComponent() {
+  const isMobile = useMobile(); // Uses default 768px breakpoint
+  const isSmallMobile = useMobile(640); // Custom 640px breakpoint
+  const isLargeMobile = useMobile(1024); // Large mobile/tablet breakpoint
+
+  return (
+    <div>
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
+      {isSmallMobile && <CompactContent />}
+      {isLargeMobile && <TabletOptimizedContent />}
+    </div>
+  );
+}
+```
+
+### SSR-Safe Usage
+
+```tsx
+function SSRComponent() {
+  const isMobile = useMobile(768, {
+    defaultValue: false,
+    initializeWithValue: false
+  });
+
+  return (
+    <div>
+      {isMobile ? 'Mobile View' : 'Desktop View'}
+    </div>
+  );
+}
+```
+
+## Common Breakpoints
+
+```tsx
+// Extra small devices (phones)
+const isXS = useMobile(480);
+
+// Small devices (large phones)
+const isSM = useMobile(640);
+
+// Medium devices (tablets)
+const isMD = useMobile(768); // Default
+
+// Large devices (small desktops)
+const isLG = useMobile(1024);
+
+// Extra large devices (large desktops)
+const isXL = useMobile(1280);
+```
+
+## Advanced Examples
+
+### Responsive Navigation
+
+```tsx
+function Navigation() {
+  const isMobile = useMobile(768);
+
+  return (
+    <nav>
+      {isMobile ? (
+        <MobileMenu />
+      ) : (
+        <DesktopMenu />
+      )}
+    </nav>
+  );
+}
+```
+
+### Conditional Content Loading
+
+```tsx
+function ContentSection() {
+  const isMobile = useMobile(768);
+  const isSmallScreen = useMobile(480);
+
+  return (
+    <section>
+      {isSmallScreen ? (
+        <MinimalContent />
+      ) : isMobile ? (
+        <MobileContent />
+      ) : (
+        <FullContent />
+      )}
+    </section>
+  );
+}
+```
+
+### Multi-Breakpoint Layout
+
+```tsx
+function useResponsiveLayout() {
+  const isXS = useMobile(480);
+  const isSM = useMobile(640);
+  const isMD = useMobile(768);
+  const isLG = useMobile(1024);
+
+  const getLayout = () => {
+    if (isXS) return { columns: 1, showSidebar: false, compact: true };
+    if (isSM) return { columns: 1, showSidebar: false, compact: false };
+    if (isMD) return { columns: 2, showSidebar: false, compact: false };
+    if (isLG) return { columns: 2, showSidebar: true, compact: false };
+    return { columns: 3, showSidebar: true, compact: false };
+  };
+
+  return getLayout();
+}
+
+function ResponsiveLayout() {
+  const layout = useResponsiveLayout();
+
+  return (
+    <div className={`grid grid-cols-${layout.columns}`}>
+      <main>Main content</main>
+      {layout.showSidebar && <aside>Sidebar</aside>}
+    </div>
+  );
+}
+```
+
+### Performance Optimization
+
+```tsx
+function OptimizedComponent() {
+  const isMobile = useMobile(768);
+
+  // Only load heavy components on desktop
+  const HeavyComponent = React.useMemo(() => {
+    if (isMobile) return null;
+    return React.lazy(() => import('./HeavyComponent'));
+  }, [isMobile]);
+
+  return (
+    <div>
+      {isMobile ? (
+        <LightweightMobileComponent />
+      ) : (
+        <React.Suspense fallback={<Loading />}>
+          {HeavyComponent && <HeavyComponent />}
+        </React.Suspense>
+      )}
+    </div>
+  );
+}
+```
+
+## Comparison with useMediaQuery
+
+While `useMediaQuery` provides more flexibility for complex media queries, `useMobile` offers a simpler API specifically for mobile detection:
+
+```tsx
+// Using useMediaQuery
+const isMobile = useMediaQuery('(max-width: 768px)');
+
+// Using useMobile (simpler)
+const isMobile = useMobile(768);
+
+// Custom breakpoint with useMobile
+const isTablet = useMobile(1024);
+```
+
+## TypeScript
+
+The hook is fully typed and exports its option types:
+
+```tsx
+import { useMobile, UseMobileOptions } from "@/hooks/use-mobile";
+
+const options: UseMobileOptions = {
+  defaultValue: false,
+  initializeWithValue: true
+};
+
+const isMobile: boolean = useMobile(768, options);
+```
+
+## Use Cases
+
+* **Responsive Navigation**: Show/hide mobile menu vs desktop navigation
+* **Layout Adaptation**: Switch between single-column and multi-column layouts
+* **Content Optimization**: Load different content for mobile vs desktop
+* **Performance**: Conditionally load heavy components only on desktop
+* **Touch Optimization**: Enable touch-friendly interfaces on mobile
+* **Image Loading**: Load different image sizes based on screen size
+* **Form Layout**: Adapt form layouts for mobile vs desktop
+* **Component Visibility**: Show/hide components based on screen size
+
+
+# useScrollIntoView
+URL: /unlogg-hooks/ui-and-dom/use-scroll-into-view
+
+A custom React hook that handles scroll behavior for any scrollable element with animation and reduced-motion support.
+
+`useScrollIntoView` is a custom React hook that provides smooth scrolling functionality to any element. It works similarly to the native `element.scrollIntoView()` method but with enhanced features including automatic reduced-motion detection and customizable scroll behavior.
+
+## Example
+
+<ComponentPreview name="use-scroll-into-view-ex-01" classNameComponentContainer="min-h-[700px]" />
+
+## Install
+
+<ComponentInstall name="use-scroll-into-view" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-scroll-into-view" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-scroll-into-view" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Automatically respects `prefers-reduced-motion` user preference
+* Uses `requestAnimationFrame` for smooth execution
+* Provides cancel functionality for ongoing scroll animations
+* Works with any scrollable container
+* Supports all native `scrollIntoView` options
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "Optional scroll configuration options.",
+    type: "ScrollIntoViewOptions",
+    default: "{ behavior: 'smooth', block: 'start', inline: 'nearest' }",
+  },
+  "options.behavior": {
+    description: "Scroll behavior ('auto' or 'smooth').",
+    type: "'auto' | 'smooth'",
+    default: "'smooth'",
+  },
+  "options.block": {
+    description: "Vertical alignment of the element.",
+    type: "'start' | 'center' | 'end' | 'nearest'",
+    default: "'start'",
+  },
+  "options.inline": {
+    description: "Horizontal alignment of the element.",
+    type: "'start' | 'center' | 'end' | 'nearest'",
+    default: "'nearest'",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  ref: {
+    description: "A ref object that must be attached to the element you want to scroll to.",
+    type: "React.RefObject<T | null>",
+  },
+  handlers: {
+    description: "An object containing scroll control functions.",
+    type: "UseScrollIntoViewReturn",
+  },
+  "handlers.scrollIntoView": {
+    description: "Function to trigger scrolling with optional override options.",
+    type: "(options?: ScrollIntoViewOptions) => void",
+  },
+  "handlers.cancel": {
+    description: "Function to cancel ongoing smooth scrolling.",
+    type: "() => void",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useScrollIntoView } from "@/hooks/use-scroll-into-view";
+
+function ScrollExample() {
+  const [targetRef, { scrollIntoView }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+
+  return (
+    <div>
+      <button onClick={() => scrollIntoView()}>
+        Scroll to target
+      </button>
+      <div style={{ height: "200vh" }}>
+        <div ref={targetRef}>Target element</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Navigation Menu
+
+```tsx
+function NavigationMenu() {
+  const [homeRef, { scrollIntoView: scrollToHome }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+  
+  const [aboutRef, { scrollIntoView: scrollToAbout }] = useScrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+
+  return (
+    <div>
+      <nav>
+        <button onClick={() => scrollToHome()}>Home</button>
+        <button onClick={() => scrollToAbout()}>About</button>
+      </nav>
+      
+      <section ref={homeRef}>Home Content</section>
+      <section ref={aboutRef}>About Content</section>
+    </div>
+  );
+}
+```
+
+### Override Options
+
+```tsx
+function FlexibleScroll() {
+  const [targetRef, { scrollIntoView }] = useScrollIntoView();
+
+  return (
+    <div>
+      <button 
+        onClick={() => scrollIntoView({ behavior: "auto", block: "start" })}
+      >
+        Instant scroll to top
+      </button>
+      <button 
+        onClick={() => scrollIntoView({ behavior: "smooth", block: "center" })}
+      >
+        Smooth scroll to center
+      </button>
+      <div ref={targetRef}>Target</div>
+    </div>
+  );
+}
+```
+
+### With Scroll Cancellation
+
+```tsx
+function CancellableScroll() {
+  const [targetRef, { scrollIntoView, cancel }] = useScrollIntoView();
+
+  const handleSlowScroll = () => {
+    scrollIntoView({ behavior: "smooth" });
+    
+    // Cancel after 1 second if needed
+    setTimeout(() => {
+      cancel();
+    }, 1000);
+  };
+
+  return (
+    <div>
+      <button onClick={handleSlowScroll}>Start scroll</button>
+      <button onClick={cancel}>Cancel scroll</button>
+      <div ref={targetRef}>Target</div>
+    </div>
+  );
+}
+```
+
+## Accessibility
+
+The hook automatically respects the user's `prefers-reduced-motion` setting:
+
+* When `prefers-reduced-motion: reduce` is set, smooth scrolling is automatically disabled
+* All scroll animations become instant (`behavior: "auto"`)
+* This ensures a comfortable experience for users with motion sensitivity
+
+## Use Cases
+
+* **Single Page Navigation**: Create smooth scrolling between sections
+* **Documentation Sites**: Table of contents navigation
+* **Landing Pages**: Smooth scrolling to different sections
+* **Form Navigation**: Jump to form sections or error fields
+* **Image Galleries**: Navigate between gallery items
+* **Timeline Components**: Scroll to specific timeline events
+* **Chat Applications**: Scroll to latest messages or specific conversations
+* **Data Tables**: Scroll to specific rows or columns
+
+
+# useWindowSize
+URL: /unlogg-hooks/ui-and-dom/use-window-size
+
+A custom React hook that tracks the current window size and updates on resize.
+
+`useWindowSize` is a custom React hook that tracks the current window size and provides real-time updates when the window is resized. This is particularly useful for creating responsive components that need to adapt to different screen sizes.
+
+## Example
+
+<ComponentPreview name="use-window-size-ex-01" classNameComponentContainer="min-h-[400px]" />
+
+## Install
+
+<ComponentInstall name="use-window-size" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-window-size" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-window-size" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Automatically updates when the window is resized
+* Returns both width and height as numbers
+* Handles the resize event listener cleanup properly
+* Initializes with the current window size on mount
+
+## API Reference
+
+### Returns
+
+<TypeTable
+  type={{
+  width: {
+    description: "The current window width in pixels.",
+    type: "number",
+  },
+  height: {
+    description: "The current window height in pixels.",
+    type: "number",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useWindowSize } from "@/hooks/use-window-size";
+
+function ResponsiveComponent() {
+  const { width, height } = useWindowSize();
+
+  if (width < 768) {
+    return <MobileView />;
+  }
+
+  return <DesktopView />;
+}
+```
+
+## Use Cases
+
+* **Responsive Components**: Create components that adapt based on screen size without relying solely on CSS media queries
+* **Layout Calculations**: Perform calculations that depend on the current viewport size
+* **Performance Optimization**: Conditionally render expensive components only on larger screens
+* **Dynamic Styling**: Apply different styles or behaviors based on window dimensions
+
+
+# useClipboardCopy
+URL: /unlogg-hooks/utilities/use-clipboard-copy
+
+A custom React hook that provides clipboard copy functionality with state management and error handling.
+
+`useClipboardCopy` is a custom React hook that provides an easy way to copy text to the clipboard with automatic state management. It tracks the copied state, handles errors gracefully, and automatically resets the state after a configurable timeout. The hook uses the modern Clipboard API under the hood for reliable functionality.
+
+## Example
+
+<ComponentPreview name="use-clipboard-copy-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-clipboard-copy" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-clipboard-copy" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-clipboard-copy" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses the modern Clipboard API (`navigator.clipboard.writeText`)
+* Automatically tracks copied state with configurable timeout
+* Provides comprehensive error handling for clipboard failures
+* Includes success and error callbacks for custom behavior
+* Supports manual state reset functionality
+* Works with any text content including code, URLs, and emojis
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  options: {
+    description: "Configuration options for the clipboard copy behavior.",
+    type: "UseClipboardCopyOptions",
+    default: "{}",
+  },
+}}
+/>
+
+### UseClipboardCopyOptions
+
+<TypeTable
+  type={{
+  timeout: {
+    description: "The timeout in milliseconds after which the copied state resets to false.",
+    type: "number",
+    default: "2000",
+  },
+  onSuccess: {
+    description: "Callback function called when text is successfully copied.",
+    type: "(text: string) => void",
+    default: "undefined",
+  },
+  onError: {
+    description: "Callback function called when copying fails.",
+    type: "(error: Error) => void",
+    default: "undefined",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  copied: {
+    description: "Whether text was recently copied (true for the duration of the timeout).",
+    type: "boolean",
+  },
+  copy: {
+    description: "Function to copy text to the clipboard.",
+    type: "(text: string) => Promise<void>",
+  },
+  error: {
+    description: "The error that occurred during copying, if any.",
+    type: "Error | null",
+  },
+  reset: {
+    description: "Function to manually reset the copied state.",
+    type: "() => void",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useClipboardCopy } from "@/hooks/use-clipboard-copy";
+
+function CopyButton() {
+  const { copy, copied, error } = useClipboardCopy({
+    timeout: 2000,
+    onSuccess: (text) => console.log('Copied:', text),
+    onError: (err) => console.error('Copy failed:', err)
+  });
+
+  const handleCopy = () => {
+    copy('Hello, World!');
+  };
+
+  return (
+    <button onClick={handleCopy}>
+      {copied ? 'Copied!' : 'Copy'}
+      {error && <span>Failed to copy</span>}
+    </button>
+  );
+}
+```
+
+## Advanced Usage
+
+### Code Block with Copy Button
+
+Create a reusable code block component with copy functionality:
+
+```tsx
+function CodeBlock({ code, language }: { code: string; language: string }) {
+  const { copy, copied } = useClipboardCopy({ timeout: 3000 });
+
+  return (
+    <div className="relative">
+      <pre className={`language-${language}`}>
+        <code>{code}</code>
+      </pre>
+      <button
+        onClick={() => copy(code)}
+        className="absolute top-2 right-2"
+      >
+        {copied ? '✓ Copied!' : 'Copy Code'}
+      </button>
+    </div>
+  );
+}
+```
+
+### URL Sharing Component
+
+Combine with other hooks for URL sharing functionality:
+
+```tsx
+function ShareURL() {
+  const { copy, copied, error } = useClipboardCopy({
+    timeout: 1500,
+    onSuccess: () => toast.success('URL copied to clipboard!'),
+    onError: () => toast.error('Failed to copy URL')
+  });
+  
+  const currentURL = window.location.href;
+
+  return (
+    <div className="flex gap-2">
+      <input value={currentURL} readOnly className="flex-1" />
+      <button onClick={() => copy(currentURL)}>
+        {copied ? '✓ Copied' : 'Share URL'}
+      </button>
+      {error && <span className="text-red-500">Error: {error.message}</span>}
+    </div>
+  );
+}
+```
+
+### Multi-Text Copy Manager
+
+Handle multiple copyable items with individual state tracking:
+
+```tsx
+function ContactCard({ contact }: { contact: Contact }) {
+  const emailCopy = useClipboardCopy({ timeout: 2000 });
+  const phoneCopy = useClipboardCopy({ timeout: 2000 });
+  const addressCopy = useClipboardCopy({ timeout: 2000 });
+
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between">
+        <span>Email: {contact.email}</span>
+        <button onClick={() => emailCopy.copy(contact.email)}>
+          {emailCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+      <div className="flex justify-between">
+        <span>Phone: {contact.phone}</span>
+        <button onClick={() => phoneCopy.copy(contact.phone)}>
+          {phoneCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+      <div className="flex justify-between">
+        <span>Address: {contact.address}</span>
+        <button onClick={() => addressCopy.copy(contact.address)}>
+          {addressCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Error Handling and Fallbacks
+
+Implement graceful fallbacks for unsupported browsers:
+
+```tsx
+function RobustCopyButton({ text }: { text: string }) {
+  const { copy, copied, error, reset } = useClipboardCopy({
+    timeout: 3000,
+    onError: (err) => {
+      console.error('Clipboard copy failed:', err);
+      // Implement fallback logic
+      fallbackCopyToClipboard(text);
+    }
+  });
+
+  const fallbackCopyToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
+  return (
+    <div>
+      <button onClick={() => copy(text)}>
+        {copied ? '✓ Copied!' : 'Copy Text'}
+      </button>
+      {error && (
+        <div className="text-red-500 text-sm">
+          Copy failed. Please try selecting and copying manually.
+          <button onClick={reset} className="underline ml-2">
+            Dismiss
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Code Documentation**: Add copy buttons to code examples and snippets
+* **URL Sharing**: Allow users to easily copy and share URLs
+* **Contact Information**: Enable copying of email addresses, phone numbers, and addresses
+* **API Keys & Tokens**: Provide secure copying of sensitive information
+* **Social Sharing**: Copy pre-formatted social media content
+* **Form Data**: Allow copying of generated content like passwords or IDs
+* **Error Messages**: Enable copying of error details for support requests
+* **Configuration Values**: Copy configuration snippets and settings
+
+
 # CLI
 URL: /unlogg-ui/cli
 

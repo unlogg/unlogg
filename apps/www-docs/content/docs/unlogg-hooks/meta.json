@@ -13,6 +13,8 @@
     "...state",
     "---UI & DOM---",
     "...ui-and-dom",
+    "---Utilities---",
+    "...utilities",
     "..."
   ]
 }

@@ -1,0 +1,181 @@
+# useHover
+URL: /unlogg-hooks/ui-and-dom/use-hover
+
+A custom React hook that detects if a given element is being hovered.
+
+`useHover` is a custom React hook that detects when an element is being hovered. It accepts a ref object pointing to the element you want to monitor and returns a boolean indicating the hover state. This is useful for creating interactive UI elements that respond to mouse hover events.
+
+## Example
+
+<ComponentPreview name="use-hover-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-hover" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-hover" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-hover" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Accepts a ref object pointing to the element to monitor
+* Returns a boolean indicating hover state
+* Automatically handles event listener cleanup
+* Works with any HTML element type through generics
+* Uses native `mouseenter` and `mouseleave` events for reliable detection
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  elementRef: {
+    description: "A ref object pointing to the element to observe for hover state.",
+    type: "React.RefObject<T | null>",
+    default: "—",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isHovered: {
+    description: "A boolean indicating whether the element is currently being hovered.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useRef } from "react";
+import { useHover } from "@/hooks/use-hover";
+
+function HoverableComponent() {
+  const hoverRef = useRef(null);
+  const isHover = useHover(hoverRef);
+
+  return (
+    <div 
+      ref={hoverRef}
+      className={isHover ? "bg-blue-100" : "bg-gray-100"}
+    >
+      {isHover ? "Hovering!" : "Not hovering"}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Multiple Elements
+
+You can use multiple instances to track different elements:
+
+```tsx
+function MultipleHoverElements() {
+  const button1Ref = useRef(null);
+  const button2Ref = useRef(null);
+  
+  const isButton1Hovered = useHover(button1Ref);
+  const isButton2Hovered = useHover(button2Ref);
+
+  return (
+    <div>
+      <button ref={button1Ref}>
+        Button 1 {isButton1Hovered && "🎯"}
+      </button>
+      <button ref={button2Ref}>
+        Button 2 {isButton2Hovered && "🎯"}
+      </button>
+    </div>
+  );
+}
+```
+
+### Delayed Actions
+
+Combine with `useEffect` for delayed hover actions:
+
+```tsx
+function DelayedHoverAction() {
+  const elementRef = useRef(null);
+  const isHovered = useHover(elementRef);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    
+    if (isHovered) {
+      timer = setTimeout(() => {
+        setShowTooltip(true);
+      }, 500); // Show tooltip after 500ms
+    } else {
+      setShowTooltip(false);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isHovered]);
+
+  return (
+    <div ref={elementRef}>
+      Hover me
+      {showTooltip && <div>Tooltip content</div>}
+    </div>
+  );
+}
+```
+
+### Conditional Styling
+
+```tsx
+function ConditionalStyling() {
+  const cardRef = useRef(null);
+  const isHovered = useHover(cardRef);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`
+        transition-all duration-200
+        ${isHovered 
+          ? "scale-105 shadow-lg border-blue-300" 
+          : "scale-100 shadow-sm border-gray-200"
+        }
+      `}
+    >
+      Interactive Card
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Interactive Cards**: Add hover effects to cards and tiles
+* **Tooltip Triggers**: Show tooltips when elements are hovered
+* **Button States**: Create enhanced button hover states
+* **Image Overlays**: Show overlays when images are hovered
+* **Navigation Items**: Highlight navigation items on hover
+* **Form Field Enhancement**: Show additional information on form field hover
+* **Data Visualization**: Highlight chart elements on hover
+* **Progressive Disclosure**: Reveal additional content on hover

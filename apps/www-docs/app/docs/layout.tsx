@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <DocsLayout tree={source.pageTree} {...baseOptions}>
-        {children}
+        <div id="docs-page">{children}</div>
       </DocsLayout>
     </>
   );

@@ -1,0 +1,135 @@
+---
+title: useElementSize
+description: A custom React hook that tracks an element's size using ResizeObserver.
+---
+
+`useElementSize` is a custom React hook that tracks an element's size using the ResizeObserver API. It provides real-time updates when the element's dimensions change, making it perfect for responsive components that need to adapt based on their container size.
+
+## Example
+
+<ComponentPreview
+  name="use-element-size-ex-01"
+  classNameComponentContainer='min-h-[500px]'
+/>
+
+## Install
+<ComponentInstall
+  name="use-element-size"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-element-size"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-element-size"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Notes
+- Uses ResizeObserver for efficient size tracking
+- Returns 0 for width and height on first render and during SSR
+- Automatically cleans up the observer when component unmounts
+- Works with any HTML element type through generics
+- Provides rounded pixel values for consistent measurements
+
+## API Reference
+
+### Returns
+<TypeTable
+  type={{
+    ref: {
+      description: "A ref object that must be attached to the element you want to observe.",
+      type: "React.RefObject<T | null>",
+    },
+    size: {
+      description: "An object containing the current element dimensions.",
+      type: "ElementSize",
+    },
+    "size.width": {
+      description: "The current element width in pixels.",
+      type: "number",
+    },
+    "size.height": {
+      description: "The current element height in pixels.",
+      type: "number",
+    },
+  }}
+/>
+
+## Usage
+
+```tsx
+import { useElementSize } from "@/hooks/use-element-size";
+
+function ResponsiveComponent() {
+  const [ref, { width, height }] = useElementSize();
+
+  return (
+    <div ref={ref} className="resize-container">
+      <p>Container size: {width} × {height}</p>
+      {width > 300 && <AdditionalContent />}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Multiple Elements
+
+You can use multiple instances to track different elements:
+
+```tsx
+function MultipleElements() {
+  const [ref1, size1] = useElementSize();
+  const [ref2, size2] = useElementSize();
+
+  return (
+    <div>
+      <div ref={ref1}>Element 1: {size1.width}×{size1.height}</div>
+      <div ref={ref2}>Element 2: {size2.width}×{size2.height}</div>
+    </div>
+  );
+}
+```
+
+### Conditional Rendering
+
+```tsx
+function ConditionalContent() {
+  const [ref, { width }] = useElementSize();
+
+  return (
+    <div ref={ref}>
+      {width > 500 ? <DesktopLayout /> : <MobileLayout />}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+- **Container Queries**: Implement container-based responsive design without CSS container queries
+- **Dynamic Layouts**: Adjust layout based on available space rather than viewport size
+- **Canvas/SVG Sizing**: Automatically resize canvas or SVG elements to their container
+- **Text Truncation**: Determine when to truncate text based on available space
+- **Grid/Masonry Layouts**: Calculate optimal grid sizes based on container dimensions
+- **Chart Responsiveness**: Resize charts and visualizations to fit their containers

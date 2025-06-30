@@ -1,0 +1,15 @@
+{
+  "name": "use-mobile",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\ntype UseMobileOptions = {\n  /**\n   * The default value to return if the hook is being run on the server.\n   * @default false\n   */\n  defaultValue?: boolean;\n  /**\n   * If true (default), the hook will initialize reading the media query.\n   * In SSR, you should set it to false, returning options.defaultValue or false initially.\n   * @default true\n   */\n  initializeWithValue?: boolean;\n};\n\n/**\n * A custom React hook that detects if the current screen width is below a mobile breakpoint.\n *\n * @param breakpoint - The pixel value to use as the mobile breakpoint (default: 768)\n * @param options - The options for customizing the behavior of the hook (optional).\n * @returns A boolean indicating whether the screen width is below the mobile breakpoint.\n *\n * @example\n * const isMobile = useMobile(); // Uses default 768px breakpoint\n * const isSmallMobile = useMobile(640); // Custom 640px breakpoint\n * \n * // With SSR options\n * const isMobile = useMobile(768, {\n *   defaultValue: false,\n *   initializeWithValue: false\n * });\n */\nfunction useMobile(\n  breakpoint: number = 768,\n  options: UseMobileOptions = {}\n): boolean {\n  const { defaultValue = false, initializeWithValue = true } = options;\n\n  const getMatches = React.useCallback(\n    (breakpoint: number): boolean => {\n      if (typeof window === \"undefined\") {\n        return defaultValue;\n      }\n      return window.innerWidth < breakpoint;\n    },\n    [defaultValue]\n  );\n\n  const [isMobile, setIsMobile] = React.useState<boolean>(() => {\n    if (initializeWithValue) {\n      return getMatches(breakpoint);\n    }\n    return defaultValue;\n  });\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\") {\n      return;\n    }\n\n    const handleResize = () => {\n      setIsMobile(window.innerWidth < breakpoint);\n    };\n\n    // Set the initial value if we didn't initialize with it\n    if (!initializeWithValue) {\n      setIsMobile(window.innerWidth < breakpoint);\n    }\n\n    // Listen for resize events\n    window.addEventListener(\"resize\", handleResize);\n\n    return () => {\n      window.removeEventListener(\"resize\", handleResize);\n    };\n  }, [breakpoint, initializeWithValue]);\n\n  return isMobile;\n}\n\nexport { useMobile };\nexport type { UseMobileOptions };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-mobile.ts",
+      "target": "/hooks/use-mobile.ts"
+    }
+  ]
+}

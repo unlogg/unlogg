@@ -1,0 +1,15 @@
+{
+  "name": "use-is-client",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/**\n * A custom React hook that determines if the code is running on the client side (in the browser).\n *\n * This hook is useful for:\n * - Preventing hydration mismatches in SSR applications\n * - Conditionally rendering client-only components\n * - Safely accessing browser APIs after hydration\n * - Avoiding server-side rendering issues\n *\n * @returns A boolean indicating whether the code is running on the client side.\n *\n * @example\n * function ClientOnlyComponent() {\n *   const isClient = useIsClient();\n *\n *   if (!isClient) {\n *     return <div>Loading...</div>; // Or null for no server-side render\n *   }\n *\n *   return <div>This only renders on the client!</div>;\n * }\n *\n * @example\n * function ConditionalFeature() {\n *   const isClient = useIsClient();\n *\n *   return (\n *     <div>\n *       <h1>My App</h1>\n *       {isClient && <BrowserOnlyFeature />}\n *     </div>\n *   );\n * }\n */\nfunction useIsClient(): boolean {\n  const [isClient, setIsClient] = React.useState(false);\n\n  React.useEffect(() => {\n    // This effect only runs on the client side\n    setIsClient(true);\n  }, []);\n\n  return isClient;\n}\n\nexport { useIsClient };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-is-client.ts",
+      "target": "/hooks/use-is-client.ts"
+    }
+  ]
+}

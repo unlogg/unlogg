@@ -1,0 +1,15 @@
+{
+  "name": "use-window-size",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\ntype WindowSize = {\n  width: number;\n  height: number;\n};\n\n/**\n * A custom React hook that tracks the current window size and updates on resize.\n *\n * @returns An object containing the current window width and height.\n *   - `width`: The current window width in pixels.\n *   - `height`: The current window height in pixels.\n *\n * @example\n * const { width, height } = useWindowSize();\n *\n * // Use the window size to conditionally render content\n * if (width < 768) {\n *   return <MobileComponent />;\n * }\n * return <DesktopComponent />;\n */\nfunction useWindowSize(): WindowSize {\n  const [windowSize, setWindowSize] = React.useState<WindowSize>({\n    width: 0,\n    height: 0,\n  });\n\n  React.useEffect(() => {\n    // Handler to call on window resize\n    function handleResize() {\n      setWindowSize({\n        width: window.innerWidth,\n        height: window.innerHeight,\n      });\n    }\n\n    // Add event listener\n    window.addEventListener(\"resize\", handleResize);\n\n    // Call handler right away so state gets updated with initial window size\n    handleResize();\n\n    // Remove event listener on cleanup\n    return () => window.removeEventListener(\"resize\", handleResize);\n  }, []); // Empty array ensures that effect is only run on mount\n\n  return windowSize;\n}\n\nexport { useWindowSize };\nexport type { WindowSize };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-window-size.ts",
+      "target": "/hooks/use-window-size.ts"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+---
+title: useMobile
+description: A custom React hook that detects if the current screen width is below a mobile breakpoint.
+isNew: true
+---
+
+`useMobile` is a custom React hook that provides a simple boolean interface to detect if the current screen width is below a specified mobile breakpoint. It uses window resize events to track screen size changes and offers configurable breakpoint values with SSR support.
+
+## Example
+
+<ComponentPreview
+  name="use-mobile-ex-01"
+  classNameComponentContainer='min-h-[700px]'
+/>
+
+## Install
+<ComponentInstall
+  name="use-mobile"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-mobile"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-mobile"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Notes
+- Uses window resize events for efficient mobile detection
+- Configurable breakpoint value (default: 768px)
+- Automatically handles server-side rendering scenarios
+- Provides options for SSR-safe initialization
+- Cleans up event listeners automatically on unmount
+
+## API Reference
+
+### Parameters
+<TypeTable
+  type={{
+    breakpoint: {
+      description: "The pixel value to use as the mobile breakpoint.",
+      type: "number",
+      default: "768",
+    },
+    options: {
+      description: "The options for customizing the behavior of the hook (optional).",
+      type: "UseMobileOptions",
+      default: "{}",
+    },
+    "options.defaultValue": {
+      description: "The default value to return if the hook is being run on the server.",
+      type: "boolean",
+      default: "false",
+    },
+    "options.initializeWithValue": {
+      description: "If true (default), the hook will initialize reading the screen width. In SSR, you should set it to false, returning options.defaultValue or false initially.",
+      type: "boolean",
+      default: "true",
+    },
+  }}
+/>
+
+### Returns
+<TypeTable
+  type={{
+    isMobile: {
+      description: "A boolean indicating whether the screen width is below the mobile breakpoint.",
+      type: "boolean",
+    },
+  }}
+/>
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import { useMobile } from "@/hooks/use-mobile";
+
+function ResponsiveComponent() {
+  const isMobile = useMobile(); // Uses default 768px breakpoint
+  const isSmallMobile = useMobile(640); // Custom 640px breakpoint
+  const isLargeMobile = useMobile(1024); // Large mobile/tablet breakpoint
+
+  return (
+    <div>
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
+      {isSmallMobile && <CompactContent />}
+      {isLargeMobile && <TabletOptimizedContent />}
+    </div>
+  );
+}
+```
+
+### SSR-Safe Usage
+
+```tsx
+function SSRComponent() {
+  const isMobile = useMobile(768, {
+    defaultValue: false,
+    initializeWithValue: false
+  });
+
+  return (
+    <div>
+      {isMobile ? 'Mobile View' : 'Desktop View'}
+    </div>
+  );
+}
+```
+
+## Common Breakpoints
+
+```tsx
+// Extra small devices (phones)
+const isXS = useMobile(480);
+
+// Small devices (large phones)
+const isSM = useMobile(640);
+
+// Medium devices (tablets)
+const isMD = useMobile(768); // Default
+
+// Large devices (small desktops)
+const isLG = useMobile(1024);
+
+// Extra large devices (large desktops)
+const isXL = useMobile(1280);
+```
+
+## Advanced Examples
+
+### Responsive Navigation
+
+```tsx
+function Navigation() {
+  const isMobile = useMobile(768);
+
+  return (
+    <nav>
+      {isMobile ? (
+        <MobileMenu />
+      ) : (
+        <DesktopMenu />
+      )}
+    </nav>
+  );
+}
+```
+
+### Conditional Content Loading
+
+```tsx
+function ContentSection() {
+  const isMobile = useMobile(768);
+  const isSmallScreen = useMobile(480);
+
+  return (
+    <section>
+      {isSmallScreen ? (
+        <MinimalContent />
+      ) : isMobile ? (
+        <MobileContent />
+      ) : (
+        <FullContent />
+      )}
+    </section>
+  );
+}
+```
+
+### Multi-Breakpoint Layout
+
+```tsx
+function useResponsiveLayout() {
+  const isXS = useMobile(480);
+  const isSM = useMobile(640);
+  const isMD = useMobile(768);
+  const isLG = useMobile(1024);
+
+  const getLayout = () => {
+    if (isXS) return { columns: 1, showSidebar: false, compact: true };
+    if (isSM) return { columns: 1, showSidebar: false, compact: false };
+    if (isMD) return { columns: 2, showSidebar: false, compact: false };
+    if (isLG) return { columns: 2, showSidebar: true, compact: false };
+    return { columns: 3, showSidebar: true, compact: false };
+  };
+
+  return getLayout();
+}
+
+function ResponsiveLayout() {
+  const layout = useResponsiveLayout();
+
+  return (
+    <div className={`grid grid-cols-${layout.columns}`}>
+      <main>Main content</main>
+      {layout.showSidebar && <aside>Sidebar</aside>}
+    </div>
+  );
+}
+```
+
+### Performance Optimization
+
+```tsx
+function OptimizedComponent() {
+  const isMobile = useMobile(768);
+
+  // Only load heavy components on desktop
+  const HeavyComponent = React.useMemo(() => {
+    if (isMobile) return null;
+    return React.lazy(() => import('./HeavyComponent'));
+  }, [isMobile]);
+
+  return (
+    <div>
+      {isMobile ? (
+        <LightweightMobileComponent />
+      ) : (
+        <React.Suspense fallback={<Loading />}>
+          {HeavyComponent && <HeavyComponent />}
+        </React.Suspense>
+      )}
+    </div>
+  );
+}
+```
+
+## Comparison with useMediaQuery
+
+While `useMediaQuery` provides more flexibility for complex media queries, `useMobile` offers a simpler API specifically for mobile detection:
+
+```tsx
+// Using useMediaQuery
+const isMobile = useMediaQuery('(max-width: 768px)');
+
+// Using useMobile (simpler)
+const isMobile = useMobile(768);
+
+// Custom breakpoint with useMobile
+const isTablet = useMobile(1024);
+```
+
+## TypeScript
+
+The hook is fully typed and exports its option types:
+
+```tsx
+import { useMobile, UseMobileOptions } from "@/hooks/use-mobile";
+
+const options: UseMobileOptions = {
+  defaultValue: false,
+  initializeWithValue: true
+};
+
+const isMobile: boolean = useMobile(768, options);
+```
+
+## Use Cases
+
+- **Responsive Navigation**: Show/hide mobile menu vs desktop navigation
+- **Layout Adaptation**: Switch between single-column and multi-column layouts
+- **Content Optimization**: Load different content for mobile vs desktop
+- **Performance**: Conditionally load heavy components only on desktop
+- **Touch Optimization**: Enable touch-friendly interfaces on mobile
+- **Image Loading**: Load different image sizes based on screen size
+- **Form Layout**: Adapt form layouts for mobile vs desktop
+- **Component Visibility**: Show/hide components based on screen size

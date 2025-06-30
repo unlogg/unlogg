@@ -1,0 +1,15 @@
+{
+  "name": "use-hover",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/**\n * A custom React hook that detects if a given element is being hovered.\n *\n * @param elementRef - A ref object pointing to the element to observe for hover state.\n * @returns A boolean indicating whether the element is currently being hovered.\n *\n * @example\n * const hoverRef = useRef(null);\n * const isHover = useHover(hoverRef);\n *\n * return (\n *   <div ref={hoverRef}>\n *     {isHover ? \"Hovering!\" : \"Not hovering\"}\n *   </div>\n * );\n */\nfunction useHover<T extends HTMLElement = HTMLElement>(\n  elementRef: React.RefObject<T | null>\n): boolean {\n  const [isHovered, setIsHovered] = React.useState<boolean>(false);\n\n  React.useEffect(() => {\n    const element = elementRef.current;\n    if (!element) return;\n\n    const handleMouseEnter = () => setIsHovered(true);\n    const handleMouseLeave = () => setIsHovered(false);\n\n    element.addEventListener(\"mouseenter\", handleMouseEnter);\n    element.addEventListener(\"mouseleave\", handleMouseLeave);\n\n    return () => {\n      element.removeEventListener(\"mouseenter\", handleMouseEnter);\n      element.removeEventListener(\"mouseleave\", handleMouseLeave);\n    };\n  }, [elementRef]);\n\n  return isHovered;\n}\n\nexport { useHover };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-hover.ts",
+      "target": "/hooks/use-hover.ts"
+    }
+  ]
+}

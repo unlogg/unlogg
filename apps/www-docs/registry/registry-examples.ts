@@ -50,6 +50,21 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-click-outside-ex-01")
     ),
   },
+  {
+    name: "use-clipboard-copy-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-clipboard-copy.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-clipboard-copy-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-clipboard-copy-ex-01")
+    ),
+  },
 
   {
     name: "use-counter-ex-01",
@@ -129,6 +144,51 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-disclosure-ex-01")
     ),
   },
+  {
+    name: "use-element-size-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-element-size.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-element-size-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-element-size-ex-01")
+    ),
+  },
+  {
+    name: "use-hover-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-hover.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-hover-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-hover-ex-01")
+    ),
+  },
+  {
+    name: "use-is-client-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-is-client.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-is-client-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-is-client-ex-01")
+    ),
+  },
 
   {
     name: "use-interval-ex-01",
@@ -206,6 +266,51 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-local-storage-ex-01")
     ),
   },
+  {
+    name: "use-media-query-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-media-query.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-media-query-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-media-query-ex-01")
+    ),
+  },
+  {
+    name: "use-mobile-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-mobile.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-mobile-ex-01")
+    ),
+  },
+  {
+    name: "use-scroll-into-view-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-scroll-into-view.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-scroll-into-view-ex-01")
+    ),
+  },
 
   {
     name: "use-state-history-ex-01",
@@ -220,6 +325,21 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-state-history-ex-01")
+    ),
+  },
+  {
+    name: "use-window-size-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-window-size.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-window-size-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-window-size-ex-01")
     ),
   },
 ];

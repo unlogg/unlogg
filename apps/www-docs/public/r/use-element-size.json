@@ -1,0 +1,15 @@
+{
+  "name": "use-element-size",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\ntype ElementSize = {\n  width: number;\n  height: number;\n};\n\n/**\n * A custom React hook that tracks an element's size using ResizeObserver.\n *\n * @returns A tuple containing:\n *   - A ref object that must be attached to the element you want to observe\n *   - An object with the current element dimensions:\n *     - `width`: The current element width in pixels\n *     - `height`: The current element height in pixels\n *\n * @example\n * const [ref, { width, height }] = useElementSize();\n *\n * return (\n *   <div ref={ref}>\n *     Element size: {width} x {height}\n *   </div>\n * );\n */\nfunction useElementSize<T extends HTMLElement = HTMLDivElement>(): [\n  React.RefObject<T | null>,\n  ElementSize,\n] {\n  const ref = React.useRef<T | null>(null);\n  const [size, setSize] = React.useState<ElementSize>({\n    width: 0,\n    height: 0,\n  });\n\n  React.useEffect(() => {\n    const element = ref.current;\n    if (!element) return;\n\n    const resizeObserver = new ResizeObserver((entries) => {\n      if (!Array.isArray(entries) || !entries.length) {\n        return;\n      }\n\n      const entry = entries[0];\n      const { width, height } = entry.contentRect;\n\n      setSize({\n        width: Math.round(width),\n        height: Math.round(height),\n      });\n    });\n\n    resizeObserver.observe(element);\n\n    return () => {\n      resizeObserver.disconnect();\n    };\n  }, []);\n\n  return [ref, size];\n}\n\nexport { useElementSize };\nexport type { ElementSize };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-element-size.ts",
+      "target": "/hooks/use-element-size.ts"
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+---
+title: useClipboardCopy
+description: A custom React hook that provides clipboard copy functionality with state management and error handling.
+isNew: true
+---
+
+`useClipboardCopy` is a custom React hook that provides an easy way to copy text to the clipboard with automatic state management. It tracks the copied state, handles errors gracefully, and automatically resets the state after a configurable timeout. The hook uses the modern Clipboard API under the hood for reliable functionality.
+
+## Example
+
+<ComponentPreview
+  name="use-clipboard-copy-ex-01"
+  classNameComponentContainer='min-h-[600px]'
+/>
+
+## Install
+<ComponentInstall
+  name="use-clipboard-copy"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-clipboard-copy"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-clipboard-copy"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Notes
+- Uses the modern Clipboard API (`navigator.clipboard.writeText`)
+- Automatically tracks copied state with configurable timeout
+- Provides comprehensive error handling for clipboard failures
+- Includes success and error callbacks for custom behavior
+- Supports manual state reset functionality
+- Works with any text content including code, URLs, and emojis
+
+## API Reference
+
+### Parameters
+<TypeTable
+  type={{
+    options: {
+      description: "Configuration options for the clipboard copy behavior.",
+      type: "UseClipboardCopyOptions",
+      default: "{}",
+    },
+  }}
+/>
+
+### UseClipboardCopyOptions
+<TypeTable
+  type={{
+    timeout: {
+      description: "The timeout in milliseconds after which the copied state resets to false.",
+      type: "number",
+      default: "2000",
+    },
+    onSuccess: {
+      description: "Callback function called when text is successfully copied.",
+      type: "(text: string) => void",
+      default: "undefined",
+    },
+    onError: {
+      description: "Callback function called when copying fails.",
+      type: "(error: Error) => void",
+      default: "undefined",
+    },
+  }}
+/>
+
+### Returns
+<TypeTable
+  type={{
+    copied: {
+      description: "Whether text was recently copied (true for the duration of the timeout).",
+      type: "boolean",
+    },
+    copy: {
+      description: "Function to copy text to the clipboard.",
+      type: "(text: string) => Promise<void>",
+    },
+    error: {
+      description: "The error that occurred during copying, if any.",
+      type: "Error | null",
+    },
+    reset: {
+      description: "Function to manually reset the copied state.",
+      type: "() => void",
+    },
+  }}
+/>
+
+## Usage
+
+```tsx
+import { useClipboardCopy } from "@/hooks/use-clipboard-copy";
+
+function CopyButton() {
+  const { copy, copied, error } = useClipboardCopy({
+    timeout: 2000,
+    onSuccess: (text) => console.log('Copied:', text),
+    onError: (err) => console.error('Copy failed:', err)
+  });
+
+  const handleCopy = () => {
+    copy('Hello, World!');
+  };
+
+  return (
+    <button onClick={handleCopy}>
+      {copied ? 'Copied!' : 'Copy'}
+      {error && <span>Failed to copy</span>}
+    </button>
+  );
+}
+```
+
+## Advanced Usage
+
+### Code Block with Copy Button
+
+Create a reusable code block component with copy functionality:
+
+```tsx
+function CodeBlock({ code, language }: { code: string; language: string }) {
+  const { copy, copied } = useClipboardCopy({ timeout: 3000 });
+
+  return (
+    <div className="relative">
+      <pre className={`language-${language}`}>
+        <code>{code}</code>
+      </pre>
+      <button
+        onClick={() => copy(code)}
+        className="absolute top-2 right-2"
+      >
+        {copied ? '✓ Copied!' : 'Copy Code'}
+      </button>
+    </div>
+  );
+}
+```
+
+### URL Sharing Component
+
+Combine with other hooks for URL sharing functionality:
+
+```tsx
+function ShareURL() {
+  const { copy, copied, error } = useClipboardCopy({
+    timeout: 1500,
+    onSuccess: () => toast.success('URL copied to clipboard!'),
+    onError: () => toast.error('Failed to copy URL')
+  });
+  
+  const currentURL = window.location.href;
+
+  return (
+    <div className="flex gap-2">
+      <input value={currentURL} readOnly className="flex-1" />
+      <button onClick={() => copy(currentURL)}>
+        {copied ? '✓ Copied' : 'Share URL'}
+      </button>
+      {error && <span className="text-red-500">Error: {error.message}</span>}
+    </div>
+  );
+}
+```
+
+### Multi-Text Copy Manager
+
+Handle multiple copyable items with individual state tracking:
+
+```tsx
+function ContactCard({ contact }: { contact: Contact }) {
+  const emailCopy = useClipboardCopy({ timeout: 2000 });
+  const phoneCopy = useClipboardCopy({ timeout: 2000 });
+  const addressCopy = useClipboardCopy({ timeout: 2000 });
+
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between">
+        <span>Email: {contact.email}</span>
+        <button onClick={() => emailCopy.copy(contact.email)}>
+          {emailCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+      <div className="flex justify-between">
+        <span>Phone: {contact.phone}</span>
+        <button onClick={() => phoneCopy.copy(contact.phone)}>
+          {phoneCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+      <div className="flex justify-between">
+        <span>Address: {contact.address}</span>
+        <button onClick={() => addressCopy.copy(contact.address)}>
+          {addressCopy.copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Error Handling and Fallbacks
+
+Implement graceful fallbacks for unsupported browsers:
+
+```tsx
+function RobustCopyButton({ text }: { text: string }) {
+  const { copy, copied, error, reset } = useClipboardCopy({
+    timeout: 3000,
+    onError: (err) => {
+      console.error('Clipboard copy failed:', err);
+      // Implement fallback logic
+      fallbackCopyToClipboard(text);
+    }
+  });
+
+  const fallbackCopyToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
+  return (
+    <div>
+      <button onClick={() => copy(text)}>
+        {copied ? '✓ Copied!' : 'Copy Text'}
+      </button>
+      {error && (
+        <div className="text-red-500 text-sm">
+          Copy failed. Please try selecting and copying manually.
+          <button onClick={reset} className="underline ml-2">
+            Dismiss
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+- **Code Documentation**: Add copy buttons to code examples and snippets
+- **URL Sharing**: Allow users to easily copy and share URLs
+- **Contact Information**: Enable copying of email addresses, phone numbers, and addresses
+- **API Keys & Tokens**: Provide secure copying of sensitive information
+- **Social Sharing**: Copy pre-formatted social media content
+- **Form Data**: Allow copying of generated content like passwords or IDs
+- **Error Messages**: Enable copying of error details for support requests
+- **Configuration Values**: Copy configuration snippets and settings
