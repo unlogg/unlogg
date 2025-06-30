@@ -1,8 +1,11 @@
-import React from "react";
-import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
-import { Button } from "@unlogg/ui/components/button";
+"use client";
 
-const ColorSchemeSelector: React.FC = () => {
+import { Badge } from "@unlogg/ui/components/badge";
+import { Button } from "@unlogg/ui/components/button";
+import { Card } from "@unlogg/ui/components/card";
+import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
+
+export default function UseLocalStorage_Ex_01() {
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: "color-scheme",
     defaultValue: "dark",
@@ -13,48 +16,91 @@ const ColorSchemeSelector: React.FC = () => {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          backgroundColor: colorScheme === "dark" ? "#333" : "#fff",
-          color: colorScheme === "dark" ? "#fff" : "#000",
-          padding: "20px",
-          textAlign: "center",
-        }}
-      >
-        <h1 className="text-2xl font-bold mb-4">
-          Color Scheme with useLocalStorage
-        </h1>
-        <p className="text-left">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+    <div className="flex flex-col gap-6 p-6">
+      <div className="text-center">
+        <h3 className="text-lg font-semibold mb-2">Local Storage Theme Hook</h3>
+        <p className="text-sm text-muted-foreground mb-4">
+          Persist theme preference across browser sessions
         </p>
-        <hr
-          style={{
-            margin: "20px 0",
-            borderColor: colorScheme === "dark" ? "#555" : "#ccc",
-          }}
-          className="my-4"
-        />
-        <h1>Current Color Scheme: {colorScheme}</h1>
-        <button
-          onClick={toggleColorScheme}
-          className="border border-gray-300 rounded px-4 py-2"
-        >
-          Switch to {colorScheme === "dark" ? "Light" : "Dark"} Mode
-        </button>
+
+        <div className="flex items-center justify-center gap-4 flex-wrap">
+          <Badge
+            variant={colorScheme === "dark" ? "default" : "secondary"}
+            className="text-sm"
+          >
+            {colorScheme === "dark" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </Badge>
+          <Badge variant="outline" className="font-mono text-xs">
+            localStorage: color-scheme
+          </Badge>
+        </div>
       </div>
-      <p>This gets saved to local storage:</p>
-      <pre className="text-left">
-        {JSON.stringify({ colorScheme }, null, 2)}
-      </pre>
+
+      <Card className="w-full max-w-4xl mx-auto p-6">
+        <h4 className="text-md font-semibold mb-4">Theme Demo</h4>
+        <ThemeDemo colorScheme={colorScheme} onToggle={toggleColorScheme} />
+      </Card>
     </div>
   );
-};
+}
 
-export default ColorSchemeSelector;
+function ThemeDemo({
+  colorScheme,
+  onToggle,
+}: {
+  colorScheme: string;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div
+        className="p-6 rounded-lg border transition-all duration-300"
+        style={{
+          backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
+          color: colorScheme === "dark" ? "#ffffff" : "#1a1a1a",
+          borderColor: colorScheme === "dark" ? "#333333" : "#e5e7eb",
+        }}
+      >
+        <div className="text-center mb-4">
+          <div className="text-4xl mb-2">
+            {colorScheme === "dark" ? "🌙" : "☀️"}
+          </div>
+          <Badge
+            variant={colorScheme === "dark" ? "default" : "secondary"}
+            className="text-sm"
+          >
+            Current Theme: {colorScheme}
+          </Badge>
+        </div>
+
+        <p className="text-sm mb-4 leading-relaxed">
+          This theme preference is automatically saved to localStorage and will
+          persist across browser sessions. The hook handles SSR safely and
+          provides seamless state management for theme switching.
+        </p>
+
+        <div className="flex justify-center">
+          <Button
+            onClick={onToggle}
+            variant={colorScheme === "dark" ? "outline" : "default"}
+          >
+            Switch to {colorScheme === "dark" ? "Light" : "Dark"} Mode
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <p className="text-sm text-gray-700">
+            <strong>Storage Key:</strong> color-scheme
+          </p>
+        </div>
+        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <p className="text-sm text-gray-700">
+            <strong>Current Value:</strong> {colorScheme}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

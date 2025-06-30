@@ -1,0 +1,364 @@
+---
+title: useLeavePage
+description: A custom React hook that detects when the user is leaving the page by monitoring the mouseleave event.
+---
+
+`useLeavePage` is a custom React hook that detects when a user is about to leave the page by monitoring when their mouse cursor leaves the browser window. This is commonly used for implementing exit-intent popups, auto-saving content, or showing retention messages to keep users engaged.
+
+## Example
+
+<ComponentPreview
+  name="use-leave-page-ex-01"
+  classNameComponentContainer='min-h-[600px]'
+/>
+
+## Install
+<ComponentInstall
+  name="use-leave-page"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="use-leave-page"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="use-leave-page"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Notes
+- Monitors the "mouseleave" event on the document by default
+- Detects when the cursor leaves the browser window area
+- Automatically resets when the cursor returns to the page
+- Client-side only (safe for SSR applications)
+- Useful for exit-intent functionality and user retention
+
+## API Reference
+
+### Parameters
+This hook takes no parameters.
+
+### Returns
+<TypeTable
+  type={{
+    isLeavingPage: {
+      description: "A boolean indicating whether the user is currently leaving the page (cursor outside browser window).",
+      type: "boolean",
+    },
+  }}
+/>
+
+## Usage
+
+```tsx
+import { useLeavePage } from "@/hooks/use-leave-page";
+
+function ExitIntentPopup() {
+  const isLeavingPage = useLeavePage();
+  
+  if (isLeavingPage) {
+    return (
+      <div className="popup">
+        <h2>Wait! Don't leave yet!</h2>
+        <p>You have unsaved changes.</p>
+      </div>
+    );
+  }
+  
+  return <div>Page content</div>;
+}
+```
+
+## Advanced Usage
+
+### Exit Intent Popup
+
+Show a popup when users are about to leave:
+
+```tsx
+function ExitIntentModal() {
+  const isLeavingPage = useLeavePage();
+  const [showModal, setShowModal] = useState(false);
+  const [hasShownModal, setHasShownModal] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage && !hasShownModal) {
+      setShowModal(true);
+      setHasShownModal(true);
+    }
+  }, [isLeavingPage, hasShownModal]);
+  
+  if (showModal) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal">
+          <h2>Before you go...</h2>
+          <p>Get 20% off your first purchase!</p>
+          <div>
+            <button onClick={() => setShowModal(false)}>
+              No Thanks
+            </button>
+            <button onClick={() => window.open('/signup', '_blank')}>
+              Get Discount
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  return <div>Your main content</div>;
+}
+```
+
+### Auto-Save on Leave
+
+Automatically save content when user leaves:
+
+```tsx
+function AutoSaveEditor() {
+  const isLeavingPage = useLeavePage();
+  const [content, setContent] = useState('');
+  const [savedContent, setSavedContent] = useState('');
+  
+  useEffect(() => {
+    if (isLeavingPage && content !== savedContent) {
+      // Auto-save when leaving
+      saveToStorage(content);
+      setSavedContent(content);
+      console.log('Content auto-saved!');
+    }
+  }, [isLeavingPage, content, savedContent]);
+  
+  const saveToStorage = (text) => {
+    localStorage.setItem('draft', text);
+  };
+  
+  return (
+    <div>
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Your content will be auto-saved when you leave..."
+      />
+      <p>Status: {isLeavingPage ? 'Saving...' : 'Editing'}</p>
+    </div>
+  );
+}
+```
+
+### Retention Message
+
+Show retention messages to keep users engaged:
+
+```tsx
+function RetentionMessage() {
+  const isLeavingPage = useLeavePage();
+  const [showRetention, setShowRetention] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage) {
+      setShowRetention(true);
+      
+      // Hide retention message after 3 seconds
+      const timer = setTimeout(() => {
+        setShowRetention(false);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isLeavingPage]);
+  
+  return (
+    <div>
+      {showRetention && (
+        <div className="retention-banner">
+          <p>🎯 Don't miss out! Complete your profile to unlock premium features.</p>
+          <button onClick={() => setShowRetention(false)}>
+            Complete Profile
+          </button>
+        </div>
+      )}
+      
+      <div>Your main content here</div>
+    </div>
+  );
+}
+```
+
+### Shopping Cart Abandonment
+
+Prevent cart abandonment with timely messages:
+
+```tsx
+function ShoppingCart() {
+  const isLeavingPage = useLeavePage();
+  const [cartItems, setCartItems] = useState([]);
+  const [showAbandonmentMessage, setShowAbandonmentMessage] = useState(false);
+  
+  useEffect(() => {
+    if (isLeavingPage && cartItems.length > 0) {
+      setShowAbandonmentMessage(true);
+    } else {
+      setShowAbandonmentMessage(false);
+    }
+  }, [isLeavingPage, cartItems.length]);
+  
+  return (
+    <div>
+      {showAbandonmentMessage && (
+        <div className="abandonment-popup">
+          <h3>Your cart is waiting!</h3>
+          <p>You have {cartItems.length} items in your cart.</p>
+          <button onClick={() => window.location.href = '/checkout'}>
+            Complete Purchase
+          </button>
+          <button onClick={() => setShowAbandonmentMessage(false)}>
+            Continue Shopping
+          </button>
+        </div>
+      )}
+      
+      <div className="cart-content">
+        {/* Cart items */}
+      </div>
+    </div>
+  );
+}
+```
+
+### Analytics Tracking
+
+Track exit intent for analytics:
+
+```tsx
+function ExitIntentAnalytics() {
+  const isLeavingPage = useLeavePage();
+  const [exitCount, setExitCount] = useState(0);
+  const [sessionData, setSessionData] = useState({
+    pageViews: 1,
+    timeOnPage: 0,
+    exitAttempts: 0
+  });
+  
+  useEffect(() => {
+    if (isLeavingPage) {
+      setExitCount(prev => prev + 1);
+      setSessionData(prev => ({
+        ...prev,
+        exitAttempts: prev.exitAttempts + 1
+      }));
+      
+      // Send analytics event
+      analytics.track('exit_intent', {
+        page: window.location.pathname,
+        exitAttempt: exitCount + 1,
+        timeOnPage: sessionData.timeOnPage
+      });
+    }
+  }, [isLeavingPage]);
+  
+  return (
+    <div>
+      <div className="analytics-info">
+        <p>Exit attempts this session: {exitCount}</p>
+        <p>Total exit attempts: {sessionData.exitAttempts}</p>
+      </div>
+      
+      <div>Your content here</div>
+    </div>
+  );
+}
+```
+
+### Form Abandonment Warning
+
+Warn users about unsaved form data:
+
+```tsx
+function ContactForm() {
+  const isLeavingPage = useLeavePage();
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  
+  useEffect(() => {
+    const hasData = Object.values(formData).some(value => value.trim() !== '');
+    setHasUnsavedChanges(hasData);
+  }, [formData]);
+  
+  useEffect(() => {
+    if (isLeavingPage && hasUnsavedChanges) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  }, [isLeavingPage, hasUnsavedChanges]);
+  
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+  
+  return (
+    <div>
+      {showWarning && (
+        <div className="form-warning">
+          <p>⚠️ You have unsaved changes in your form!</p>
+          <button onClick={() => console.log('Form saved!')}>
+            Save Draft
+          </button>
+        </div>
+      )}
+      
+      <form>
+        <input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => handleInputChange('name', e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+        />
+        <textarea
+          placeholder="Message"
+          value={formData.message}
+          onChange={(e) => handleInputChange('message', e.target.value)}
+        />
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+- **Exit Intent Popups**: Show special offers or newsletters when users are about to leave
+- **Auto-Save Functionality**: Automatically save user content when they move away
+- **Cart Abandonment Prevention**: Remind users about items in their shopping cart
+- **Form Data Protection**: Warn users about unsaved form changes
+- **Analytics Tracking**: Track user exit behavior for optimization
+- **Retention Messages**: Show engaging content to keep users on the page
+- **Session Management**: Trigger session-related actions before users leave
+- **Content Protection**: Save drafts or warn about unsaved work

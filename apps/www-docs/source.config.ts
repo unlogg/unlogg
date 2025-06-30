@@ -12,11 +12,13 @@ export const docs = defineDocs({
   docs: {
     schema: frontmatterSchema.extend({
       isNew: z.boolean().optional(),
+      isAlpha: z.boolean().optional(),
     }),
   },
   meta: {
     schema: metaSchema.extend({
       isNew: z.boolean().optional(),
+      isAlpha: z.boolean().optional(),
     }),
   },
 });

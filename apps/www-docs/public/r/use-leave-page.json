@@ -1,0 +1,15 @@
+{
+  "name": "use-leave-page",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/**\n * A custom React hook that detects when the user is leaving the page.\n *\n * This hook monitors the \"mouseleave\" event on the document to determine when\n * the user's cursor leaves the browser window/document area. It's useful for\n * implementing features like exit-intent popups, saving drafts, or showing\n * retention messages when users are about to leave.\n *\n * @returns A boolean indicating whether the user is currently leaving the page\n *\n * @example\n * function ExitIntentPopup() {\n *   const isLeavingPage = useLeavePage();\n *\n *   if (isLeavingPage) {\n *     return (\n *       <div className=\"popup\">\n *         <h2>Wait! Don't leave yet!</h2>\n *         <p>You have unsaved changes.</p>\n *       </div>\n *     );\n *   }\n *\n *   return <div>Page content</div>;\n * }\n *\n * @example\n * function AutoSaveOnLeave() {\n *   const isLeavingPage = useLeavePage();\n *   const [content, setContent] = useState(\"\");\n *\n *   React.useEffect(() => {\n *     if (isLeavingPage && content) {\n *       // Auto-save when user is leaving\n *       console.log(\"Auto-saving content...\");\n *     }\n *   }, [isLeavingPage, content]);\n *\n *   return (\n *     <textarea\n *       value={content}\n *       onChange={(e) => setContent(e.target.value)}\n *       placeholder=\"Type something...\"\n *     />\n *   );\n * }\n */\nfunction useLeavePage(): boolean {\n  const [isLeavingPage, setIsLeavingPage] = React.useState(false);\n\n  React.useEffect(() => {\n    // Only run on client side\n    if (typeof document === \"undefined\") {\n      return;\n    }\n\n    const handleMouseLeave = (event: MouseEvent) => {\n      // Check if the mouse is leaving the document (not just an element within it)\n      if (\n        event.clientY <= 0 ||\n        event.clientX <= 0 ||\n        event.clientX >= window.innerWidth ||\n        event.clientY >= window.innerHeight\n      ) {\n        setIsLeavingPage(true);\n      }\n    };\n\n    const handleMouseEnter = () => {\n      setIsLeavingPage(false);\n    };\n\n    // Add event listeners\n    document.addEventListener(\"mouseleave\", handleMouseLeave);\n    document.addEventListener(\"mouseenter\", handleMouseEnter);\n\n    // Cleanup function\n    return () => {\n      document.removeEventListener(\"mouseleave\", handleMouseLeave);\n      document.removeEventListener(\"mouseenter\", handleMouseEnter);\n    };\n  }, []);\n\n  return isLeavingPage;\n}\n\nexport { useLeavePage };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-leave-page.ts",
+      "target": "/hooks/use-leave-page.ts"
+    }
+  ]
+}

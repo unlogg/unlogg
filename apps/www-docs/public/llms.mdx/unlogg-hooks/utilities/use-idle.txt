@@ -1,0 +1,363 @@
+# useIdle
+URL: /unlogg-hooks/utilities/use-idle
+
+A custom React hook that detects if the user is idle by monitoring various DOM events.
+
+`useIdle` is a custom React hook that detects when a user becomes idle by monitoring DOM events such as mouse movements, key presses, clicks, and scrolls. It's perfect for implementing features like auto-logout, hiding UI elements during inactivity, or triggering actions when users step away from their devices.
+
+## Example
+
+<ComponentPreview name="use-idle-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-idle" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-idle" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-idle" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Monitors multiple DOM events by default: keydown, click, scroll, wheel, mousemove, touchmove
+* Timeout duration is required as the first parameter
+* Configurable event list for specific use cases
+* Automatically cleans up event listeners on unmount
+* Client-side only (safe for SSR applications)
+* Efficient event handling with proper throttling via timeout
+* Initial state defaults to `true` (idle by default)
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  timeout: {
+    description: "The duration in milliseconds after which the user is considered idle if no events are detected.",
+    type: "number",
+    required: true,
+  },
+  options: {
+    description: "Optional configuration object to override default idle detection options.",
+    type: "UseIdleOptions",
+    default: "undefined",
+  },
+}}
+/>
+
+### UseIdleOptions
+
+<TypeTable
+  type={{
+  events: {
+    description: "Array of DOM event names that reset the idle timer.",
+    type: "(keyof DocumentEventMap)[]",
+    default: "['keydown', 'click', 'scroll', 'wheel', 'mousemove', 'touchmove']",
+  },
+  initialState: {
+    description: "Initial idle state.",
+    type: "boolean",
+    default: "true",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  isIdle: {
+    description: "A boolean indicating whether the user is currently idle.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useIdle } from "@/hooks/use-idle";
+
+function IdleIndicator() {
+  const isIdle = useIdle(5000); // User is idle after 5 seconds
+  
+  return (
+    <div>
+      Status: {isIdle ? 'User is idle' : 'User is active'}
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Auto-Logout System
+
+Implement automatic logout after a period of inactivity:
+
+```tsx
+function AutoLogout() {
+  const isIdle = useIdle(30000); // 30 seconds
+  const [showWarning, setShowWarning] = useState(false);
+  
+  useEffect(() => {
+    if (isIdle) {
+      setShowWarning(true);
+      // Show warning for 10 seconds before logout
+      const logoutTimer = setTimeout(() => {
+        logout();
+      }, 10000);
+      
+      return () => clearTimeout(logoutTimer);
+    } else {
+      setShowWarning(false);
+    }
+  }, [isIdle]);
+  
+  if (showWarning) {
+    return (
+      <div className="warning-modal">
+        <h2>Session Warning</h2>
+        <p>You will be logged out in 10 seconds due to inactivity.</p>
+        <button onClick={() => setShowWarning(false)}>
+          Stay Logged In
+        </button>
+      </div>
+    );
+  }
+  
+  return <div>Your session is active</div>;
+}
+```
+
+### Custom Event Monitoring
+
+Monitor only specific types of user activity:
+
+```tsx
+function MouseTracker() {
+  // Only track mouse-related activity
+  const isMouseIdle = useIdle(5000, {
+    events: ['mousemove', 'click']
+  });
+  
+  return (
+    <div>
+      Mouse status: {isMouseIdle ? 'Inactive' : 'Active'}
+      <p>This only responds to mouse movement and clicks</p>
+    </div>
+  );
+}
+
+function KeyboardTracker() {
+  // Only track keyboard activity
+  const isKeyboardIdle = useIdle(3000, {
+    events: ['keydown']
+  });
+  
+  return (
+    <div>
+      Keyboard status: {isKeyboardIdle ? 'Inactive' : 'Active'}
+      <p>Type something to reset the idle state</p>
+    </div>
+  );
+}
+```
+
+### Auto-Save Functionality
+
+Automatically save content when user stops typing:
+
+```tsx
+function AutoSaveEditor() {
+  const [content, setContent] = useState('');
+  const [savedContent, setSavedContent] = useState('');
+  const [lastSaved, setLastSaved] = useState(null);
+  
+  // Detect when user stops typing (2 second delay)
+  const isIdle = useIdle(2000, { 
+    events: ['keydown'] // Only keyboard events
+  });
+  
+  useEffect(() => {
+    if (isIdle && content !== savedContent && content.trim()) {
+      // Auto-save the content
+      saveContent(content);
+      setSavedContent(content);
+      setLastSaved(new Date());
+    }
+  }, [isIdle, content, savedContent]);
+  
+  const saveContent = async (text) => {
+    // Your save logic here
+    console.log('Auto-saving:', text);
+  };
+  
+  return (
+    <div>
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Start typing... (auto-saves when you stop)"
+      />
+      {lastSaved && (
+        <p>Last saved: {lastSaved.toLocaleTimeString()}</p>
+      )}
+    </div>
+  );
+}
+```
+
+### Screen Saver Mode
+
+Hide sensitive content when user is away:
+
+```tsx
+function SensitiveContent() {
+  const isIdle = useIdle(10000); // 10 seconds
+  
+  if (isIdle) {
+    return (
+      <div className="screen-saver">
+        <h2>Screen Locked</h2>
+        <p>Move your mouse or press any key to continue</p>
+        <div className="loading-animation">🔒</div>
+      </div>
+    );
+  }
+  
+  return (
+    <div>
+      <h1>Confidential Information</h1>
+      <p>This sensitive content is hidden when you're away</p>
+      {/* Your sensitive content here */}
+    </div>
+  );
+}
+```
+
+### Multiple Idle Timers
+
+Track different types of inactivity simultaneously:
+
+```tsx
+function MultipleIdleStates() {
+  const quickIdle = useIdle(2000);   // 2 seconds
+  const mediumIdle = useIdle(10000); // 10 seconds
+  const longIdle = useIdle(60000);   // 1 minute
+  
+  return (
+    <div>
+      <div>Quick idle (2s): {quickIdle ? '💤' : '👀'}</div>
+      <div>Medium idle (10s): {mediumIdle ? '😴' : '🙂'}</div>
+      <div>Long idle (1m): {longIdle ? '🌙' : '☀️'}</div>
+      
+      {longIdle && (
+        <div>Consider taking a break! You've been inactive for over a minute.</div>
+      )}
+    </div>
+  );
+}
+```
+
+### Gaming Pause Feature
+
+Automatically pause games when player becomes inactive:
+
+```tsx
+function GameComponent() {
+  const [gameState, setGameState] = useState('playing');
+  const isIdle = useIdle(5000, { 
+    events: ['keydown', 'click'] // Game-relevant events
+  });
+  
+  useEffect(() => {
+    if (isIdle && gameState === 'playing') {
+      setGameState('paused');
+      console.log('Game auto-paused due to inactivity');
+    } else if (!isIdle && gameState === 'paused') {
+      // Optional: Auto-resume or require manual resume
+      // setGameState('playing');
+    }
+  }, [isIdle, gameState]);
+  
+  return (
+    <div>
+      <h2>Game Status: {gameState}</h2>
+      {gameState === 'paused' && (
+        <div>
+          <p>Game paused due to inactivity</p>
+          <button onClick={() => setGameState('playing')}>
+            Resume Game
+          </button>
+        </div>
+      )}
+      {/* Game content */}
+    </div>
+  );
+}
+```
+
+### Analytics and User Behavior
+
+Track user engagement patterns:
+
+```tsx
+function EngagementTracker() {
+  const [engagementData, setEngagementData] = useState({
+    totalTime: 0,
+    activeTime: 0,
+    idleTime: 0
+  });
+  
+  const isIdle = useIdle(3000);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEngagementData(prev => ({
+        totalTime: prev.totalTime + 1,
+        activeTime: isIdle ? prev.activeTime : prev.activeTime + 1,
+        idleTime: isIdle ? prev.idleTime + 1 : prev.idleTime
+      }));
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [isIdle]);
+  
+  const engagementRate = (engagementData.activeTime / engagementData.totalTime * 100).toFixed(1);
+  
+  return (
+    <div>
+      <h3>User Engagement Analytics</h3>
+      <div>Total Time: {engagementData.totalTime}s</div>
+      <div>Active Time: {engagementData.activeTime}s</div>
+      <div>Idle Time: {engagementData.idleTime}s</div>
+      <div>Engagement Rate: {engagementRate}%</div>
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Auto-Logout**: Automatically log users out after periods of inactivity for security
+* **Screen Savers**: Hide sensitive content when users step away
+* **Auto-Save**: Save user work automatically when they stop typing or editing
+* **Game Pausing**: Pause games when players become inactive
+* **Power Management**: Reduce resource usage during idle periods
+* **Analytics**: Track user engagement and activity patterns
+* **Session Management**: Extend or warn about session timeouts
+* **Content Protection**: Hide confidential information during inactivity

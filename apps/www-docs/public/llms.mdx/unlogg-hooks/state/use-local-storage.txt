@@ -1,9 +1,9 @@
 # useLocalStorage
 URL: /unlogg-hooks/state/use-local-storage
 
-A custom React hook to manage local storage with ease.
+Manage local storage with ease in React applications.
 
-## Example
+`useLocalStorage` provides a straightforward API to read and update values stored in `localStorage`, automatically handling JSON serialization and deserialization.
 
 <ComponentPreview name="use-local-storage-ex-01" classNameComponentContainer="min-h-[200px]" />
 
@@ -33,6 +33,22 @@ A custom React hook to manage local storage with ease.
 * Handles JSON serialization and deserialization for complex data types.
 * Provides a simple API for reading and updating values.
 * Includes error handling for environments where `localStorage` is unavailable (e.g., server-side rendering).
+
+## Examples
+
+### Todo List with Persistence
+
+<ComponentPreview name="use-local-storage-ex-02" classNameComponentContainer="min-h-[400px]" />
+
+## Use Cases
+
+* **Theme Preferences**: Store user's preferred color scheme, theme settings, or UI preferences
+* **Form Data**: Persist form inputs to prevent data loss during accidental page refreshes
+* **Shopping Cart**: Save cart items locally before user authentication
+* **User Settings**: Store user-specific configuration options and preferences
+* **Todo Lists**: Maintain task lists that persist across browser sessions
+* **Recently Viewed**: Track recently accessed items or pages
+* **Feature Flags**: Store client-side feature toggle states
 
 ## Server-Side Rendering
 

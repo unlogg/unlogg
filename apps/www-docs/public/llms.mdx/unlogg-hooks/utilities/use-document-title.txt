@@ -1,0 +1,295 @@
+# useDocumentTitle
+URL: /unlogg-hooks/utilities/use-document-title
+
+A custom React hook that sets the document title with React.useLayoutEffect.
+
+`useDocumentTitle` is a custom React hook that sets the document title using `useLayoutEffect` for synchronous updates. It's designed for client-only applications and will not run during server-side rendering. The hook provides options for restoring the original title when the component unmounts, making it perfect for dynamic title management.
+
+## Example
+
+<ComponentPreview name="use-document-title-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-document-title" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-document-title" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-document-title" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Uses `useLayoutEffect` for synchronous DOM updates before paint
+* Only runs on client-side (safe for SSR applications)
+* Supports optional title restoration on component unmount
+* Accepts null/undefined to skip title updates
+* Stores original title for restoration purposes
+* Ideal for client-only applications and dynamic title updates
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  title: {
+    description: "The title to set for the document. If null or undefined, the title won't be changed.",
+    type: "string | null | undefined",
+    default: "—",
+  },
+  options: {
+    description: "Configuration options for the hook behavior.",
+    type: "object",
+    default: "{}",
+  },
+}}
+/>
+
+### Options
+
+<TypeTable
+  type={{
+  restoreOnUnmount: {
+    description: "Whether to restore the previous title when the component unmounts.",
+    type: "boolean",
+    default: "false",
+  },
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  "void": {
+    description: "This hook does not return any value.",
+    type: "void",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
+function MyPage() {
+  useDocumentTitle("My Page Title");
+  
+  return <div>Page content</div>;
+}
+```
+
+## Advanced Usage
+
+### Dynamic Title Updates
+
+Update the title based on component state:
+
+```tsx
+function DynamicPage() {
+  const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null);
+  
+  // Dynamic title based on state
+  useDocumentTitle(
+    user ? `${user.name}'s Dashboard (${count} items)` : `Dashboard (${count} items)`
+  );
+  
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>Items: {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>
+        Add Item
+      </button>
+    </div>
+  );
+}
+```
+
+### Conditional Title Setting
+
+Set title only when certain conditions are met:
+
+```tsx
+function ConditionalTitle() {
+  const [isImportant, setIsImportant] = useState(false);
+  const [notification, setNotification] = useState(null);
+  
+  // Only set title when there's an important notification
+  useDocumentTitle(
+    isImportant && notification ? `🔔 ${notification}` : null
+  );
+  
+  return (
+    <div>
+      <button onClick={() => setIsImportant(!isImportant)}>
+        {isImportant ? "Mark Normal" : "Mark Important"}
+      </button>
+      <input 
+        value={notification || ""}
+        onChange={(e) => setNotification(e.target.value)}
+        placeholder="Enter notification..."
+      />
+    </div>
+  );
+}
+```
+
+### Restore Original Title
+
+Use the `restoreOnUnmount` option for temporary title changes:
+
+```tsx
+function TemporaryModal({ isOpen, onClose }) {
+  // This will restore the original title when modal closes
+  useDocumentTitle(
+    isOpen ? "🎯 Important: Review Required" : null,
+    { restoreOnUnmount: true }
+  );
+  
+  if (!isOpen) return null;
+  
+  return (
+    <div className="modal">
+      <h2>Important Action Required</h2>
+      <p>Please review the following...</p>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
+}
+```
+
+### Page Navigation with Breadcrumbs
+
+Create breadcrumb-style titles for navigation:
+
+```tsx
+function ProductPage({ category, product }) {
+  const title = useMemo(() => {
+    const parts = ["MyStore"];
+    if (category) parts.push(category.name);
+    if (product) parts.push(product.name);
+    return parts.join(" > ");
+  }, [category, product]);
+  
+  useDocumentTitle(title);
+  
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        {category && (
+          <>
+            <span> > </span>
+            <Link to={`/category/${category.id}`}>{category.name}</Link>
+          </>
+        )}
+        {product && (
+          <>
+            <span> > </span>
+            <span>{product.name}</span>
+          </>
+        )}
+      </nav>
+      {/* Product content */}
+    </div>
+  );
+}
+```
+
+### Real-time Updates
+
+Update title with live data:
+
+```tsx
+function LiveCounter() {
+  const [count, setCount] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  
+  // Update title with current count when active
+  useDocumentTitle(isActive ? `Live Count: ${count}` : null);
+  
+  useEffect(() => {
+    if (!isActive) return;
+    
+    const interval = setInterval(() => {
+      setCount(c => c + 1);
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [isActive]);
+  
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => setIsActive(!isActive)}>
+        {isActive ? "Stop" : "Start"} Live Title
+      </button>
+    </div>
+  );
+}
+```
+
+### Form with Validation Status
+
+Show form status in the title:
+
+```tsx
+function ContactForm() {
+  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [errors, setErrors] = useState({});
+  const [isDirty, setIsDirty] = useState(false);
+  
+  const isValid = Object.keys(errors).length === 0;
+  const titleSuffix = isDirty ? (isValid ? " ✓" : " ⚠️") : "";
+  
+  useDocumentTitle(`Contact Form${titleSuffix}`);
+  
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setIsDirty(true);
+    // Validation logic here...
+  };
+  
+  return (
+    <form>
+      <input 
+        value={formData.name}
+        onChange={(e) => handleChange("name", e.target.value)}
+        placeholder="Name"
+      />
+      <input 
+        value={formData.email}
+        onChange={(e) => handleChange("email", e.target.value)}
+        placeholder="Email"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+## Use Cases
+
+* **Page Identification**: Set descriptive titles for different pages and views
+* **Dynamic Content**: Update titles based on loaded data or user actions
+* **Notification System**: Show urgent information in the browser tab
+* **Form Management**: Indicate form status or validation state
+* **Real-time Updates**: Display live data like unread messages or timer counts
+* **Modal Dialogs**: Temporarily change title when important dialogs are open
+* **Navigation Context**: Show current location in multi-level navigation
+* **Progress Tracking**: Display progress status for long-running operations

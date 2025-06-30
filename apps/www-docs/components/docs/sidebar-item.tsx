@@ -3,9 +3,11 @@ import { Badge } from "@unlogg/ui/components/badge";
 export const SidebarItem = ({
   name,
   isNew,
+  isAlpha = false,
 }: {
   name: string;
   isNew: boolean;
+  isAlpha: boolean;
 }) => {
   return (
     <div className="flex items-center justify-between w-full">
@@ -16,6 +18,14 @@ export const SidebarItem = ({
           className="grow-0 border-teal-500/50 text-teal-500"
         >
           New
+        </Badge>
+      )}
+      {isAlpha && (
+        <Badge
+          variant="secondary"
+          className="grow-0 border-yellow-500/50 text-yellow-500"
+        >
+          Alpha
         </Badge>
       )}
     </div>
