@@ -56,13 +56,13 @@ export const baseOptions: BaseLayoutProps = {
     //   secondary: false,
     //   type: "custom",
     // },
-    {
-      icon: <BookIcon />,
-      text: "Docs",
-      url: "/docs/unlogg-docs",
-      // secondary items will be displayed differently on navbar
-      secondary: false,
-    },
+    // {
+    //   icon: <BookIcon />,
+    //   text: "Docs",
+    //   url: "/docs/unlogg-docs",
+    //   // secondary items will be displayed differently on navbar
+    //   secondary: false,
+    // },
     {
       icon: <BookIcon />,
       text: "UI",

@@ -1,14 +1,20 @@
-# Overview
-URL: /unlogg-docs
+# Unlogg Docs
+URL: /index
 
-Unlogg documentation
+A collection of open source libraries and tools for building modern web applications.
 
-Welcome to the docs!
+import { Atom, Paintbrush } from "lucide-react";
 
-<Callout title="Work in progress">
-  The docs are a work in progress, so please bear with us as we continue to improve them.
-  More cooming soon!
-</Callout>
+<Cards>
+  <Card icon={<Paintbrush />} href="/docs/unlogg-ui" title="Unlogg UI">
+    A collection of UI components for building modern web applications.
+  </Card>
+
+  <Card icon={<Atom />} href="/docs/unlogg-hooks" title="Unlogg Hooks">
+    A collection of custom React hooks for building modern web
+    applications.
+  </Card>
+</Cards>
 
 
 # Overview
