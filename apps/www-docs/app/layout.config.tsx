@@ -15,7 +15,7 @@ import { ThemeCustomizer } from "@/components/theme-customizer";
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <div className="relative flex items-center space-x-2 w-full justify-around">
+      <div className="relative flex w-full items-center justify-around space-x-2">
         <Image
           src="/unlogg-logo-icon.svg"
           alt="logo"
@@ -23,7 +23,9 @@ export const baseOptions: BaseLayoutProps = {
           height={30}
           className="block"
         />
-        <Logo />
+        <div className="w-[75px]">
+          <Logo />
+        </div>
         {/* <span className="grow-0 bg-secondary text-foreground ml-0.5 hidden rounded-full px-1.5 py-px text-[10px] font-medium select-none md:block">
           beta
         </span> */}

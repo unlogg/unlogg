@@ -28,7 +28,6 @@ import {
 import { PagePreview } from "./preview/page-preview";
 import { Reference, References } from "./references";
 import { LoaderOutput, Page } from "fumadocs-core/source";
-// const { AutoTypeTable } = createTypeTable();
 
 export function getMDXComponents(
   // components: MDXComponents,
@@ -37,6 +36,7 @@ export function getMDXComponents(
 ): MDXComponents {
   return {
     ...defaultComponents,
+
     // this allows you to link to other pages with relative file paths
     a: createRelativeLink(source, page),
     Accordion,

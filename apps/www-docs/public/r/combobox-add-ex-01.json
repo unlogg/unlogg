@@ -1,0 +1,18 @@
+{
+  "name": "combobox-add-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/combobox-add.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport ComboboxAdd from \"@/components/ui/combobox-add\";\nimport { useState } from \"react\";\nimport * as chrono from \"chrono-node\";\n\ntype Status = {\n  value: string;\n  label: string;\n  color?: string;\n};\n\nexport default function Combobox_Add_Ex_01() {\n  const [selectedStatus, setSelectedStatus] = useState<Status | null>(null);\n  const [statusItems, setStatusItems] = useState<Status[]>([\n    { value: \"backlog\", label: \"Backlog\", color: \"#ffcc00\" },\n    { value: \"todo\", label: \"Todo\", color: \"#007bff\" },\n    { value: \"in progress\", label: \"In Progress\", color: \"#ffc107\" },\n    { value: \"done\", label: \"Done\", color: \"#28a745\" },\n    { value: \"canceled\", label: \"Canceled\", color: \"#dc3545\" },\n  ]);\n\n  const handleAddNewStatus = (newStatus: Status) => {\n    setStatusItems((prev) => [...prev, newStatus]);\n  };\n\n  console.log(\"chrono\", chrono.parseDate(\"In 10 minutes\")); // Example usage of chrono-node to parse date\n\n  return (\n    <div className=\"flex flex-col items-center gap-4\">\n      <div className=\"text-center\">\n        <h3 className=\"mb-2 font-semibold\">Combobox with Add Functionality</h3>\n        <p className=\"text-muted-foreground mb-4 text-sm\">\n          Type to search or add new entries with optional colors\n        </p>\n      </div>\n\n      <ComboboxAdd\n        items={statusItems}\n        value={selectedStatus}\n        onValueChange={setSelectedStatus}\n        onAddItem={handleAddNewStatus}\n        className=\"w-fit\"\n      />\n\n      {selectedStatus && (\n        <div className=\"bg-muted mt-4 rounded-md p-3\">\n          <p className=\"text-sm\">\n            Selected:{\" \"}\n            <span className=\"flex items-center gap-2 font-medium\">\n              {selectedStatus.color && (\n                <div\n                  className=\"h-3 w-3 rounded-full border border-gray-200\"\n                  style={{ backgroundColor: selectedStatus.color }}\n                />\n              )}\n              {selectedStatus.label}\n            </span>\n          </p>\n        </div>\n      )}\n\n      <div className=\"text-muted-foreground mt-4 max-w-md text-center text-xs\">\n        Current items:{\" \"}\n        {statusItems\n          .map((item) => `${item.label}${item.color ? ` (${item.color})` : \"\"}`)\n          .join(\", \")}\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-01.tsx",
+      "target": "/components/unlogg-ui/combobox-add-ex-01.tsx"
+    }
+  ]
+}

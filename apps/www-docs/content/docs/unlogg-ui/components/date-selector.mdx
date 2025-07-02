@@ -1,0 +1,80 @@
+---
+title: Date Selector
+description: A date selector component with natural language parsing
+---
+
+
+Set due dates using natural language like *in 2 hours* or *tomorrow at 3pm*. 
+Alternatively, you can select from predefined time periods like *1 hour*, *1 day*, *7 days*, or *30 days*.
+
+<ComponentPreview
+  name="date-selector-ex-01"
+  classNameComponentContainer='min-h-[400px]'
+/>
+
+## Install
+<ComponentInstall
+  name="date-selector"
+  classNameComponentContainer='min-h-[200px]'
+>
+<CLIInstall  name="date-selector"   />
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="date-selector"/>
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+<Step>
+
+Install the required dependency:
+
+```bash
+npm install chrono-node
+```
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Features
+
+- **Natural Language Parsing**: Type dates in natural language like "in 2 hours", "tomorrow at 3pm", or "next Friday"
+- **Preset Options**: Quick selection with predefined time periods (1 hour, 1 day, 7 days, 30 days)
+- **Future Dates Only**: Automatically ensures all selected dates are in the future
+- **Flexible Formatting**: Displays both absolute and relative time formats
+- **Keyboard Navigation**: Full keyboard support for accessibility
+
+## Usage
+
+The Date Selector component uses [chrono-node](https://github.com/wanasit/chrono) for natural language date parsing, allowing users to input dates in various formats:
+
+- **Relative times**: "in 30 minutes", "in 2 hours", "in 3 days"
+- **Specific dates**: "tomorrow", "next Friday", "Monday"
+- **Date with time**: "tomorrow at 9am", "Friday at 2:30pm"
+- **Complex expressions**: "next week Monday", "2 weeks from now"
+
+## Examples
+
+### Show relative time only
+<ComponentPreview
+  name="date-selector-ex-02"
+  classNameComponentContainer='min-h-[400px]'
+/>
+
