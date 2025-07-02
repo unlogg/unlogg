@@ -235,6 +235,22 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-disclosure-ex-01")
     ),
   },
+
+  {
+    name: "use-document-title-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-document-title.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-document-title-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-document-title-ex-01")
+    ),
+  },
   {
     name: "use-element-size-ex-01",
     type: "registry:example",
@@ -265,6 +281,22 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-hover-ex-01")
     ),
   },
+
+  {
+    name: "use-idle-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-idle.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-idle-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-idle-ex-01")
+    ),
+  },
   {
     name: "use-is-client-ex-01",
     type: "registry:example",
@@ -278,6 +310,38 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-is-client-ex-01")
+    ),
+  },
+
+  {
+    name: "use-is-online-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-is-online.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-is-online-ex-01")
+    ),
+  },
+
+  {
+    name: "use-is-online-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-is-online.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-is-online-ex-02")
     ),
   },
 
@@ -342,6 +406,55 @@ export const examples: Registry = [
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-toggle-ex-01")
     ),
   },
+
+  {
+    name: "use-leave-page-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-leave-page.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-leave-page-ex-01")
+    ),
+  },
+
+  {
+    name: "use-leave-page-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-leave-page.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-leave-page-ex-02")
+    ),
+  },
+
+  {
+    name: "use-leave-page-ex-03",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-leave-page.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-03.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-leave-page-ex-03")
+    ),
+  },
+
   {
     name: "use-local-storage-ex-01",
     type: "registry:example",

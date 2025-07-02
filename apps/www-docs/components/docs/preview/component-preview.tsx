@@ -190,13 +190,13 @@ export function ComponentPreview({
           <TabsTrigger
             value="preview"
             // className="text-muted-foreground border-none data-[state=active]:border-b-primary data-[state=active]:border-b-2 data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none "
-            className="bg-transparent dark:bg-transparent border-t-0 border-r-0 border-l-0 data-[state=active]:border-b-2  dark:data-[state=active]:border-primary data-[state=active]:border-primary text-muted-foreground rounded-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent shadow-none data-[state=active]:shadow-none  data-[state=active]:text-primary-foreground"
+            className="dark:data-[state=active]:border-primary data-[state=active]:border-primary text-muted-foreground data-[state=active]:text-primary-foreground rounded-none border-t-0 border-r-0 border-l-0 bg-transparent shadow-none data-[state=active]:border-b-2 data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:bg-transparent dark:data-[state=active]:bg-transparent"
           >
             Preview
           </TabsTrigger>
           <TabsTrigger
             value="code"
-            className="bg-transparent dark:bg-transparent border-t-0 border-r-0 border-l-0 data-[state=active]:border-b-2  dark:data-[state=active]:border-primary data-[state=active]:border-primary text-muted-foreground rounded-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:text-primary-foreground"
+            className="dark:data-[state=active]:border-primary data-[state=active]:border-primary text-muted-foreground data-[state=active]:text-primary-foreground rounded-none border-t-0 border-r-0 border-l-0 bg-transparent shadow-none data-[state=active]:border-b-2 data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:bg-transparent dark:data-[state=active]:bg-transparent"
           >
             Code
           </TabsTrigger>
@@ -324,7 +324,7 @@ export function ComponentPreview({
         </TabsList>
         <TabsContent value="preview">
           <ActiveThemeProvider>
-            <ThemeCustomizer />
+            {/* <ThemeCustomizer /> */}
             <div className="preview flex min-h-[450px] w-full justify-center p-4">
               <ComponentLoader
                 name={displayExampleName ? displayExampleName : name}

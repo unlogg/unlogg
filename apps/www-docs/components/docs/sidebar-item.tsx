@@ -10,7 +10,7 @@ export const SidebarItem = ({
   isAlpha: boolean;
 }) => {
   return (
-    <div className="flex items-center justify-between w-full">
+    <span className="flex w-full items-center justify-between">
       <span>{name}</span>
       {isNew && (
         <Badge
@@ -28,6 +28,6 @@ export const SidebarItem = ({
           Alpha
         </Badge>
       )}
-    </div>
+    </span>
   );
 };

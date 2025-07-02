@@ -130,6 +130,20 @@ export const hooks: Registry = [
     ],
     component: useDisclosure,
   },
+  // {
+  //   name: "use-document-title",
+  //   type: "registry:hook",
+  //   dependencies: ["lucide-react"],
+  //   files: [
+  //     {
+  //       path: "../../packages/ui/src/hooks/unlogg-hooks/use-document-title.ts",
+  //       type: "registry:hook",
+  //       target: "/hooks/use-document-title.ts",
+  //     },
+  //   ],
+  //   component: useDocumentTitle,
+  // },
+
   {
     name: "use-document-title",
     type: "registry:hook",
