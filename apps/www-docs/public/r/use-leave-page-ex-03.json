@@ -1,0 +1,18 @@
+{
+  "name": "use-leave-page-ex-03",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-leave-page.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { Card } from \"@/hooks/card\";\nimport { Input } from \"@/hooks/input\";\nimport { useLeavePage } from \"@/hooks/use-leave-page\";\nimport * as React from \"react\";\n\nexport default function UseLeavePage_Ex_03() {\n  return (\n    <div className=\"flex flex-col gap-6 p-6\">\n      {/* Auto-Save Demo */}\n      <Card className=\"mx-auto w-full max-w-4xl p-6\">\n        <h4 className=\"text-md mb-4 font-semibold\">Auto-Save on Leave</h4>\n        <AutoSaveDemo />\n      </Card>\n    </div>\n  );\n}\n\nfunction AutoSaveDemo() {\n  const isLeavingPage = useLeavePage();\n  const [content, setContent] = React.useState(\"\");\n  const [savedContent, setSavedContent] = React.useState(\"\");\n  const [saveCount, setSaveCount] = React.useState(0);\n  const [lastSaved, setLastSaved] = React.useState<Date | null>(null);\n\n  React.useEffect(() => {\n    if (isLeavingPage && content !== savedContent && content.trim() !== \"\") {\n      // Auto-save when leaving page\n      setSavedContent(content);\n      setSaveCount((prev) => prev + 1);\n      setLastSaved(new Date());\n    }\n  }, [isLeavingPage, content, savedContent]);\n\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"space-y-2\">\n        <label className=\"text-sm font-medium\">\n          Type something (auto-saves when you leave the page):\n        </label>\n        <Input\n          value={content}\n          onChange={(e) => setContent(e.target.value)}\n          placeholder=\"Start typing...\"\n        />\n      </div>\n\n      <div className=\"grid grid-cols-1 gap-4 md:grid-cols-2\">\n        <div className=\"bg-card rounded-lg border p-3\">\n          <p className=\"text-muted-foreground text-sm\">\n            <strong>Leave Status:</strong>{\" \"}\n            {isLeavingPage ? \"Auto-saving...\" : \"Editing...\"}\n          </p>\n        </div>\n        <div className=\"bg-card rounded-lg border border-green-500 p-3\">\n          <p className=\"text-sm text-green-700\">\n            <strong>Auto-saves:</strong> {saveCount}\n          </p>\n        </div>\n      </div>\n\n      {lastSaved && (\n        <div className=\"bg-card rounded-lg border border-gray-500 p-3\">\n          <p className=\"text text-sm\">\n            <strong>Last saved:</strong> {lastSaved.toLocaleTimeString()}\n          </p>\n          <p className=\"text-sm\">\n            <strong>Saved content:</strong> \"{savedContent}\"\n          </p>\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-03.tsx",
+      "target": "/components/unlogg-ui/use-leave-page-ex-03.tsx"
+    }
+  ]
+}

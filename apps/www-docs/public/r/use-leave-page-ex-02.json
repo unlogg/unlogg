@@ -1,0 +1,18 @@
+{
+  "name": "use-leave-page-ex-02",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-leave-page.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { Button } from \"@/hooks/button\";\nimport { Card } from \"@/hooks/card\";\nimport { useLeavePage } from \"@/hooks/use-leave-page\";\nimport * as React from \"react\";\n\nexport default function UseLeavePage_Ex_02() {\n  return (\n    <div className=\"flex flex-col gap-6 p-6\">\n      {/* Exit Intent Popup Demo */}\n      <Card className=\"mx-auto w-full max-w-4xl p-6\">\n        <h4 className=\"text-md mb-4 font-semibold\">Exit Intent Popup</h4>\n        <ExitIntentDemo />\n      </Card>\n    </div>\n  );\n}\n\nfunction ExitIntentDemo() {\n  const isLeavingPage = useLeavePage();\n  const [showPopup, setShowPopup] = React.useState(false);\n  const [dismissedCount, setDismissedCount] = React.useState(0);\n\n  React.useEffect(() => {\n    if (isLeavingPage && !showPopup) {\n      setShowPopup(true);\n    }\n  }, [isLeavingPage, showPopup]);\n\n  const handleDismiss = () => {\n    setShowPopup(false);\n    setDismissedCount((prev) => prev + 1);\n  };\n\n  if (showPopup) {\n    return (\n      <div className=\"relative\">\n        <div className=\"bg-card absolute inset-0 z-10 rounded-lg\" />\n        <div className=\"bg-card border-border relative z-20 rounded-lg border-2 p-6 shadow-lg\">\n          <div className=\"space-y-4 text-center\">\n            <div className=\"text-4xl\">🚨</div>\n            <h3 className=\"text-lg font-semibold text-red-500\">\n              Wait! Don't leave yet!\n            </h3>\n            <p className=\"text-sm text-red-500\">\n              You were about to leave this amazing demo. Are you sure you want\n              to go?\n            </p>\n            <div className=\"flex justify-center gap-2\">\n              <Button onClick={handleDismiss} variant=\"outline\" size=\"sm\">\n                Stay Here\n              </Button>\n              <Button\n                onClick={() => alert(\"Thanks for staying!\")}\n                variant=\"default\"\n                size=\"sm\"\n              >\n                Learn More\n              </Button>\n            </div>\n          </div>\n        </div>\n      </div>\n    );\n  }\n\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"bg-card rounded-lg border border-green-500 p-4\">\n        <p className=\"text-sm\">\n          ✅ No exit intent detected. Move your cursor outside the browser\n          window to see the exit intent popup.\n        </p>\n      </div>\n      {dismissedCount > 0 && (\n        <div className=\"bg-card rounded-lg border p-3\">\n          <p className=\"text-muted-foreground text-sm\">\n            <strong>Popups dismissed:</strong> {dismissedCount}\n          </p>\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-leave-page-ex-02.tsx",
+      "target": "/components/unlogg-ui/use-leave-page-ex-02.tsx"
+    }
+  ]
+}
