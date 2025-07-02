@@ -3,6 +3,97 @@ import * as React from "react";
 
 export const examples: Registry = [
   {
+    name: "user-selector-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/user-selector.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-01"
+        )
+    ),
+  },
+
+  {
+    name: "user-selector-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/user-selector.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-02"
+        )
+    ),
+  },
+  {
+    name: "combobox-add-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/combobox-add.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-01"
+        )
+    ),
+  },
+  {
+    name: "combobox-add-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/combobox-add.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-02"
+        )
+    ),
+  },
+  {
+    name: "combobox-add-ex-03",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/combobox-add.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-03.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-03"
+        )
+    ),
+  },
+  {
     name: "test-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
@@ -340,6 +431,42 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-window-size-ex-01")
+    ),
+  },
+  {
+    name: "date-selector-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react", "chrono-node"],
+    registryDependencies: ["https://unlogg.com/r/date-selector.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-01"
+        )
+    ),
+  },
+  {
+    name: "date-selector-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react", "chrono-node"],
+    registryDependencies: ["https://unlogg.com/r/date-selector.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-02"
+        )
     ),
   },
 ];

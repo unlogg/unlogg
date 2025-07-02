@@ -1,0 +1,18 @@
+{
+  "name": "user-selector-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/user-selector.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport AssigneeSelector from \"@/components/ui/user-selector\";\nimport { useState } from \"react\";\n\ntype User = {\n  id: string;\n  email: string;\n  name?: string;\n  avatar?: string;\n};\n\nexport default function AssigneeSelector_Ex_01() {\n  const [users] = useState<User[]>([\n    {\n      id: \"1\",\n      name: \"Alice Example\",\n      email: \"alice@example.com\",\n      avatar: \"https://randomuser.me/api/portraits/women/1.jpg\",\n    },\n    {\n      id: \"2\",\n      name: \"Bob Example\",\n      email: \"bob@example.com\",\n    },\n    {\n      id: \"3\",\n      email: \"charlie@example.com\",\n    },\n  ]);\n\n  const [assignee, setAssignee] = useState<User | null>(null);\n\n  const handleInviteNewUser = () => {\n    alert(\"Invite new user clicked!\");\n  };\n\n  return (\n    <div className=\"flex flex-col items-center gap-6 py-12\">\n      <h2 className=\"mb-2 text-lg font-semibold\">Simple Assignee Selector</h2>\n      <AssigneeSelector\n        users={users}\n        value={assignee}\n        onValueChange={setAssignee}\n        onInviteNewUser={handleInviteNewUser}\n        placeholder=\"No assignee\"\n        searchPlaceholder=\"Search users...\"\n        className=\"w-[240px]\"\n      />\n      <div className=\"mt-4 text-sm\">\n        <span className=\"font-medium\">Selected:</span>{\" \"}\n        {assignee ? assignee.name || assignee.email : \"No assignee\"}\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-01.tsx",
+      "target": "/components/unlogg-ui/user-selector-ex-01.tsx"
+    }
+  ]
+}

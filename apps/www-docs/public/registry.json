@@ -1,6 +1,19 @@
 {
   "registry": [
     {
+      "name": "user-selector",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/user-selector/user-selector.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "test-component",
       "type": "registry:component",
       "dependencies": [
@@ -10,6 +23,113 @@
         {
           "path": "../../packages/ui/src/components/unlogg-ui/test/test.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "combobox-add",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "date-selector",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react",
+        "chrono-node"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "user-selector-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/user-selector.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "user-selector-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/user-selector.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/user-selector/user-selector-ex-02.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "combobox-add-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/combobox-add.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "combobox-add-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/combobox-add.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-02.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "combobox-add-ex-03",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/combobox-add.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/combobox-add/combobox-add-ex-03.tsx",
+          "type": "registry:example"
         }
       ]
     },
@@ -361,6 +481,40 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-window-size-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "date-selector-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react",
+        "chrono-node"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/date-selector.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "date-selector-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react",
+        "chrono-node"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/date-selector.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector-ex-02.tsx",
           "type": "registry:example"
         }
       ]
