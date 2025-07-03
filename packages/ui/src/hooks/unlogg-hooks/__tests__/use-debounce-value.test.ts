@@ -1,8 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { useDebounceValue } from "../use-debounce-value.js";
+import { useDebouncedValue } from "../use-debounced-value.js";
 
-describe("useDebounceValue", () => {
+describe("useDebouncedValue", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -13,7 +13,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should return initial value and setValue function", () => {
-    const { result } = renderHook(() => useDebounceValue("initial", 300));
+    const { result } = renderHook(() => useDebouncedValue("initial", 300));
 
     expect(result.current).toHaveLength(2);
     expect(result.current[0]).toBe("initial");
@@ -21,7 +21,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should debounce value updates", () => {
-    const { result } = renderHook(() => useDebounceValue("initial", 300));
+    const { result } = renderHook(() => useDebouncedValue("initial", 300));
 
     const [, { setValue }] = result.current;
 
@@ -52,7 +52,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should reset delay on subsequent value changes", () => {
-    const { result } = renderHook(() => useDebounceValue("initial", 300));
+    const { result } = renderHook(() => useDebouncedValue("initial", 300));
 
     const [, { setValue }] = result.current;
 
@@ -90,7 +90,7 @@ describe("useDebounceValue", () => {
   it("should call onDebounce callback when value is debounced", () => {
     const onDebounce = vi.fn();
     const { result } = renderHook(() =>
-      useDebounceValue("initial", 300, { onDebounce })
+      useDebouncedValue("initial", 300, { onDebounce })
     );
 
     const [, { setValue }] = result.current;
@@ -109,7 +109,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should handle different value types", () => {
-    const { result } = renderHook(() => useDebounceValue<number>(0, 300));
+    const { result } = renderHook(() => useDebouncedValue<number>(0, 300));
 
     const [, { setValue }] = result.current;
 
@@ -128,7 +128,7 @@ describe("useDebounceValue", () => {
     const initialObj = { name: "initial" };
     const updatedObj = { name: "updated" };
 
-    const { result } = renderHook(() => useDebounceValue(initialObj, 300));
+    const { result } = renderHook(() => useDebouncedValue(initialObj, 300));
 
     const [, { setValue }] = result.current;
 
@@ -145,7 +145,7 @@ describe("useDebounceValue", () => {
 
   it("should update when initialValue changes", () => {
     const { result, rerender } = renderHook(
-      ({ initialValue }) => useDebounceValue(initialValue, 300),
+      ({ initialValue }) => useDebouncedValue(initialValue, 300),
       { initialProps: { initialValue: "initial" } }
     );
 
@@ -161,7 +161,7 @@ describe("useDebounceValue", () => {
 
   it("should update delay when it changes", () => {
     const { result, rerender } = renderHook(
-      ({ delay }) => useDebounceValue("initial", delay),
+      ({ delay }) => useDebouncedValue("initial", delay),
       { initialProps: { delay: 300 } }
     );
 
@@ -190,7 +190,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should handle zero delay", () => {
-    const { result } = renderHook(() => useDebounceValue("initial", 0));
+    const { result } = renderHook(() => useDebouncedValue("initial", 0));
 
     const [, { setValue }] = result.current;
 
@@ -208,7 +208,7 @@ describe("useDebounceValue", () => {
   it("should cleanup timeout on unmount", () => {
     const onDebounce = vi.fn();
     const { result, unmount } = renderHook(() =>
-      useDebounceValue("initial", 300, { onDebounce })
+      useDebouncedValue("initial", 300, { onDebounce })
     );
 
     const [, { setValue }] = result.current;
@@ -231,7 +231,7 @@ describe("useDebounceValue", () => {
   it("should handle rapid successive changes", () => {
     const onDebounce = vi.fn();
     const { result } = renderHook(() =>
-      useDebounceValue("initial", 300, { onDebounce })
+      useDebouncedValue("initial", 300, { onDebounce })
     );
 
     const [, { setValue }] = result.current;
@@ -273,7 +273,7 @@ describe("useDebounceValue", () => {
     const onDebounce2 = vi.fn();
 
     const { result, rerender } = renderHook(
-      ({ onDebounce }) => useDebounceValue("initial", 300, { onDebounce }),
+      ({ onDebounce }) => useDebouncedValue("initial", 300, { onDebounce }),
       { initialProps: { onDebounce: onDebounce1 } }
     );
 
@@ -298,7 +298,7 @@ describe("useDebounceValue", () => {
   });
 
   it("should work without onDebounce callback", () => {
-    const { result } = renderHook(() => useDebounceValue("initial", 300));
+    const { result } = renderHook(() => useDebouncedValue("initial", 300));
 
     const [, { setValue }] = result.current;
 
@@ -316,7 +316,7 @@ describe("useDebounceValue", () => {
 
   it("should maintain stable setValue reference", () => {
     const { result, rerender } = renderHook(() =>
-      useDebounceValue("initial", 300)
+      useDebouncedValue("initial", 300)
     );
 
     const [, initialHandlers] = result.current;

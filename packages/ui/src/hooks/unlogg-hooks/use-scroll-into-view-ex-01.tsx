@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Button } from "@unlogg/ui/components/button";
+import { Card } from "@unlogg/ui/components/card";
 import { useScrollIntoView } from "@unlogg/ui/hooks/unlogg-hooks/use-scroll-into-view";
+import * as React from "react";
 
 export default function UseScrollIntoView_Ex_01() {
   const [target1Ref, { scrollIntoView: scrollToTarget1 }] =
@@ -35,14 +35,14 @@ export default function UseScrollIntoView_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Scroll Into View Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">Scroll Into View Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           Click the buttons to scroll to different targets with various
           alignments
         </p>
 
         {/* Control buttons */}
-        <div className="flex flex-wrap gap-2 justify-center mb-6">
+        <div className="mb-6 flex flex-wrap justify-center gap-2">
           <Button onClick={() => scrollToTarget1()} variant="outline" size="sm">
             Scroll to Top Target
           </Button>
@@ -61,27 +61,27 @@ export default function UseScrollIntoView_Ex_01() {
           </Button>
         </div>
 
-        <div className="text-xs text-muted-foreground">
+        <div className="text-muted-foreground text-xs">
           💡 Respects your <code>prefers-reduced-motion</code> setting
         </div>
       </div>
 
       {/* Scrollable container */}
-      <Card className="w-full max-w-2xl mx-auto">
+      <Card className="mx-auto w-full max-w-2xl">
         <div
           ref={scrollableRef}
-          className="h-96 overflow-y-auto border rounded-lg"
+          className="h-96 overflow-y-auto rounded-lg border"
         >
-          <div className="p-4 space-y-8">
+          <div className="space-y-8 p-4">
             {/* Initial content */}
             <div className="space-y-4">
               <h4 className="font-semibold">Start of Content</h4>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 This is the beginning of our scrollable content. Scroll down to
                 see the targets.
               </p>
               {Array.from({ length: 5 }, (_, i) => (
-                <div key={i} className="p-3 bg-gray-50 rounded">
+                <div key={i} className="rounded bg-gray-50 p-3">
                   <p className="text-sm">Filler content block {i + 1}</p>
                 </div>
               ))}
@@ -90,9 +90,9 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 1 - Top alignment */}
             <div
               ref={target1Ref}
-              className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg"
+              className="rounded-lg border-2 border-blue-200 bg-blue-50 p-4"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Badge variant="default">Target 1</Badge>
                 <span className="text-sm font-medium">Top Aligned</span>
               </div>
@@ -104,7 +104,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 8 }, (_, i) => (
-              <div key={`mid-${i}`} className="p-3 bg-gray-50 rounded">
+              <div key={`mid-${i}`} className="rounded bg-gray-50 p-3">
                 <p className="text-sm">More content block {i + 1}</p>
               </div>
             ))}
@@ -112,9 +112,9 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 2 - Center alignment */}
             <div
               ref={target2Ref}
-              className="p-4 bg-green-50 border-2 border-green-200 rounded-lg"
+              className="rounded-lg border-2 border-green-200 bg-green-50 p-4"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Badge variant="secondary">Target 2</Badge>
                 <span className="text-sm font-medium">Center Aligned</span>
               </div>
@@ -126,7 +126,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 8 }, (_, i) => (
-              <div key={`end-${i}`} className="p-3 bg-gray-50 rounded">
+              <div key={`end-${i}`} className="rounded bg-gray-50 p-3">
                 <p className="text-sm">Additional content block {i + 1}</p>
               </div>
             ))}
@@ -134,9 +134,9 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 3 - Bottom alignment */}
             <div
               ref={target3Ref}
-              className="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg"
+              className="rounded-lg border-2 border-purple-200 bg-purple-50 p-4"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Badge variant="outline">Target 3</Badge>
                 <span className="text-sm font-medium">Bottom Aligned</span>
               </div>
@@ -148,7 +148,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 6 }, (_, i) => (
-              <div key={`final-${i}`} className="p-3 bg-gray-50 rounded">
+              <div key={`final-${i}`} className="rounded bg-gray-50 p-3">
                 <p className="text-sm">Final content block {i + 1}</p>
               </div>
             ))}
@@ -156,9 +156,9 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Auto scroll target */}
             <div
               ref={autoTargetRef}
-              className="p-4 bg-orange-50 border-2 border-orange-200 rounded-lg"
+              className="rounded-lg border-2 border-orange-200 bg-orange-50 p-4"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Badge variant="destructive">Auto Target</Badge>
                 <span className="text-sm font-medium">No Animation</span>
               </div>
@@ -172,7 +172,7 @@ export default function UseScrollIntoView_Ex_01() {
             {/* End content */}
             <div className="space-y-4">
               <h4 className="font-semibold">End of Content</h4>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 You've reached the end of our scrollable content.
               </p>
             </div>
@@ -181,8 +181,8 @@ export default function UseScrollIntoView_Ex_01() {
       </Card>
 
       {/* Advanced example */}
-      <Card className="w-full max-w-2xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4 text-center">
+      <Card className="mx-auto w-full max-w-2xl p-6">
+        <h4 className="text-md mb-4 text-center font-semibold">
           Advanced Navigation
         </h4>
         <NavigationDemo />
@@ -231,7 +231,7 @@ function NavigationDemo() {
   return (
     <div className="space-y-4">
       {/* Navigation */}
-      <div className="flex flex-wrap gap-2 justify-center p-4 bg-gray-50 rounded-lg">
+      <div className="flex flex-wrap justify-center gap-2 rounded-lg bg-gray-50 p-4">
         {sections.map((section) => (
           <Button
             key={section.id}
@@ -247,19 +247,19 @@ function NavigationDemo() {
       </div>
 
       {/* Content sections */}
-      <div className="h-64 overflow-y-auto border rounded-lg">
-        <div className="p-4 space-y-8">
+      <div className="h-64 overflow-y-auto rounded-lg border">
+        <div className="space-y-8 p-4">
           <div
             ref={introRef}
-            className="p-4 bg-blue-50 border border-blue-200 rounded"
+            className="rounded border border-blue-200 bg-blue-50 p-4"
           >
-            <h5 className="font-semibold text-blue-800 mb-2">Introduction</h5>
+            <h5 className="mb-2 font-semibold text-blue-800">Introduction</h5>
             <p className="text-sm text-blue-700">
               Welcome to our advanced navigation demo. This section demonstrates
               how to create smooth scrolling navigation with multiple targets.
             </p>
             {Array.from({ length: 3 }, (_, i) => (
-              <p key={i} className="text-xs text-blue-600 mt-2">
+              <p key={i} className="mt-2 text-xs text-blue-600">
                 Introduction content line {i + 1}
               </p>
             ))}
@@ -267,15 +267,15 @@ function NavigationDemo() {
 
           <div
             ref={featuresRef}
-            className="p-4 bg-green-50 border border-green-200 rounded"
+            className="rounded border border-green-200 bg-green-50 p-4"
           >
-            <h5 className="font-semibold text-green-800 mb-2">Features</h5>
+            <h5 className="mb-2 font-semibold text-green-800">Features</h5>
             <p className="text-sm text-green-700">
               Our scroll hook provides smooth animations, respects user
               preferences, and works with any scrollable container.
             </p>
             {Array.from({ length: 4 }, (_, i) => (
-              <p key={i} className="text-xs text-green-600 mt-2">
+              <p key={i} className="mt-2 text-xs text-green-600">
                 Feature description {i + 1}
               </p>
             ))}
@@ -283,15 +283,15 @@ function NavigationDemo() {
 
           <div
             ref={usageRef}
-            className="p-4 bg-purple-50 border border-purple-200 rounded"
+            className="rounded border border-purple-200 bg-purple-50 p-4"
           >
-            <h5 className="font-semibold text-purple-800 mb-2">Usage</h5>
+            <h5 className="mb-2 font-semibold text-purple-800">Usage</h5>
             <p className="text-sm text-purple-700">
               Simply create refs for your target elements and use the scroll
               functions to navigate between them smoothly.
             </p>
             {Array.from({ length: 5 }, (_, i) => (
-              <p key={i} className="text-xs text-purple-600 mt-2">
+              <p key={i} className="mt-2 text-xs text-purple-600">
                 Usage example {i + 1}
               </p>
             ))}
@@ -299,15 +299,15 @@ function NavigationDemo() {
 
           <div
             ref={conclusionRef}
-            className="p-4 bg-orange-50 border border-orange-200 rounded"
+            className="rounded border border-orange-200 bg-orange-50 p-4"
           >
-            <h5 className="font-semibold text-orange-800 mb-2">Conclusion</h5>
+            <h5 className="mb-2 font-semibold text-orange-800">Conclusion</h5>
             <p className="text-sm text-orange-700">
               The useScrollIntoView hook makes it easy to create engaging,
               accessible navigation experiences in your React applications.
             </p>
             {Array.from({ length: 3 }, (_, i) => (
-              <p key={i} className="text-xs text-orange-600 mt-2">
+              <p key={i} className="mt-2 text-xs text-orange-600">
                 Conclusion point {i + 1}
               </p>
             ))}

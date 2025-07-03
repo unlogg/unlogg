@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Card } from "@unlogg/ui/components/card";
 import { useIsClient } from "@unlogg/ui/hooks/unlogg-hooks/use-is-client";
+import * as React from "react";
 
 export default function UseIsClient_Ex_01() {
   const isClient = useIsClient();
@@ -22,8 +21,8 @@ export default function UseIsClient_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Client Detection Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">Client Detection Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           This hook helps prevent hydration mismatches and enables safe
           client-side rendering
         </p>
@@ -44,9 +43,9 @@ export default function UseIsClient_Ex_01() {
         </div>
       </div>
       {/* Status Overview */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Hydration Status</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Hydration Status</h4>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <StatusCard
             title="useIsClient()"
             value={isClient}
@@ -61,20 +60,20 @@ export default function UseIsClient_Ex_01() {
             trueLabel="Mounted"
             falseLabel="Not Mounted"
           />
-          <div className="p-4  border rounded-lg">
-            <h5 className="font-semibold text-primary mb-2">Render Count</h5>
-            <div className="text-2xl font-mono font-bold text-primary mb-2">
+          <div className="rounded-lg border p-4">
+            <h5 className="text-primary mb-2 font-semibold">Render Count</h5>
+            <div className="text-primary mb-2 font-mono text-2xl font-bold">
               {renderCountRef.current}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Total component renders
             </p>
           </div>
         </div>
       </Card>
       Client-only content
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Client-Only Content</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Client-Only Content</h4>
         <ClientOnlyDemo />
       </Card>
       {/* Browser API access */}
@@ -110,23 +109,17 @@ function StatusCard({
 }: StatusCardProps) {
   return (
     <div
-      className={`
-      p-4 rounded-lg border-2 transition-all duration-200
-      ${value ? "border-green-300" : "border-gray-200 bg-gray-50"}
-    `}
+      className={`rounded-lg border-2 p-4 transition-all duration-200 ${value ? "border-green-300" : "border-gray-200 bg-gray-50"} `}
     >
       <div className="text-center">
-        <h5 className="font-semibold text-sm mb-2">{title}</h5>
+        <h5 className="mb-2 text-sm font-semibold">{title}</h5>
         <div
-          className={`
-          w-4 h-4 rounded-full mx-auto mb-2
-          ${value ? "bg-green-500" : "bg-gray-400"}
-        `}
+          className={`mx-auto mb-2 h-4 w-4 rounded-full ${value ? "bg-green-500" : "bg-gray-400"} `}
         />
         <Badge variant={value ? "default" : "secondary"} className="mb-2">
           {value ? trueLabel : falseLabel}
         </Badge>
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-xs">{description}</p>
       </div>
     </div>
   );
@@ -137,12 +130,12 @@ function ClientOnlyDemo() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground mb-4">
+      <p className="text-muted-foreground mb-4 text-sm">
         The content below only appears after client-side hydration:
       </p>
 
       {!isClient ? (
-        <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
           <p className="text-sm text-yellow-800">
             🔄 Server-side rendering... Client content will appear after
             hydration.
@@ -150,8 +143,8 @@ function ClientOnlyDemo() {
         </div>
       ) : (
         <div className="space-y-3">
-          <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <h5 className="font-semibold text-green-800 mb-2">
+          <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+            <h5 className="mb-2 font-semibold text-green-800">
               ✅ Client-Side Content
             </h5>
             <p className="text-sm text-green-700">
@@ -159,11 +152,11 @@ function ClientOnlyDemo() {
             </p>
           </div>
 
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h5 className="font-semibold text-blue-800 mb-2">
+          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+            <h5 className="mb-2 font-semibold text-blue-800">
               🌐 Browser Information
             </h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-blue-700">
+            <div className="grid grid-cols-1 gap-2 text-sm text-blue-700 md:grid-cols-2">
               <div>User Agent: {navigator.userAgent.slice(0, 50)}...</div>
               <div>Language: {navigator.language}</div>
               <div>Online: {navigator.onLine ? "Yes" : "No"}</div>
@@ -202,7 +195,7 @@ function BrowserAPIDemo() {
 
   if (!isClient) {
     return (
-      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
         <p className="text-sm text-gray-600">
           Browser APIs will be accessed safely after client-side hydration...
         </p>
@@ -212,9 +205,9 @@ function BrowserAPIDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
-          <h5 className="font-semibold text-purple-800 mb-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg border border-purple-200 bg-purple-50 p-4">
+          <h5 className="mb-2 font-semibold text-purple-800">
             📍 Location API
           </h5>
           {locationInfo && (
@@ -225,8 +218,8 @@ function BrowserAPIDemo() {
           )}
         </div>
 
-        <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-          <h5 className="font-semibold text-indigo-800 mb-2">
+        <div className="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
+          <h5 className="mb-2 font-semibold text-indigo-800">
             💾 Storage APIs
           </h5>
           {storageInfo && (
@@ -249,16 +242,16 @@ function ConditionalRenderingDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {/* Pattern 1: Loading state */}
-        <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-          <h5 className="font-semibold text-orange-800 mb-2">
+        <div className="rounded-lg border border-orange-200 bg-orange-50 p-4">
+          <h5 className="mb-2 font-semibold text-orange-800">
             Pattern 1: Loading
           </h5>
           <div className="text-sm text-orange-700">
             {!isClient ? (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-orange-400 border-t-transparent" />
                 Loading...
               </div>
             ) : (
@@ -268,8 +261,8 @@ function ConditionalRenderingDemo() {
         </div>
 
         {/* Pattern 2: Null fallback */}
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-          <h5 className="font-semibold text-green-800 mb-2">
+        <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+          <h5 className="mb-2 font-semibold text-green-800">
             Pattern 2: Null Fallback
           </h5>
           <div className="text-sm text-green-700">
@@ -279,13 +272,13 @@ function ConditionalRenderingDemo() {
         </div>
 
         {/* Pattern 3: Placeholder */}
-        <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h5 className="font-semibold text-blue-800 mb-2">
+        <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+          <h5 className="mb-2 font-semibold text-blue-800">
             Pattern 3: Placeholder
           </h5>
           <div className="text-sm text-blue-700">
             {!isClient ? (
-              <div className="bg-blue-200 h-8 rounded animate-pulse" />
+              <div className="h-8 animate-pulse rounded bg-blue-200" />
             ) : (
               <div>Dynamic client content</div>
             )}
@@ -293,16 +286,16 @@ function ConditionalRenderingDemo() {
         </div>
       </div>
 
-      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-        <h5 className="font-semibold text-gray-800 mb-2">Code Examples</h5>
-        <div className="space-y-2 text-sm font-mono">
-          <div className="p-2 bg-white rounded border">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+        <h5 className="mb-2 font-semibold text-gray-800">Code Examples</h5>
+        <div className="space-y-2 font-mono text-sm">
+          <div className="rounded border bg-white p-2">
             {`{!isClient ? <Loading /> : <ClientContent />}`}
           </div>
-          <div className="p-2 bg-white rounded border">
+          <div className="rounded border bg-white p-2">
             {`{isClient && <BrowserOnlyFeature />}`}
           </div>
-          <div className="p-2 bg-white rounded border">
+          <div className="rounded border bg-white p-2">
             {`{!isClient ? <Placeholder /> : <DynamicContent />}`}
           </div>
         </div>

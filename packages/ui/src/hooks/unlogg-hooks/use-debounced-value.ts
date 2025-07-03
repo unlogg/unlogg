@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-type UseDebounceValueOptions = {
+type UseDebouncedValueOptions = {
   onDebounce?: (value: any) => void;
 };
 
-type UseDebounceValueHandlers<T> = {
+type UseDebouncedValueHandlers<T> = {
   setValue: (val: T) => void;
 };
 
@@ -21,13 +21,13 @@ type UseDebounceValueHandlers<T> = {
  * @returns A tuple containing the debounced value and an object with a `setValue` handler to update the value.
  *
  * @example
- * const [debouncedValue, { setValue }] = useDebounceValue(inputValue, 300);
+ * const [debouncedValue, { setValue }] = useDebouncedValue(inputValue, 300);
  */
-function useDebounceValue<T>(
+function useDebouncedValue<T>(
   initialValue: T,
   delay: number,
-  options: UseDebounceValueOptions = {}
-): [T, UseDebounceValueHandlers<T>] {
+  options: UseDebouncedValueOptions = {}
+): [T, UseDebouncedValueHandlers<T>] {
   const [internalValue, setInternalValue] = useState<T>(initialValue);
   const [debouncedValue, setDebouncedValue] = useState<T>(initialValue);
 
@@ -54,5 +54,5 @@ function useDebounceValue<T>(
   return [debouncedValue, { setValue }];
 }
 
-export { useDebounceValue };
-export type { UseDebounceValueOptions, UseDebounceValueHandlers };
+export { useDebouncedValue };
+export type { UseDebouncedValueOptions, UseDebouncedValueHandlers };

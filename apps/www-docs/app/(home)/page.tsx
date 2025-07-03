@@ -9,7 +9,7 @@ export default function HomePage() {
         gradientSecond="radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .07) 0, hsla(210, 100%, 55%, .04) 80%, transparent 100%)"
         gradientThird="radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 45%, .04) 80%, transparent 100%)"
       />
-      {/* <Homepage /> */}
+      <Homepage />
 
       <>
         <h1 className="text-3xl">Cooming Soon!</h1>

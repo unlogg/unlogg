@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Badge } from "@unlogg/ui/components/badge";
 import { Button } from "@unlogg/ui/components/button";
 import { Card } from "@unlogg/ui/components/card";
 import { Input } from "@unlogg/ui/components/input";
 import { useLocalStorage } from "@unlogg/ui/hooks/unlogg-hooks/use-local-storage";
+import { useState } from "react";
 
 interface TodoItem {
   id: string;
@@ -56,14 +56,14 @@ export default function UseLocalStorage_Ex_02() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">
+        <h3 className="mb-2 text-lg font-semibold">
           Persistent Todo List Hook
         </h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-muted-foreground mb-4 text-sm">
           A todo list that persists across browser sessions using localStorage
         </p>
 
-        <div className="flex items-center justify-center gap-4 flex-wrap">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Badge variant="default" className="text-sm">
             📝 {todos.length} Total Tasks
           </Badge>
@@ -76,8 +76,8 @@ export default function UseLocalStorage_Ex_02() {
         </div>
       </div>
 
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Todo Manager</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Todo Manager</h4>
         <TodoManager
           todos={todos}
           inputValue={inputValue}
@@ -134,24 +134,24 @@ function TodoManager({
       {/* Todo List */}
       <div className="space-y-2">
         {todos.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">
-            <div className="text-4xl mb-2">📝</div>
+          <div className="text-muted-foreground py-8 text-center">
+            <div className="mb-2 text-4xl">📝</div>
             <p>No todos yet. Add one above!</p>
           </div>
         ) : (
           todos.map((todo) => (
             <div
               key={todo.id}
-              className="flex items-center gap-3 p-3 bg-background border rounded-lg"
+              className="bg-background flex items-center gap-3 rounded-lg border p-3"
             >
               <button
                 onClick={() => onToggleTodo(todo.id)}
                 className="flex-shrink-0"
               >
                 <div
-                  className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                  className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
                     todo.completed
-                      ? "bg-green-500 border-green-500 text-white"
+                      ? "border-green-500 bg-green-500 text-white"
                       : "border-gray-300 hover:border-green-400"
                   }`}
                 >
@@ -182,8 +182,8 @@ function TodoManager({
 
       {/* Actions */}
       {todos.length > 0 && (
-        <div className="flex justify-between items-center pt-4 border-t">
-          <div className="text-sm text-muted-foreground">
+        <div className="flex items-center justify-between border-t pt-4">
+          <div className="text-muted-foreground text-sm">
             {todos.filter((t) => !t.completed).length} remaining
           </div>
           <Button variant="outline" onClick={onClearAll} size="sm">
@@ -193,13 +193,13 @@ function TodoManager({
       )}
 
       {/* Storage Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+      <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-2">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Storage Size:</strong> {JSON.stringify(todos).length} bytes
           </p>
         </div>
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Last Updated:</strong>{" "}
             {todos.length > 0

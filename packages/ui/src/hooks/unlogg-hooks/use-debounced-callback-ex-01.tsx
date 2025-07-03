@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { Input } from "@unlogg/ui/components/input";
-import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
+import { useDebouncedCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounced-callback";
 
-export function DebounceCallbackExample() {
+export function DebouncedCallbackExample() {
   const [input, setInput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [result, setResult] = React.useState<string | null>(null);
@@ -15,7 +15,7 @@ export function DebounceCallbackExample() {
       setTimeout(() => resolve(`Result for "${query}"`), 800)
     );
 
-  const [debouncedCallback, { cancel }] = useDebounceCallback(
+  const [debouncedCallback, { cancel }] = useDebouncedCallback(
     async (value: string) => {
       setLoading(true);
       setResult(null);
@@ -38,7 +38,7 @@ export function DebounceCallbackExample() {
   }, [input, debouncedCallback, cancel]);
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-background rounded-lg shadow space-y-6">
+    <div className="bg-background mx-auto mt-10 max-w-md space-y-6 rounded-lg p-6 shadow">
       <h2 className="text-xl font-semibold">Debounced API Call Example</h2>
       <Input
         placeholder="Type a search query..."
@@ -49,17 +49,18 @@ export function DebounceCallbackExample() {
       <div className="space-y-2">
         <div>
           <span className="font-medium">Immediate value:</span>
-          <span className="ml-2 text-muted-foreground">{input}</span>
+          <span className="text-muted-foreground ml-2">{input}</span>
         </div>
         <div>
           <span className="font-medium">API status:</span>
           <span className="ml-2">
-            {loading
-              ? <span className="text-yellow-600">Loading...</span>
-              : result
-                ? <span className="text-green-700">{result}</span>
-                : <span className="text-gray-400">No result</span>
-            }
+            {loading ? (
+              <span className="text-yellow-600">Loading...</span>
+            ) : result ? (
+              <span className="text-green-700">{result}</span>
+            ) : (
+              <span className="text-gray-400">No result</span>
+            )}
           </span>
         </div>
       </div>
@@ -70,4 +71,4 @@ export function DebounceCallbackExample() {
   );
 }
 
-export default DebounceCallbackExample;
+export default DebouncedCallbackExample;

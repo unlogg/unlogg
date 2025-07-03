@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 
-type UseDebounceCallbackHandlers = {
+type UseDebouncedCallbackHandlers = {
   cancel: () => void;
 };
 
@@ -15,14 +15,14 @@ type UseDebounceCallbackHandlers = {
  * @returns A tuple containing the debounced callback and an object with a `cancel` handler.
  *
  * @example
- * const [debouncedFn, { cancel }] = useDebounceCallback((val) => { ... }, 300);
+ * const [debouncedFn, { cancel }] = useDebouncedCallback((val) => { ... }, 300);
  * debouncedFn("value");
  * cancel(); // cancels any pending invocation
  */
-function useDebounceCallback<TArgs extends any[]>(
+function useDebouncedCallback<TArgs extends any[]>(
   callback: (...args: TArgs) => void,
   delay: number
-): [(...args: TArgs) => void, UseDebounceCallbackHandlers] {
+): [(...args: TArgs) => void, UseDebouncedCallbackHandlers] {
   const callbackRef = useRef(callback);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
@@ -62,5 +62,5 @@ function useDebounceCallback<TArgs extends any[]>(
   return [debouncedFn, { cancel }];
 }
 
-export { useDebounceCallback };
-export type { UseDebounceCallbackHandlers };
+export { useDebouncedCallback };
+export type { UseDebouncedCallbackHandlers };

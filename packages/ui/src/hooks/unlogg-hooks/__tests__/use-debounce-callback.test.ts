@@ -1,8 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { useDebounceCallback } from "../use-debounce-callback.js";
+import { useDebouncedCallback } from "../use-debounced-callback.js";
 
-describe("useDebounceCallback", () => {
+describe("useDebouncedCallback", () => {
   let mockCallback: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
@@ -16,7 +16,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should return a debounced function and cancel handler", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     expect(result.current).toHaveLength(2);
     expect(typeof result.current[0]).toBe("function");
@@ -24,7 +26,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should debounce callback execution", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     const [debouncedFn] = result.current;
 
@@ -56,7 +60,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should reset delay on subsequent calls", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     const [debouncedFn] = result.current;
 
@@ -93,7 +99,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should handle multiple arguments", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     const [debouncedFn] = result.current;
 
@@ -111,7 +119,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should cancel pending execution", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     const [debouncedFn, { cancel }] = result.current;
 
@@ -133,7 +143,9 @@ describe("useDebounceCallback", () => {
   });
 
   it("should allow calling after cancellation", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 300));
+    const { result } = renderHook(() =>
+      useDebouncedCallback(mockCallback, 300)
+    );
 
     const [debouncedFn, { cancel }] = result.current;
 
@@ -159,7 +171,7 @@ describe("useDebounceCallback", () => {
   it("should update callback when it changes", () => {
     const newCallback = vi.fn();
     const { result, rerender } = renderHook(
-      ({ callback }) => useDebounceCallback(callback, 300),
+      ({ callback }) => useDebouncedCallback(callback, 300),
       { initialProps: { callback: mockCallback } }
     );
 
@@ -184,7 +196,7 @@ describe("useDebounceCallback", () => {
 
   it("should update delay when it changes", () => {
     const { result, rerender } = renderHook(
-      ({ delay }) => useDebounceCallback(mockCallback, delay),
+      ({ delay }) => useDebouncedCallback(mockCallback, delay),
       { initialProps: { delay: 300 } }
     );
 
@@ -218,7 +230,7 @@ describe("useDebounceCallback", () => {
   });
 
   it("should handle zero delay", () => {
-    const { result } = renderHook(() => useDebounceCallback(mockCallback, 0));
+    const { result } = renderHook(() => useDebouncedCallback(mockCallback, 0));
 
     const [debouncedFn] = result.current;
 
@@ -235,7 +247,7 @@ describe("useDebounceCallback", () => {
 
   it("should cleanup timeout on unmount", () => {
     const { result, unmount } = renderHook(() =>
-      useDebounceCallback(mockCallback, 300)
+      useDebouncedCallback(mockCallback, 300)
     );
 
     const [debouncedFn] = result.current;
@@ -257,7 +269,7 @@ describe("useDebounceCallback", () => {
   it("should handle no arguments", () => {
     const noArgsCallback = vi.fn();
     const { result } = renderHook(() =>
-      useDebounceCallback(noArgsCallback, 300)
+      useDebouncedCallback(noArgsCallback, 300)
     );
 
     const [debouncedFn] = result.current;
@@ -275,7 +287,7 @@ describe("useDebounceCallback", () => {
 
   it("should maintain stable function references", () => {
     const { result, rerender } = renderHook(() =>
-      useDebounceCallback(mockCallback, 300)
+      useDebouncedCallback(mockCallback, 300)
     );
 
     const [initialDebouncedFn, initialHandlers] = result.current;

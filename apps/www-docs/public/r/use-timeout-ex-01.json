@@ -5,12 +5,13 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://unlogg.com/r/use-timeout.json"
+    "https://unlogg.com/r/use-timeout.json",
+    "button"
   ],
   "files": [
     {
       "type": "registry:example",
-      "content": "\"use client\";\n\nimport { Button } from \"@/hooks/button\";\nimport { useTimeout } from \"@/hooks/use-timeout\";\nimport { useState } from \"react\";\n\n// Example: Show a notification after 3 seconds when button is clicked\nfunction UseTimeout_Ex_01() {\n  const [showMessage, setShowMessage] = useState(false);\n  const [trigger, setTrigger] = useState(0);\n\n  useTimeout({\n    callback: () => {\n      setShowMessage(true);\n    },\n    delay: trigger > 0 ? 3000 : null, // 3 seconds delay after trigger\n  });\n\n  const handleClick = () => {\n    setShowMessage(false);\n    setTrigger((t) => t + 1); // retrigger timeout\n  };\n\n  return (\n    <div>\n      <Button onClick={handleClick}>Show Dashboard Message in 3s</Button>\n      {showMessage && (\n        <div style={{ marginTop: 16, color: \"green\" }}>\n          This is your dashboard notification!\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport default UseTimeout_Ex_01;\n",
+      "content": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { useTimeout } from \"@/hooks/use-timeout\";\nimport { useState } from \"react\";\n\n// Example: Show a notification after 3 seconds when button is clicked\nfunction UseTimeout_Ex_01() {\n  const [showMessage, setShowMessage] = useState(false);\n  const [trigger, setTrigger] = useState(0);\n\n  useTimeout({\n    callback: () => {\n      setShowMessage(true);\n    },\n    delay: trigger > 0 ? 3000 : null, // 3 seconds delay after trigger\n  });\n\n  const handleClick = () => {\n    setShowMessage(false);\n    setTrigger((t) => t + 1); // retrigger timeout\n  };\n\n  return (\n    <div>\n      <Button onClick={handleClick}>Show Dashboard Message in 3s</Button>\n      {showMessage && (\n        <div style={{ marginTop: 16, color: \"green\" }}>\n          This is your dashboard notification!\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport default UseTimeout_Ex_01;\n",
       "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-timeout-ex-01.tsx",
       "target": "/components/unlogg-ui/use-timeout-ex-01.tsx"
     }

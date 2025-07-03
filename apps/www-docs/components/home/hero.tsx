@@ -76,21 +76,23 @@ export const Hero = () => {
       </div>
 
       <div className="mx-auto flex w-fit flex-row items-center justify-center gap-4">
-        <p>
+        {/* <p>
           <Button variant="link">View roadmap</Button>{" "}
-        </p>
-        <ShimmerButton className="shadow-2xl">
-          <span className="text-center text-3xl text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-xl dark:from-white dark:to-slate-900/10">
-            Get Unlogg
-          </span>
-        </ShimmerButton>
+        </p> */}
+        <Link href="https://tally.so/r/w8YYbo" target="_blank">
+          <ShimmerButton className="shadow-2xl">
+            <span className="text-center text-3xl text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-xl dark:from-white dark:to-slate-900/10">
+              Get Unlogg
+            </span>
+          </ShimmerButton>
+        </Link>
       </div>
 
-      <div className="relative mt-8">
+      {/* <div className="relative mt-8">
         <div className="absolute top-1/2 left-1/6 -z-1 h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-500/10 opacity-50 blur-[80px]" />
         <div className="absolute top-1/2 -right-1/6 -z-1 h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-400/10 opacity-50 blur-[80px]" />
         <div className="bg-background z-20 mx-auto h-[700px] w-6xl rounded-md border-3 border-lime-500/10"></div>
-      </div>
+      </div> */}
     </section>
   );
 };

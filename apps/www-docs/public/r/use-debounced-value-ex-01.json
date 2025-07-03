@@ -1,0 +1,19 @@
+{
+  "name": "use-debounced-value-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-debounced-value.json",
+    "input"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Input } from \"@/components/ui/input\";\nimport { useDebouncedValue } from \"@/hooks/use-debounced-value\";\n\nexport function DebouncedValueExample() {\n  const [input, setInput] = React.useState(\"\");\n  const [debounced, { setValue }] = useDebouncedValue(input, 500);\n\n  // Sync input changes to the debounce hook\n  React.useEffect(() => {\n    setValue(input);\n  }, [input, setValue]);\n\n  return (\n    <div className=\"bg-background mx-auto mt-10 max-w-md space-y-6 rounded-lg p-6 shadow\">\n      <h2 className=\"text-xl font-semibold\">Debounce Value Example</h2>\n      <Input\n        placeholder=\"Type something...\"\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        className=\"w-full\"\n      />\n      <div className=\"space-y-2\">\n        <div>\n          <span className=\"font-medium\">Immediate value:</span>\n          <span className=\"text-muted-foreground ml-2\">{input}</span>\n        </div>\n        <div>\n          <span className=\"font-medium\">Debounced value:</span>\n          <span className=\"text-primary ml-2\">{debounced}</span>\n        </div>\n      </div>\n      <p className=\"text-sm text-gray-500\">\n        👉 The debounced value updates 500ms after you stop typing.\n      </p>\n    </div>\n  );\n}\n\nexport default DebouncedValueExample;\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-debounced-value-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-debounced-value-ex-01.tsx"
+    }
+  ]
+}

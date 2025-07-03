@@ -82,15 +82,15 @@ const getComponentFiles = async (files: File[], registryType: string) => {
 
     // Modify the import paths in the content
     let modifiedContent = fileContent;
-    if (fileContent.includes("@unlogg/ui/components")) {
-      modifiedContent = fileContent.replace(
-        /@unlogg\/ui\/.*?([^/]+)$/gm,
+    if (modifiedContent.includes("@unlogg/ui/components")) {
+      modifiedContent = modifiedContent.replace(
+        /@unlogg\/ui\/components\/.*?([^/]+)$/gm,
         "@/components/ui/$1"
       );
     }
-    if (fileContent.includes("@unlogg/ui/hooks")) {
-      modifiedContent = fileContent.replace(
-        /@unlogg\/ui\/.*?([^/]+)$/gm,
+    if (modifiedContent.includes("@unlogg/ui/hooks")) {
+      modifiedContent = modifiedContent.replace(
+        /@unlogg\/ui\/hooks\/.*?([^/]+)$/gm,
         "@/hooks/$1"
       );
     }

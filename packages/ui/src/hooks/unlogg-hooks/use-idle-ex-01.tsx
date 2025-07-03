@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Button } from "@unlogg/ui/components/button";
+import { Card } from "@unlogg/ui/components/card";
 import { Input } from "@unlogg/ui/components/input";
 import { useIdle } from "@unlogg/ui/hooks/unlogg-hooks/use-idle";
+import * as React from "react";
 
 export default function UseIdle_Ex_01() {
   const [customTimeout, setCustomTimeout] = React.useState(3000);
@@ -42,12 +42,12 @@ export default function UseIdle_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">User Idle Detection Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">User Idle Detection Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           Monitors user activity and detects when the user becomes idle
         </p>
 
-        <div className="flex items-center justify-center gap-4 flex-wrap">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium">Last Activity:</span>
             <Badge variant="outline" className="font-mono text-xs">
@@ -57,8 +57,8 @@ export default function UseIdle_Ex_01() {
         </div>
       </div>
       {/* Default Idle Detection */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">
           Default Idle Detection (2s timeout)
         </h4>
         <DefaultIdleDemo />
@@ -138,7 +138,7 @@ function DefaultIdleDemo() {
   return (
     <div className="space-y-4">
       <div className="text-center">
-        <div className={`text-6xl mb-2 ${isIdle ? "animate-pulse" : ""}`}>
+        <div className={`mb-2 text-6xl ${isIdle ? "animate-pulse" : ""}`}>
           {isIdle ? "😴" : "👀"}
         </div>
         <Badge variant={isIdle ? "destructive" : "default"} className="text-sm">
@@ -146,7 +146,7 @@ function DefaultIdleDemo() {
         </Badge>
       </div>
 
-      <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
         <p className="text-sm text-gray-700">
           <strong>Status:</strong>{" "}
           {isIdle
@@ -164,7 +164,7 @@ function CustomTimeoutDemo({ timeout }: { timeout: number }) {
   return (
     <div className="space-y-4">
       <div className="text-center">
-        <div className={`text-4xl mb-2 ${isIdle ? "animate-bounce" : ""}`}>
+        <div className={`mb-2 text-4xl ${isIdle ? "animate-bounce" : ""}`}>
           {isIdle ? "⏰" : "⚡"}
         </div>
         <Badge variant={isIdle ? "secondary" : "default"}>
@@ -172,7 +172,7 @@ function CustomTimeoutDemo({ timeout }: { timeout: number }) {
         </Badge>
       </div>
 
-      <div className="p-3 bg-purple-50 border border-purple-200 rounded-lg">
+      <div className="rounded-lg border border-purple-200 bg-purple-50 p-3">
         <p className="text-sm text-purple-700">
           <strong>Timeout:</strong> {timeout / 1000} seconds
         </p>
@@ -187,11 +187,11 @@ function MouseOnlyDemo() {
   });
 
   return (
-    <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-      <h5 className="font-semibold text-orange-800 mb-2">Mouse Only</h5>
+    <div className="rounded-lg border border-orange-200 bg-orange-50 p-4">
+      <h5 className="mb-2 font-semibold text-orange-800">Mouse Only</h5>
       <div className="space-y-2">
         <div className="text-center">
-          <div className="text-2xl mb-1">🖱️</div>
+          <div className="mb-1 text-2xl">🖱️</div>
           <Badge variant={isIdle ? "secondary" : "default"}>
             {isIdle ? "No Mouse Activity" : "Mouse Active"}
           </Badge>
@@ -210,11 +210,11 @@ function KeyboardOnlyDemo() {
   });
 
   return (
-    <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-      <h5 className="font-semibold text-green-800 mb-2">Keyboard Only</h5>
+    <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+      <h5 className="mb-2 font-semibold text-green-800">Keyboard Only</h5>
       <div className="space-y-2">
         <div className="text-center">
-          <div className="text-2xl mb-1">⌨️</div>
+          <div className="mb-1 text-2xl">⌨️</div>
           <Badge variant={isIdle ? "secondary" : "default"}>
             {isIdle ? "No Keyboard Activity" : "Keyboard Active"}
           </Badge>
@@ -241,10 +241,10 @@ function IdleTimer({ label, timeout, color }: IdleTimerProps) {
   };
 
   return (
-    <div className={`p-4 border rounded-lg ${colorClasses[color]}`}>
-      <h5 className="font-semibold mb-2">{label}</h5>
+    <div className={`rounded-lg border p-4 ${colorClasses[color]}`}>
+      <h5 className="mb-2 font-semibold">{label}</h5>
       <div className="text-center">
-        <div className="text-xl mb-1">{isIdle ? "⏱️" : "🔥"}</div>
+        <div className="mb-1 text-xl">{isIdle ? "⏱️" : "🔥"}</div>
         <Badge variant={isIdle ? "secondary" : "default"}>
           {isIdle ? "Idle" : "Active"}
         </Badge>
@@ -280,13 +280,13 @@ function AutoSaveDemo() {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
           <p className="text-sm text-blue-700">
             <strong>Status:</strong> {isIdle ? "Auto-saving..." : "Typing..."}
           </p>
         </div>
-        <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+        <div className="rounded-lg border border-green-200 bg-green-50 p-3">
           <p className="text-sm text-green-700">
             <strong>Last Saved:</strong>{" "}
             {lastSaved?.toLocaleTimeString() || "Never"}
@@ -295,7 +295,7 @@ function AutoSaveDemo() {
       </div>
 
       {savedText && (
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Saved Content:</strong> "{savedText}"
           </p>
@@ -317,7 +317,7 @@ function SessionWarningDemo() {
 
   if (!isIdle || dismissed) {
     return (
-      <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+      <div className="rounded-lg border border-green-200 bg-green-50 p-3">
         <p className="text-sm text-green-700">
           ✅ Session active - you will be warned after 8 seconds of inactivity
         </p>
@@ -327,14 +327,14 @@ function SessionWarningDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="p-4 bg-yellow-50 border border-yellow-300 rounded-lg border-l-4">
+      <div className="rounded-lg border border-l-4 border-yellow-300 bg-yellow-50 p-4">
         <div className="flex items-start">
-          <div className="text-yellow-600 text-xl mr-3">⚠️</div>
+          <div className="mr-3 text-xl text-yellow-600">⚠️</div>
           <div className="flex-1">
-            <h5 className="font-semibold text-yellow-800 mb-1">
+            <h5 className="mb-1 font-semibold text-yellow-800">
               Session Warning
             </h5>
-            <p className="text-sm text-yellow-700 mb-3">
+            <p className="mb-3 text-sm text-yellow-700">
               You've been inactive for a while. Your session will expire soon.
             </p>
             <div className="flex gap-2">

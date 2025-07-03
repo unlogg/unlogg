@@ -1,9 +1,7 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Card } from "@unlogg/ui/components/card";
 import { useMediaQuery } from "@unlogg/ui/hooks/unlogg-hooks/use-media-query";
 
 export default function UseMediaQuery_Ex_01() {
@@ -49,8 +47,8 @@ export default function UseMediaQuery_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Media Query Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">Media Query Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           Resize your window or change system settings to see the queries in
           action
         </p>
@@ -62,9 +60,9 @@ export default function UseMediaQuery_Ex_01() {
       </div>
 
       {/* Breakpoint queries */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Breakpoint Queries</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Breakpoint Queries</h4>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <QueryCard
             title="Mobile"
             query="(max-width: 640px)"
@@ -93,9 +91,9 @@ export default function UseMediaQuery_Ex_01() {
       </Card>
 
       {/* System preferences */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">System Preferences</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">System Preferences</h4>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <QueryCard
             title="Dark Mode"
             query="(prefers-color-scheme: dark)"
@@ -118,9 +116,9 @@ export default function UseMediaQuery_Ex_01() {
       </Card>
 
       {/* Device capabilities */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Device Capabilities</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Device Capabilities</h4>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <QueryCard
             title="Portrait"
             query="(orientation: portrait)"
@@ -149,9 +147,9 @@ export default function UseMediaQuery_Ex_01() {
       </Card>
 
       {/* Custom queries */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Custom Queries</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Custom Queries</h4>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <QueryCard
             title="Very Narrow"
             query="(max-width: 400px)"
@@ -168,8 +166,8 @@ export default function UseMediaQuery_Ex_01() {
       </Card>
 
       {/* Responsive content demo */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Responsive Content Demo</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Responsive Content Demo</h4>
         <ResponsiveContentDemo
           isMobile={isMobile}
           isTablet={isTablet}
@@ -192,25 +190,19 @@ interface QueryCardProps {
 function QueryCard({ title, query, matches, description }: QueryCardProps) {
   return (
     <div
-      className={`
-      p-4 rounded-lg border-2 transition-all duration-200
-      ${
+      className={`rounded-lg border-2 p-4 transition-all duration-200 ${
         matches
           ? "border-green-300 bg-green-50 text-green-800"
           : "border-gray-200 bg-gray-50 text-gray-600"
-      }
-    `}
+      } `}
     >
-      <div className="flex items-center gap-2 mb-2">
+      <div className="mb-2 flex items-center gap-2">
         <div
-          className={`
-          w-3 h-3 rounded-full
-          ${matches ? "bg-green-500" : "bg-gray-400"}
-        `}
+          className={`h-3 w-3 rounded-full ${matches ? "bg-green-500" : "bg-gray-400"} `}
         />
-        <h5 className="font-semibold text-sm">{title}</h5>
+        <h5 className="text-sm font-semibold">{title}</h5>
       </div>
-      <code className="text-xs bg-white/50 px-2 py-1 rounded block mb-2">
+      <code className="mb-2 block rounded bg-white/50 px-2 py-1 text-xs">
         {query}
       </code>
       <p className="text-xs">{description}</p>
@@ -242,13 +234,10 @@ function ResponsiveContentDemo({
     <div className="space-y-4">
       {/* Layout adaptation */}
       <div
-        className={`
-        grid gap-4
-        ${isMobile ? "grid-cols-1" : isTablet ? "grid-cols-2" : "grid-cols-3"}
-      `}
+        className={`grid gap-4 ${isMobile ? "grid-cols-1" : isTablet ? "grid-cols-2" : "grid-cols-3"} `}
       >
-        <div className="p-4 bg-blue-50 border border-blue-200 rounded">
-          <h6 className="font-medium text-blue-800 mb-2">Layout</h6>
+        <div className="rounded border border-blue-200 bg-blue-50 p-4">
+          <h6 className="mb-2 font-medium text-blue-800">Layout</h6>
           <p className="text-sm text-blue-700">
             {isMobile && "Single column for mobile"}
             {isTablet && "Two columns for tablet"}
@@ -256,21 +245,18 @@ function ResponsiveContentDemo({
           </p>
         </div>
 
-        <div className="p-4 bg-purple-50 border border-purple-200 rounded">
-          <h6 className="font-medium text-purple-800 mb-2">Theme</h6>
+        <div className="rounded border border-purple-200 bg-purple-50 p-4">
+          <h6 className="mb-2 font-medium text-purple-800">Theme</h6>
           <p className="text-sm text-purple-700">
             {isDarkMode ? "Dark mode detected" : "Light mode active"}
           </p>
         </div>
 
         <div
-          className={`
-          p-4 border rounded
-          ${isDesktop ? "bg-green-50 border-green-200" : "bg-gray-50 border-gray-200"}
-        `}
+          className={`rounded border p-4 ${isDesktop ? "border-green-200 bg-green-50" : "border-gray-200 bg-gray-50"} `}
         >
           <h6
-            className={`font-medium mb-2 ${isDesktop ? "text-green-800" : "text-gray-700"}`}
+            className={`mb-2 font-medium ${isDesktop ? "text-green-800" : "text-gray-700"}`}
           >
             Features
           </h6>
@@ -283,13 +269,10 @@ function ResponsiveContentDemo({
       </div>
 
       {/* Motion adaptation */}
-      <div className="p-4 bg-orange-50 border border-orange-200 rounded">
-        <h6 className="font-medium text-orange-800 mb-2">Animation</h6>
+      <div className="rounded border border-orange-200 bg-orange-50 p-4">
+        <h6 className="mb-2 font-medium text-orange-800">Animation</h6>
         <div
-          className={`
-          w-8 h-8 bg-orange-400 rounded-full mb-2
-          ${prefersReducedMotion ? "" : "animate-bounce"}
-        `}
+          className={`mb-2 h-8 w-8 rounded-full bg-orange-400 ${prefersReducedMotion ? "" : "animate-bounce"} `}
         />
         <p className="text-sm text-orange-700">
           {prefersReducedMotion
@@ -300,8 +283,8 @@ function ResponsiveContentDemo({
 
       {/* Conditional content */}
       {isMobile && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded">
-          <h6 className="font-medium text-red-800 mb-2">Mobile Only</h6>
+        <div className="rounded border border-red-200 bg-red-50 p-4">
+          <h6 className="mb-2 font-medium text-red-800">Mobile Only</h6>
           <p className="text-sm text-red-700">
             This content only appears on mobile devices.
           </p>
@@ -309,8 +292,8 @@ function ResponsiveContentDemo({
       )}
 
       {isDesktop && (
-        <div className="p-4 bg-indigo-50 border border-indigo-200 rounded">
-          <h6 className="font-medium text-indigo-800 mb-2">Desktop Only</h6>
+        <div className="rounded border border-indigo-200 bg-indigo-50 p-4">
+          <h6 className="mb-2 font-medium text-indigo-800">Desktop Only</h6>
           <p className="text-sm text-indigo-700">
             This advanced content is only shown on desktop devices.
           </p>
