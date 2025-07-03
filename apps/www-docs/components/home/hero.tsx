@@ -48,10 +48,11 @@ export const Hero = () => {
           <p
             className="mx-auto mb-8 max-w-3xl text-xl tracking-tight text-gray-600 md:text-2xl dark:text-gray-300"
             style={{
-              wordSpacing: "0.2rem",
+              wordSpacing: "0.0rem",
             }}
           >
-            Access 20+ developer tools - all free and 100% open source.
+            Build and plan your next project with Unlogg, the open source issue
+            tracker that keeps it simple and open.
           </p>
         ) : (
           <p
@@ -81,7 +82,7 @@ export const Hero = () => {
         </p> */}
         <Link href="https://tally.so/r/w8YYbo" target="_blank">
           <ShimmerButton className="shadow-2xl">
-            <span className="text-center text-3xl text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-xl dark:from-white dark:to-slate-900/10">
+            <span className="text-center text-2xl leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-xl dark:from-white dark:to-slate-900/10">
               Get Unlogg
             </span>
           </ShimmerButton>
