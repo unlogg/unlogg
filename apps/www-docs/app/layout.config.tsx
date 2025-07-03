@@ -13,6 +13,7 @@ import { ThemeCustomizer } from "@/components/theme-customizer";
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: BaseLayoutProps = {
+  githubUrl: siteConfig.links.github,
   nav: {
     title: (
       <div className="relative flex w-full items-center justify-around space-x-2">

@@ -16,7 +16,7 @@ export const siteConfig = {
   ],
   links: {
     portfolio: "https://unlogg.com",
-    github: "https://github.com/unlogg-labs/unlogg",
+    github: "https://github.com/unlogg/unlogg",
   },
   githubBaseUrl: "https://github.com",
   githubOwner: "unlogg",

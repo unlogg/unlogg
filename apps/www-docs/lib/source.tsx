@@ -25,6 +25,7 @@ export const source = loader({
       return node;
     },
   },
+
   baseUrl: "/docs",
   source: docs.toFumadocsSource(),
   icon(icon) {
