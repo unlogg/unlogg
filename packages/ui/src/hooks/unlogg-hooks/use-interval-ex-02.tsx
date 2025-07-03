@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
+import { useState } from "react";
 
 /**
  * Example component: DashboardCounter
@@ -26,7 +26,7 @@ function UseInterval_Ex_02() {
       }}
     >
       <h2>Live Updates</h2>
-      <div className="text-4xl font-bold text-primary font-mono">{count}</div>
+      <div className="text-primary font-mono text-4xl font-bold">{count}</div>
       <p>Updates every second</p>
     </div>
   );

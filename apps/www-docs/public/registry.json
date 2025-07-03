@@ -156,7 +156,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-boolean.json"
+        "https://unlogg.com/r/use-boolean.json",
+        "button"
       ],
       "files": [
         {
@@ -172,7 +173,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-click-outside.json"
+        "https://unlogg.com/r/use-click-outside.json",
+        "button"
       ],
       "files": [
         {
@@ -188,27 +190,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-clipboard-copy.json"
+        "https://unlogg.com/r/use-clipboard-copy.json",
+        "badge",
+        "button",
+        "card",
+        "input"
       ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-clipboard-copy-ex-01.tsx",
-          "type": "registry:example"
-        }
-      ]
-    },
-    {
-      "name": "use-counter-ex-01",
-      "type": "registry:example",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "https://unlogg.com/r/use-counter.json"
-      ],
-      "files": [
-        {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-counter-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -220,7 +210,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-countdown.json"
+        "https://unlogg.com/r/use-countdown.json",
+        "button"
       ],
       "files": [
         {
@@ -230,33 +221,53 @@
       ]
     },
     {
-      "name": "use-debounce-callback-ex-01",
+      "name": "use-counter-ex-01",
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-debounce-callback.json"
+        "https://unlogg.com/r/use-counter.json",
+        "button",
+        "input"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback-ex-01.tsx",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-counter-ex-01.tsx",
           "type": "registry:example"
         }
       ]
     },
     {
-      "name": "use-debounce-value-ex-01",
+      "name": "use-debounced-callback-ex-01",
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-debounce-value.json"
+        "https://unlogg.com/r/use-debounced-callback.json",
+        "input"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value-ex-01.tsx",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-callback-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-debounced-value-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-debounced-value.json",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-value-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -268,7 +279,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-disclosure.json"
+        "https://unlogg.com/r/use-disclosure.json",
+        "button",
+        "dialog"
       ],
       "files": [
         {
@@ -284,7 +297,11 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-document-title.json"
+        "https://unlogg.com/r/use-document-title.json",
+        "badge",
+        "button",
+        "card",
+        "input"
       ],
       "files": [
         {
@@ -300,7 +317,10 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-element-size.json"
+        "https://unlogg.com/r/use-element-size.json",
+        "badge",
+        "button",
+        "card"
       ],
       "files": [
         {
@@ -316,7 +336,10 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-hover.json"
+        "https://unlogg.com/r/use-hover.json",
+        "badge",
+        "button",
+        "card"
       ],
       "files": [
         {
@@ -332,59 +355,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-idle.json"
+        "https://unlogg.com/r/use-idle.json",
+        "badge",
+        "button",
+        "card",
+        "input"
       ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-idle-ex-01.tsx",
-          "type": "registry:example"
-        }
-      ]
-    },
-    {
-      "name": "use-is-client-ex-01",
-      "type": "registry:example",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "https://unlogg.com/r/use-is-client.json"
-      ],
-      "files": [
-        {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client-ex-01.tsx",
-          "type": "registry:example"
-        }
-      ]
-    },
-    {
-      "name": "use-is-online-ex-01",
-      "type": "registry:example",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "https://unlogg.com/r/use-is-online.json"
-      ],
-      "files": [
-        {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-01.tsx",
-          "type": "registry:example"
-        }
-      ]
-    },
-    {
-      "name": "use-is-online-ex-02",
-      "type": "registry:example",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "https://unlogg.com/r/use-is-online.json"
-      ],
-      "files": [
-        {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-02.tsx",
           "type": "registry:example"
         }
       ]
@@ -422,33 +401,54 @@
       ]
     },
     {
-      "name": "use-timeout-ex-01",
+      "name": "use-is-client-ex-01",
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-timeout.json"
+        "https://unlogg.com/r/use-is-client.json",
+        "badge",
+        "card"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-timeout-ex-01.tsx",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-client-ex-01.tsx",
           "type": "registry:example"
         }
       ]
     },
     {
-      "name": "use-toggle-ex-01",
+      "name": "use-is-online-ex-01",
       "type": "registry:example",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-toggle.json"
+        "https://unlogg.com/r/use-is-online.json",
+        "badge",
+        "card"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-is-online-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-is-online.json",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-is-online-ex-02.tsx",
           "type": "registry:example"
         }
       ]
@@ -460,7 +460,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-leave-page.json"
+        "https://unlogg.com/r/use-leave-page.json",
+        "badge",
+        "card"
       ],
       "files": [
         {
@@ -476,7 +478,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-leave-page.json"
+        "https://unlogg.com/r/use-leave-page.json",
+        "button",
+        "card"
       ],
       "files": [
         {
@@ -492,7 +496,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-leave-page.json"
+        "https://unlogg.com/r/use-leave-page.json",
+        "card",
+        "input"
       ],
       "files": [
         {
@@ -508,11 +514,34 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-local-storage.json"
+        "https://unlogg.com/r/use-local-storage.json",
+        "badge",
+        "button",
+        "card"
       ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-local-storage.json",
+        "badge",
+        "button",
+        "card",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-local-storage-ex-02.tsx",
           "type": "registry:example"
         }
       ]
@@ -524,7 +553,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-media-query.json"
+        "https://unlogg.com/r/use-media-query.json",
+        "badge",
+        "card"
       ],
       "files": [
         {
@@ -540,7 +571,10 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-mobile.json"
+        "https://unlogg.com/r/use-mobile.json",
+        "badge",
+        "button",
+        "card"
       ],
       "files": [
         {
@@ -556,7 +590,10 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-scroll-into-view.json"
+        "https://unlogg.com/r/use-scroll-into-view.json",
+        "badge",
+        "button",
+        "card"
       ],
       "files": [
         {
@@ -572,11 +609,47 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-state-history.json"
+        "https://unlogg.com/r/use-state-history.json",
+        "button",
+        "input"
       ],
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-state-history-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-timeout-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-timeout.json",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-timeout-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-toggle-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-toggle.json",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-toggle-ex-01.tsx",
           "type": "registry:example"
         }
       ]
@@ -588,7 +661,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://unlogg.com/r/use-window-size.json"
+        "https://unlogg.com/r/use-window-size.json",
+        "badge",
+        "card"
       ],
       "files": [
         {
@@ -709,7 +784,7 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback.ts",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-callback.ts",
           "type": "registry:hook",
           "target": "/hooks/use-debounce-callback.ts"
         }
@@ -723,7 +798,7 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value.ts",
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-value.ts",
           "type": "registry:hook",
           "target": "/hooks/use-debounce-value.ts"
         }

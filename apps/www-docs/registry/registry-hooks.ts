@@ -4,8 +4,8 @@ import { useClickOutside } from "@unlogg/ui/hooks/unlogg-hooks/use-click-outside
 import { useClipboardCopy } from "@unlogg/ui/hooks/unlogg-hooks/use-clipboard-copy";
 import { useCountdown } from "@unlogg/ui/hooks/unlogg-hooks/use-countdown";
 import { useCounter } from "@unlogg/ui/hooks/unlogg-hooks/use-counter";
-import { useDebounceCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-callback";
-import { useDebounceValue } from "@unlogg/ui/hooks/unlogg-hooks/use-debounce-value";
+import { useDebouncedCallback } from "@unlogg/ui/hooks/unlogg-hooks/use-debounced-callback";
+import { useDebouncedValue } from "@unlogg/ui/hooks/unlogg-hooks/use-debounced-value";
 import { useDisclosure } from "@unlogg/ui/hooks/unlogg-hooks/use-disclosure";
 import { useDocumentTitle } from "@unlogg/ui/hooks/unlogg-hooks/use-document-title";
 import { useElementSize } from "@unlogg/ui/hooks/unlogg-hooks/use-element-size";
@@ -96,12 +96,12 @@ export const hooks: Registry = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-callback.ts",
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-callback.ts",
         type: "registry:hook",
         target: "/hooks/use-debounce-callback.ts",
       },
     ],
-    component: useDebounceCallback,
+    component: useDebouncedCallback,
   },
   {
     name: "use-debounced-value",
@@ -109,12 +109,12 @@ export const hooks: Registry = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounce-value.ts",
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-debounced-value.ts",
         type: "registry:hook",
         target: "/hooks/use-debounce-value.ts",
       },
     ],
-    component: useDebounceValue,
+    component: useDebouncedValue,
   },
 
   {

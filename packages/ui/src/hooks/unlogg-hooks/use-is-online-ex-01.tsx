@@ -10,14 +10,14 @@ export default function UseIsOnline_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">
+        <h3 className="mb-2 text-lg font-semibold">
           Online Status Detection Hook
         </h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-muted-foreground mb-4 text-sm">
           Monitors network connectivity and provides connection information
         </p>
 
-        <div className="flex items-center justify-center gap-4 flex-wrap">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Badge
             variant={isOnline ? "default" : "destructive"}
             className="text-sm"
@@ -37,8 +37,8 @@ export default function UseIsOnline_Ex_01() {
         </div>
       </div>
 
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Connection Status</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Connection Status</h4>
         <ConnectionStatusDemo isOnline={isOnline} networkInfo={networkInfo} />
       </Card>
     </div>
@@ -55,7 +55,7 @@ function ConnectionStatusDemo({
   return (
     <div className="space-y-4">
       <div className="text-center">
-        <div className={`text-6xl mb-2 ${!isOnline ? "animate-pulse" : ""}`}>
+        <div className={`mb-2 text-6xl ${!isOnline ? "animate-pulse" : ""}`}>
           {isOnline ? "🌐" : "📡"}
         </div>
         <Badge
@@ -66,14 +66,14 @@ function ConnectionStatusDemo({
         </Badge>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Status:</strong> {isOnline ? "Online" : "Offline"}
           </p>
         </div>
         {networkInfo?.type && (
-          <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
             <p className="text-sm text-gray-700">
               <strong>Connection Type:</strong> {networkInfo.type}
             </p>

@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Button } from "@unlogg/ui/components/button";
+import { Card } from "@unlogg/ui/components/card";
 import { useElementSize } from "@unlogg/ui/hooks/unlogg-hooks/use-element-size";
+import * as React from "react";
 
 export default function UseElementSize_Ex_01() {
   const [ref, { width, height }] = useElementSize<HTMLDivElement>();
@@ -26,14 +26,14 @@ export default function UseElementSize_Ex_01() {
       <Card className="w-full max-w-2xl p-6">
         <div className="space-y-6">
           <div className="text-center">
-            <h3 className="text-lg font-semibold mb-2">
+            <h3 className="mb-2 text-lg font-semibold">
               Element Size Observer
             </h3>
             <Badge variant={getStatusColor()}>{getStatus()}</Badge>
           </div>
 
           {/* Controls */}
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap justify-center gap-2">
             <Button
               onClick={() => setIsExpanded(!isExpanded)}
               variant="outline"
@@ -65,18 +65,18 @@ export default function UseElementSize_Ex_01() {
           </div>
 
           {/* Size Display */}
-          <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+          <div className="mx-auto grid max-w-sm grid-cols-2 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-mono font-bold text-blue-600">
+              <div className="font-mono text-2xl font-bold text-blue-600">
                 {width}px
               </div>
-              <div className="text-sm text-muted-foreground">Width</div>
+              <div className="text-muted-foreground text-sm">Width</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-mono font-bold text-green-600">
+              <div className="font-mono text-2xl font-bold text-green-600">
                 {height}px
               </div>
-              <div className="text-sm text-muted-foreground">Height</div>
+              <div className="text-muted-foreground text-sm">Height</div>
             </div>
           </div>
 
@@ -88,21 +88,16 @@ export default function UseElementSize_Ex_01() {
                 width: containerWidth,
                 transition: "all 0.3s ease-in-out",
               }}
-              className={`
-                bg-card-foreground
-                border-2 border-dashed border-blue-500
-                rounded-lg p-4 text-center
-                ${isExpanded ? "min-h-[200px]" : "min-h-[100px]"}
-              `}
+              className={`bg-card-foreground rounded-lg border-2 border-dashed border-blue-500 p-4 text-center ${isExpanded ? "min-h-[200px]" : "min-h-[100px]"} `}
             >
-              <div className="text-sm font-medium text-blue-700 mb-2">
+              <div className="mb-2 text-sm font-medium text-blue-700">
                 Observed Element
               </div>
               <div className="text-xs text-blue-600">
                 This element is being observed for size changes
               </div>
               {isExpanded && (
-                <div className="mt-4 text-xs text-muted-foreground">
+                <div className="text-muted-foreground mt-4 text-xs">
                   <p>Additional content when expanded</p>
                   <p>The height automatically adjusts</p>
                   <p>ResizeObserver tracks all changes</p>
@@ -111,7 +106,7 @@ export default function UseElementSize_Ex_01() {
             </div>
           </div>
 
-          <div className="text-xs text-center text-muted-foreground">
+          <div className="text-muted-foreground text-center text-xs">
             Try resizing the element using the controls above or by resizing
             your browser window
           </div>
@@ -120,7 +115,7 @@ export default function UseElementSize_Ex_01() {
 
       {/* Multiple Elements Example */}
       <Card className="w-full max-w-2xl p-6">
-        <h4 className="text-md font-semibold mb-4 text-center">
+        <h4 className="text-md mb-4 text-center font-semibold">
           Multiple Elements
         </h4>
         <MultipleElementsDemo />
@@ -136,7 +131,7 @@ function MultipleElementsDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2 justify-center">
+      <div className="flex justify-center gap-2">
         <Button
           onClick={() => setShow((prev) => ({ ...prev, first: !prev.first }))}
           variant="outline"
@@ -153,15 +148,15 @@ function MultipleElementsDemo() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {show.first && (
           <div>
             <div
               ref={ref1}
-              className="bg-red-50 border border-red-200 rounded p-4 text-center"
+              className="rounded border border-red-200 bg-red-50 p-4 text-center"
             >
               <div className="text-sm font-medium text-red-700">Element 1</div>
-              <div className="text-xs text-red-600 mt-2">
+              <div className="mt-2 text-xs text-red-600">
                 {size1.width} × {size1.height}
               </div>
             </div>
@@ -172,15 +167,15 @@ function MultipleElementsDemo() {
           <div>
             <div
               ref={ref2}
-              className="bg-green-50 border border-green-200 rounded p-6 text-center"
+              className="rounded border border-green-200 bg-green-50 p-6 text-center"
             >
               <div className="text-sm font-medium text-green-700">
                 Element 2
               </div>
-              <div className="text-xs text-green-600 mt-2">
+              <div className="mt-2 text-xs text-green-600">
                 {size2.width} × {size2.height}
               </div>
-              <div className="text-xs text-muted-foreground mt-2">
+              <div className="text-muted-foreground mt-2 text-xs">
                 This element has more padding
               </div>
             </div>

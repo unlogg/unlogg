@@ -18,12 +18,12 @@ export default function UseLocalStorage_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Local Storage Theme Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">Local Storage Theme Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           Persist theme preference across browser sessions
         </p>
 
-        <div className="flex items-center justify-center gap-4 flex-wrap">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Badge
             variant={colorScheme === "dark" ? "default" : "secondary"}
             className="text-sm"
@@ -36,8 +36,8 @@ export default function UseLocalStorage_Ex_01() {
         </div>
       </div>
 
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Theme Demo</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Theme Demo</h4>
         <ThemeDemo colorScheme={colorScheme} onToggle={toggleColorScheme} />
       </Card>
     </div>
@@ -54,15 +54,15 @@ function ThemeDemo({
   return (
     <div className="space-y-4">
       <div
-        className="p-6 rounded-lg border transition-all duration-300"
+        className="rounded-lg border p-6 transition-all duration-300"
         style={{
           backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
           color: colorScheme === "dark" ? "#ffffff" : "#1a1a1a",
           borderColor: colorScheme === "dark" ? "#333333" : "#e5e7eb",
         }}
       >
-        <div className="text-center mb-4">
-          <div className="text-4xl mb-2">
+        <div className="mb-4 text-center">
+          <div className="mb-2 text-4xl">
             {colorScheme === "dark" ? "🌙" : "☀️"}
           </div>
           <Badge
@@ -73,7 +73,7 @@ function ThemeDemo({
           </Badge>
         </div>
 
-        <p className="text-sm mb-4 leading-relaxed">
+        <p className="mb-4 text-sm leading-relaxed">
           This theme preference is automatically saved to localStorage and will
           persist across browser sessions. The hook handles SSR safely and
           provides seamless state management for theme switching.
@@ -89,13 +89,13 @@ function ThemeDemo({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Storage Key:</strong> color-scheme
           </p>
         </div>
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
           <p className="text-sm text-gray-700">
             <strong>Current Value:</strong> {colorScheme}
           </p>

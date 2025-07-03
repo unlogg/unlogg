@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { Card } from "@unlogg/ui/components/card";
-import { Button } from "@unlogg/ui/components/button";
 import { Badge } from "@unlogg/ui/components/badge";
+import { Button } from "@unlogg/ui/components/button";
+import { Card } from "@unlogg/ui/components/card";
 import { useMobile } from "@unlogg/ui/hooks/unlogg-hooks/use-mobile";
+import * as React from "react";
 
 export default function UseMobile_Ex_01() {
   // Different mobile breakpoints
@@ -60,12 +60,12 @@ export default function UseMobile_Ex_01() {
   return (
     <div className="flex flex-col gap-6 p-6">
       <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">Mobile Detection Hook</h3>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h3 className="mb-2 text-lg font-semibold">Mobile Detection Hook</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
           Resize your window to see different mobile breakpoints in action
         </p>
 
-        <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="mb-4 flex items-center justify-center gap-2">
           <span className="text-sm font-medium">Current Width:</span>
           <Badge variant="outline" className="font-mono">
             {windowWidth}px
@@ -74,7 +74,7 @@ export default function UseMobile_Ex_01() {
       </div>
 
       {/* Breakpoint cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {breakpoints.map((bp) => (
           <BreakpointCard
             key={bp.name}
@@ -89,8 +89,8 @@ export default function UseMobile_Ex_01() {
       </div>
 
       {/* Responsive content demo */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">Responsive Content Demo</h4>
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">Responsive Content Demo</h4>
         <ResponsiveDemo
           isMobileDefault={isMobileDefault}
           isMobileSmall={isMobileSmall}
@@ -99,8 +99,8 @@ export default function UseMobile_Ex_01() {
       </Card>
 
       {/* Interactive breakpoint tester */}
-      <Card className="w-full max-w-4xl mx-auto p-6">
-        <h4 className="text-md font-semibold mb-4">
+      <Card className="mx-auto w-full max-w-4xl p-6">
+        <h4 className="text-md mb-4 font-semibold">
           Interactive Breakpoint Tester
         </h4>
         <BreakpointTester />
@@ -131,30 +131,23 @@ function BreakpointCard({
 
   return (
     <div
-      className={`
-      p-4 rounded-lg border-2 transition-all duration-300
-      ${
+      className={`rounded-lg border-2 p-4 transition-all duration-300 ${
         isMobile ? "border-green-300 bg-green-50" : "border-gray-200 bg-gray-50"
-      }
-      ${isClose ? "ring-2 ring-blue-200 scale-105" : ""}
-    `}
+      } ${isClose ? "scale-105 ring-2 ring-blue-200" : ""} `}
     >
-      <div className="text-center space-y-2">
-        <div className="flex items-center justify-center gap-2 mb-2">
+      <div className="space-y-2 text-center">
+        <div className="mb-2 flex items-center justify-center gap-2">
           <div
-            className={`
-            w-3 h-3 rounded-full transition-colors
-            ${isMobile ? "bg-green-500" : "bg-gray-400"}
-          `}
+            className={`h-3 w-3 rounded-full transition-colors ${isMobile ? "bg-green-500" : "bg-gray-400"} `}
           />
-          <h5 className="font-semibold text-sm">{name}</h5>
+          <h5 className="text-sm font-semibold">{name}</h5>
         </div>
 
-        <code className="text-xs bg-white/70 px-2 py-1 rounded block">
+        <code className="block rounded bg-white/70 px-2 py-1 text-xs">
           &lt; {value}px
         </code>
 
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-xs">{description}</p>
 
         <div className="space-y-1">
           <Badge variant={color} className="text-xs">
@@ -162,7 +155,7 @@ function BreakpointCard({
           </Badge>
 
           {isClose && (
-            <div className="text-xs text-blue-600 font-medium">
+            <div className="text-xs font-medium text-blue-600">
               {difference > 0 ? `+${difference}` : difference}px from breakpoint
             </div>
           )}
@@ -187,13 +180,10 @@ function ResponsiveDemo({
     <div className="space-y-4">
       {/* Layout adaptation based on default mobile */}
       <div
-        className={`
-        grid gap-4 transition-all duration-300
-        ${isMobileDefault ? "grid-cols-1" : "grid-cols-3"}
-      `}
+        className={`grid gap-4 transition-all duration-300 ${isMobileDefault ? "grid-cols-1" : "grid-cols-3"} `}
       >
-        <div className="p-4 bg-blue-50 border border-blue-200 rounded">
-          <h6 className="font-medium text-blue-800 mb-2">Layout</h6>
+        <div className="rounded border border-blue-200 bg-blue-50 p-4">
+          <h6 className="mb-2 font-medium text-blue-800">Layout</h6>
           <p className="text-sm text-blue-700">
             {isMobileDefault
               ? "Single column (mobile)"
@@ -201,15 +191,15 @@ function ResponsiveDemo({
           </p>
         </div>
 
-        <div className="p-4 bg-purple-50 border border-purple-200 rounded">
-          <h6 className="font-medium text-purple-800 mb-2">Navigation</h6>
+        <div className="rounded border border-purple-200 bg-purple-50 p-4">
+          <h6 className="mb-2 font-medium text-purple-800">Navigation</h6>
           <p className="text-sm text-purple-700">
             {isMobileDefault ? "Hamburger menu" : "Full navigation"}
           </p>
         </div>
 
-        <div className="p-4 bg-green-50 border border-green-200 rounded">
-          <h6 className="font-medium text-green-800 mb-2">Content</h6>
+        <div className="rounded border border-green-200 bg-green-50 p-4">
+          <h6 className="mb-2 font-medium text-green-800">Content</h6>
           <p className="text-sm text-green-700">
             {isMobileDefault ? "Stacked content" : "Side-by-side layout"}
           </p>
@@ -217,10 +207,10 @@ function ResponsiveDemo({
       </div>
 
       {/* Conditional content based on different breakpoints */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {isMobileSmall && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded">
-            <h6 className="font-medium text-red-800 mb-2">Small Mobile Only</h6>
+          <div className="rounded border border-red-200 bg-red-50 p-4">
+            <h6 className="mb-2 font-medium text-red-800">Small Mobile Only</h6>
             <p className="text-sm text-red-700">
               This content only appears on very small screens (&lt; 640px).
             </p>
@@ -228,8 +218,8 @@ function ResponsiveDemo({
         )}
 
         {isMobileDefault && !isMobileSmall && (
-          <div className="p-4 bg-orange-50 border border-orange-200 rounded">
-            <h6 className="font-medium text-orange-800 mb-2">Medium Mobile</h6>
+          <div className="rounded border border-orange-200 bg-orange-50 p-4">
+            <h6 className="mb-2 font-medium text-orange-800">Medium Mobile</h6>
             <p className="text-sm text-orange-700">
               This appears between 640px and 768px width.
             </p>
@@ -237,8 +227,8 @@ function ResponsiveDemo({
         )}
 
         {isMobileLarge && !isMobileDefault && (
-          <div className="p-4 bg-yellow-50 border border-yellow-200 rounded">
-            <h6 className="font-medium text-yellow-800 mb-2">Tablet Range</h6>
+          <div className="rounded border border-yellow-200 bg-yellow-50 p-4">
+            <h6 className="mb-2 font-medium text-yellow-800">Tablet Range</h6>
             <p className="text-sm text-yellow-700">
               This appears between 768px and 1024px width.
             </p>
@@ -246,8 +236,8 @@ function ResponsiveDemo({
         )}
 
         {!isMobileLarge && (
-          <div className="p-4 bg-indigo-50 border border-indigo-200 rounded">
-            <h6 className="font-medium text-indigo-800 mb-2">Desktop Only</h6>
+          <div className="rounded border border-indigo-200 bg-indigo-50 p-4">
+            <h6 className="mb-2 font-medium text-indigo-800">Desktop Only</h6>
             <p className="text-sm text-indigo-700">
               This content only appears on desktop screens (≥ 1024px).
             </p>
@@ -266,8 +256,8 @@ function BreakpointTester() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2 justify-center">
-        <span className="text-sm font-medium self-center">Quick Presets:</span>
+      <div className="flex flex-wrap justify-center gap-2">
+        <span className="self-center text-sm font-medium">Quick Presets:</span>
         {presetBreakpoints.map((bp) => (
           <Button
             key={bp}
@@ -280,22 +270,22 @@ function BreakpointTester() {
         ))}
       </div>
 
-      <div className="flex items-center gap-4 justify-center">
+      <div className="flex items-center justify-center gap-4">
         <label className="text-sm font-medium">Custom Breakpoint:</label>
         <input
           type="number"
           value={customBreakpoint}
           onChange={(e) => setCustomBreakpoint(Number(e.target.value))}
-          className="px-3 py-1 border rounded text-sm w-20"
+          className="w-20 rounded border px-3 py-1 text-sm"
           min="200"
           max="2000"
           step="10"
         />
-        <span className="text-xs text-muted-foreground">pixels</span>
+        <span className="text-muted-foreground text-xs">pixels</span>
       </div>
 
-      <div className="text-center p-4 bg-gray-50 rounded-lg">
-        <div className="text-lg font-semibold mb-2">
+      <div className="rounded-lg bg-gray-50 p-4 text-center">
+        <div className="mb-2 text-lg font-semibold">
           useMobile({customBreakpoint})
         </div>
         <Badge
@@ -304,7 +294,7 @@ function BreakpointTester() {
         >
           {isCustomMobile ? "Mobile" : "Desktop"}
         </Badge>
-        <p className="text-xs text-muted-foreground mt-2">
+        <p className="text-muted-foreground mt-2 text-xs">
           Current screen is {isCustomMobile ? "below" : "at or above"}{" "}
           {customBreakpoint}px
         </p>

@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Button } from "@unlogg/ui/components/button";
 import { Input } from "@unlogg/ui/components/input";
 import { useStateHistory } from "@unlogg/ui/hooks/unlogg-hooks/use-state-history";
+import * as React from "react";
 
 export default function UseStateHistory_Ex_01() {
   const [
@@ -36,8 +36,8 @@ export default function UseStateHistory_Ex_01() {
   return (
     <div className="flex flex-col items-center gap-6 p-6">
       <div className="text-center">
-        <div className="text-4xl font-mono font-bold mb-2">{value}</div>
-        <div className="text-sm text-muted-foreground">
+        <div className="mb-2 font-mono text-4xl font-bold">{value}</div>
+        <div className="text-muted-foreground text-sm">
           History: {currentIndex + 1} / {history.length}
         </div>
       </div>
@@ -87,12 +87,12 @@ export default function UseStateHistory_Ex_01() {
       </div>
 
       <div className="text-center">
-        <div className="text-sm font-medium mb-2">History:</div>
-        <div className="flex gap-1 flex-wrap justify-center max-w-xs">
+        <div className="mb-2 text-sm font-medium">History:</div>
+        <div className="flex max-w-xs flex-wrap justify-center gap-1">
           {history.map((historyValue, index) => (
             <span
               key={index}
-              className={`px-2 py-1 text-xs rounded ${
+              className={`rounded px-2 py-1 text-xs ${
                 index === currentIndex
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground"

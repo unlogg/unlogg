@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useInterval } from "@unlogg/ui/hooks/unlogg-hooks/use-interval";
+import { useState } from "react";
 
 const tabs = [
   {
@@ -35,20 +35,19 @@ function UseInterval_Ex_01() {
 
   return (
     <div>
-      <p className="text-muted-foreground text-sm text-center mb-4">
+      <p className="text-muted-foreground mb-4 text-center text-sm">
         Tabs auto-switch every 3 seconds
       </p>
 
-      <div className="bg-background border text-center p-6 rounded-lg w-[480px] mx-auto">
-        <div className="flex justify-center mb-4">
+      <div className="bg-background mx-auto w-[480px] rounded-lg border p-6 text-center">
+        <div className="mb-4 flex justify-center">
           {tabs.map((tab, idx) => (
             <div
               key={tab.title}
-              className={`flex-1 py-2 cursor-pointer border-b-2 transition-all duration-200
-              ${
+              className={`flex-1 cursor-pointer border-b-2 py-2 transition-all duration-200 ${
                 activeTab === idx
-                  ? "border-b-2 border-primary font-bold text-primary"
-                  : "border-b-2 bg-transparent font-normal text-muted-foreground"
+                  ? "border-primary text-primary border-b-2 font-bold"
+                  : "text-muted-foreground border-b-2 bg-transparent font-normal"
               }`}
             >
               {tab.title}
@@ -59,7 +58,7 @@ function UseInterval_Ex_01() {
           <h3 className="mt-2 mb-1 text-lg font-semibold">
             {tabs[activeTab].title}
           </h3>
-          <p className="m-0 text-muted-foreground">
+          <p className="text-muted-foreground m-0">
             {tabs[activeTab].description}
           </p>
         </div>
