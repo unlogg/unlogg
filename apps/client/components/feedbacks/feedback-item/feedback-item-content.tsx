@@ -11,6 +11,7 @@ import { ScrollArea } from "@unlogg/ui/components/scroll-area";
 import { Separator } from "@unlogg/ui/components/separator";
 import { Collapsible } from "@unlogg/ui/components/collapsible-animated";
 import { FeedbackItemDescriptionCollapsible } from "./feedback-item-content.client";
+import { Label } from "@unlogg/ui/components/label";
 
 export type FeedbackItemProps = {
   id: string;
@@ -98,7 +99,7 @@ const FeedbackItemSidebar = ({
 }: FeedbackItemSidebarProps) => {
   return (
     <div>
-      <div className="flex  flex-col items-start justify-between gap-3 mt-4 px-2">
+      <div className="flex  flex-col items-start justify-between gap-4 mt-4 px-2">
         <div className="flex items-center gap-4">
           <Upvote upvotes={upvotes} />
           <Button variant="ghost" size="sm" className="gap-2">
@@ -106,6 +107,35 @@ const FeedbackItemSidebar = ({
             {comments}
           </Button>
         </div>
+        <Separator className="w-full" />
+
+        <div className="flex items-center gap-2">
+          {status === "open" && (
+            <>
+              <Label className="text-muted-foreground">Status:</Label>
+              <Badge
+                variant="outline"
+                className="text-green-500 border-green-500/50"
+              >
+                Open
+              </Badge>
+            </>
+          )}
+        </div>
+
+        {productTags.length > 0 && (
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Product Tags:</Label>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              {productTags.map((tag) => (
+                <Badge key={tag} variant="secondary">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
         <Separator className="w-full" />
         <div className="flex items-center gap-3">
           <Avatar className="rounded-lg w-8 h-8">
@@ -120,27 +150,6 @@ const FeedbackItemSidebar = ({
             <span>{createdAt}</span>
           </div>
         </div>
-
-        <div className="flex items-center gap-2">
-          {status === "open" && (
-            <Badge
-              variant="outline"
-              className="text-green-500 border-green-500/50"
-            >
-              Open
-            </Badge>
-          )}
-        </div>
-
-        {productTags.length > 0 && (
-          <div className="flex items-center gap-2 flex-wrap">
-            {productTags.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

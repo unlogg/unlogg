@@ -8,10 +8,11 @@ function FeedbacksHeader() {
         <FeedbackView />
       </div>
       <div>
-        <Button>
+        {/* <Button>
           {" "}
           <PlusIcon /> Add Feedback
-        </Button>
+        </Button> */}
+        <CreateFeedbackButton />
       </div>
     </div>
   );
@@ -27,6 +28,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@unlogg/ui/components/tabs";
+import { CreateFeedbackButton } from "./create-feedback-modal";
 
 export default function FeedbackView() {
   return (

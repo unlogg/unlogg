@@ -87,6 +87,7 @@ function DialogOverlay({
 type DialogContentProps = React.ComponentProps<
   typeof DialogPrimitive.Content
 > & {
+  dialogOverlayClassName?: string;
   variant?: "default";
   position?: "default" | "bl" | "bc" | "br" | "tc";
   size?:
@@ -109,11 +110,12 @@ function DialogContent({
   position,
   size,
   displayCloseButton = false,
+  dialogOverlayClassName,
   ...props
 }: DialogContentProps) {
   return (
     <DialogPortal data-slot="dialog-portal">
-      <DialogOverlay />
+      <DialogOverlay className={cn(dialogOverlayClassName)} />
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(dialogVariants({ variant, position, size }), className)}

@@ -9,6 +9,12 @@ import { Badge } from "@unlogg/ui/components/badge";
 import { Button } from "@unlogg/ui/components/button";
 import { ArrowLeft, Maximize, Maximize2, MessageCircle, X } from "lucide-react";
 import { Upvote } from "../feedback-card.client";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@unlogg/ui/components/tooltip";
 
 export type FeedbackTitleProps = {
   id: string;
@@ -46,17 +52,27 @@ export const FeedbackItemHeaderInModal = ({
     <div className="flex items-center justify-between sticky top-0 z-10 bg-background border-b p-4">
       <h1 className="text-2xl font-semibold">{title}</h1>
 
-      <div>
-        <Button
-          variant="outlineSecondary"
-          size="icon"
-          onClick={() => {
-            // Force a hard navigation to bypass the intercepted route
-            window.location.href = `/feedbacks/${id}`;
-          }}
-        >
-          <Maximize2 />
-        </Button>
+      <div className="flex items-center gap-2">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  // Force a hard navigation to bypass the intercepted route
+                  window.location.href = `/feedbacks/${id}`;
+                }}
+              >
+                <Maximize2 />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Expand</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <Button
           variant="ghost"
           size="icon"

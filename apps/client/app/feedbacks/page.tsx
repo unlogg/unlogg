@@ -5,6 +5,7 @@ import {
 import { FeedbacksHeader } from "@/components/feedbacks/feedbacks-header";
 import { sampleFeedbacks } from "@/data/sample-feedbacks";
 import { Button } from "@unlogg/ui/components/button";
+import { MarkdownEditor } from "@unlogg/ui/components/unlogg-ui/markdown-editor/markdown-editor";
 
 export default function FeedbacksPage() {
   return (

@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono, Public_Sans } from "next/font/google";
 
 import "@unlogg/ui/globals.css";
 import { Providers } from "@/components/providers";

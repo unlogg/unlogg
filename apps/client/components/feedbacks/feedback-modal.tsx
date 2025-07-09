@@ -49,24 +49,7 @@ export function FeedbackModal({
         position="tc"
         size="4xl"
       >
-        {/* <FeedbackItemHeaderInModal
-          id={id}
-          title={title}
-          handleClose={handleClose}
-        />
-
-        <FeedbackItemContent
-          id={id}
-          title={title}
-          description={description}
-          username={username}
-          userAvatar={userAvatar}
-          upvotes={upvotes}
-          comments={comments}
-          productTags={productTags}
-          createdAt={createdAt}
-          status={status}
-        /> */}
+        <DialogTitle className="sr-only">{title}</DialogTitle>
 
         <FeedbackItem
           id={id}
