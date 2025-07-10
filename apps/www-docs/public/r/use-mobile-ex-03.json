@@ -1,0 +1,21 @@
+{
+  "name": "use-mobile-ex-03",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-mobile.json",
+    "badge",
+    "button",
+    "card"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { Badge } from \"@/components/ui/badge\";\nimport { Button } from \"@/components/ui/button\";\nimport { useMobile } from \"@/hooks/use-mobile\";\nimport * as React from \"react\";\n\nexport default function UseMobile_Ex_03() {\n  return (\n    <div className=\"flex flex-col gap-6 p-6\">\n      <div>\n        <BreakpointTester />\n      </div>\n    </div>\n  );\n}\n\nfunction BreakpointTester() {\n  const [customBreakpoint, setCustomBreakpoint] = React.useState(768);\n  const isCustomMobile = useMobile(customBreakpoint);\n\n  const presetBreakpoints = [320, 480, 640, 768, 1024, 1280, 1440];\n\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"flex flex-wrap justify-center gap-2\">\n        <span className=\"self-center text-sm font-medium\">Quick Presets:</span>\n        {presetBreakpoints.map((bp) => (\n          <Button\n            key={bp}\n            onClick={() => setCustomBreakpoint(bp)}\n            variant={customBreakpoint === bp ? \"default\" : \"outline\"}\n            size=\"sm\"\n          >\n            {bp}px\n          </Button>\n        ))}\n      </div>\n\n      <div className=\"flex items-center justify-center gap-4\">\n        <label className=\"text-sm font-medium\">Custom Breakpoint:</label>\n        <input\n          type=\"number\"\n          value={customBreakpoint}\n          onChange={(e) => setCustomBreakpoint(Number(e.target.value))}\n          className=\"w-20 rounded border px-3 py-1 text-sm\"\n          min=\"200\"\n          max=\"2000\"\n          step=\"10\"\n        />\n        <span className=\"text-muted-foreground text-xs\">pixels</span>\n      </div>\n\n      <div className=\"bg-card rounded-lg p-4 text-center\">\n        <div className=\"mb-2 text-lg font-semibold\">\n          useMobile({customBreakpoint})\n        </div>\n        <Badge\n          variant={isCustomMobile ? \"default\" : \"secondary\"}\n          className=\"text-sm\"\n        >\n          {isCustomMobile ? \"Mobile\" : \"Desktop\"}\n        </Badge>\n        <p className=\"text-muted-foreground mt-2 text-xs\">\n          Current screen is {isCustomMobile ? \"below\" : \"at or above\"}{\" \"}\n          {customBreakpoint}px\n        </p>\n      </div>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-03.tsx",
+      "target": "/components/unlogg-ui/use-mobile-ex-03.tsx"
+    }
+  ]
+}
