@@ -88,12 +88,10 @@ export default function UseElementSize_Ex_01() {
                 width: containerWidth,
                 transition: "all 0.3s ease-in-out",
               }}
-              className={`bg-card-foreground rounded-lg border-2 border-dashed border-blue-500 p-4 text-center ${isExpanded ? "min-h-[200px]" : "min-h-[100px]"} `}
+              className={`bg-card rounded-lg border-2 border-dashed border-blue-500 p-4 text-center ${isExpanded ? "min-h-[200px]" : "min-h-[100px]"} `}
             >
-              <div className="mb-2 text-sm font-medium text-blue-700">
-                Observed Element
-              </div>
-              <div className="text-xs text-blue-600">
+              <div className="mb-2 text-sm font-medium">Observed Element</div>
+              <div className="text-xs">
                 This element is being observed for size changes
               </div>
               {isExpanded && (
@@ -112,76 +110,6 @@ export default function UseElementSize_Ex_01() {
           </div>
         </div>
       </Card>
-
-      {/* Multiple Elements Example */}
-      <Card className="w-full max-w-2xl p-6">
-        <h4 className="text-md mb-4 text-center font-semibold">
-          Multiple Elements
-        </h4>
-        <MultipleElementsDemo />
-      </Card>
-    </div>
-  );
-}
-
-function MultipleElementsDemo() {
-  const [ref1, size1] = useElementSize<HTMLDivElement>();
-  const [ref2, size2] = useElementSize<HTMLDivElement>();
-  const [show, setShow] = React.useState({ first: true, second: true });
-
-  return (
-    <div className="space-y-4">
-      <div className="flex justify-center gap-2">
-        <Button
-          onClick={() => setShow((prev) => ({ ...prev, first: !prev.first }))}
-          variant="outline"
-          size="sm"
-        >
-          {show.first ? "Hide" : "Show"} First Element
-        </Button>
-        <Button
-          onClick={() => setShow((prev) => ({ ...prev, second: !prev.second }))}
-          variant="outline"
-          size="sm"
-        >
-          {show.second ? "Hide" : "Show"} Second Element
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {show.first && (
-          <div>
-            <div
-              ref={ref1}
-              className="rounded border border-red-200 bg-red-50 p-4 text-center"
-            >
-              <div className="text-sm font-medium text-red-700">Element 1</div>
-              <div className="mt-2 text-xs text-red-600">
-                {size1.width} × {size1.height}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {show.second && (
-          <div>
-            <div
-              ref={ref2}
-              className="rounded border border-green-200 bg-green-50 p-6 text-center"
-            >
-              <div className="text-sm font-medium text-green-700">
-                Element 2
-              </div>
-              <div className="mt-2 text-xs text-green-600">
-                {size2.width} × {size2.height}
-              </div>
-              <div className="text-muted-foreground mt-2 text-xs">
-                This element has more padding
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

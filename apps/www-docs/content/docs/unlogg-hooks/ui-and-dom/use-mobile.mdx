@@ -6,7 +6,6 @@ isNew: true
 
 `useMobile` is a custom React hook that provides a simple boolean interface to detect if the current screen width is below a specified mobile breakpoint. It uses window resize events to track screen size changes and offers configurable breakpoint values with SSR support.
 
-## Example
 
 <ComponentPreview
   name="use-mobile-ex-01"
@@ -50,6 +49,23 @@ Update the import paths to match your project setup
 - Automatically handles server-side rendering scenarios
 - Provides options for SSR-safe initialization
 - Cleans up event listeners automatically on unmount
+
+## Examples
+
+### Layout with breakpoints
+
+<ComponentPreview
+  name="use-mobile-ex-02"
+  classNameComponentContainer='min-h-[700px]'
+/>
+
+### Layout with custom breakpoints
+
+<ComponentPreview
+  name="use-mobile-ex-03"
+  classNameComponentContainer='min-h-[700px]'
+/>
+
 
 ## API Reference
 
@@ -261,20 +277,7 @@ const isMobile = useMobile(768);
 const isTablet = useMobile(1024);
 ```
 
-## TypeScript
 
-The hook is fully typed and exports its option types:
-
-```tsx
-import { useMobile, UseMobileOptions } from "@/hooks/use-mobile";
-
-const options: UseMobileOptions = {
-  defaultValue: false,
-  initializeWithValue: true
-};
-
-const isMobile: boolean = useMobile(768, options);
-```
 
 ## Use Cases
 

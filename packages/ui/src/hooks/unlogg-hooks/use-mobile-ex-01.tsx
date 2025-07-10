@@ -1,8 +1,6 @@
 "use client";
 
 import { Badge } from "@unlogg/ui/components/badge";
-import { Button } from "@unlogg/ui/components/button";
-import { Card } from "@unlogg/ui/components/card";
 import { useMobile } from "@unlogg/ui/hooks/unlogg-hooks/use-mobile";
 import * as React from "react";
 
@@ -87,24 +85,6 @@ export default function UseMobile_Ex_01() {
           />
         ))}
       </div>
-
-      {/* Responsive content demo */}
-      <Card className="mx-auto w-full max-w-4xl p-6">
-        <h4 className="text-md mb-4 font-semibold">Responsive Content Demo</h4>
-        <ResponsiveDemo
-          isMobileDefault={isMobileDefault}
-          isMobileSmall={isMobileSmall}
-          isMobileLarge={isMobileLarge}
-        />
-      </Card>
-
-      {/* Interactive breakpoint tester */}
-      <Card className="mx-auto w-full max-w-4xl p-6">
-        <h4 className="text-md mb-4 font-semibold">
-          Interactive Breakpoint Tester
-        </h4>
-        <BreakpointTester />
-      </Card>
     </div>
   );
 }
@@ -132,18 +112,18 @@ function BreakpointCard({
   return (
     <div
       className={`rounded-lg border-2 p-4 transition-all duration-300 ${
-        isMobile ? "border-green-300 bg-green-50" : "border-gray-200 bg-gray-50"
+        isMobile ? "border-green-300" : "border"
       } ${isClose ? "scale-105 ring-2 ring-blue-200" : ""} `}
     >
       <div className="space-y-2 text-center">
         <div className="mb-2 flex items-center justify-center gap-2">
           <div
-            className={`h-3 w-3 rounded-full transition-colors ${isMobile ? "bg-green-500" : "bg-gray-400"} `}
+            className={`h-3 w-3 rounded-full transition-colors ${isMobile ? "bg-green-500" : "bg-border-400"} `}
           />
           <h5 className="text-sm font-semibold">{name}</h5>
         </div>
 
-        <code className="block rounded bg-white/70 px-2 py-1 text-xs">
+        <code className="bg-card block rounded px-2 py-1 text-xs">
           &lt; {value}px
         </code>
 
@@ -160,144 +140,6 @@ function BreakpointCard({
             </div>
           )}
         </div>
-      </div>
-    </div>
-  );
-}
-
-interface ResponsiveDemoProps {
-  isMobileDefault: boolean;
-  isMobileSmall: boolean;
-  isMobileLarge: boolean;
-}
-
-function ResponsiveDemo({
-  isMobileDefault,
-  isMobileSmall,
-  isMobileLarge,
-}: ResponsiveDemoProps) {
-  return (
-    <div className="space-y-4">
-      {/* Layout adaptation based on default mobile */}
-      <div
-        className={`grid gap-4 transition-all duration-300 ${isMobileDefault ? "grid-cols-1" : "grid-cols-3"} `}
-      >
-        <div className="rounded border border-blue-200 bg-blue-50 p-4">
-          <h6 className="mb-2 font-medium text-blue-800">Layout</h6>
-          <p className="text-sm text-blue-700">
-            {isMobileDefault
-              ? "Single column (mobile)"
-              : "Three columns (desktop)"}
-          </p>
-        </div>
-
-        <div className="rounded border border-purple-200 bg-purple-50 p-4">
-          <h6 className="mb-2 font-medium text-purple-800">Navigation</h6>
-          <p className="text-sm text-purple-700">
-            {isMobileDefault ? "Hamburger menu" : "Full navigation"}
-          </p>
-        </div>
-
-        <div className="rounded border border-green-200 bg-green-50 p-4">
-          <h6 className="mb-2 font-medium text-green-800">Content</h6>
-          <p className="text-sm text-green-700">
-            {isMobileDefault ? "Stacked content" : "Side-by-side layout"}
-          </p>
-        </div>
-      </div>
-
-      {/* Conditional content based on different breakpoints */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {isMobileSmall && (
-          <div className="rounded border border-red-200 bg-red-50 p-4">
-            <h6 className="mb-2 font-medium text-red-800">Small Mobile Only</h6>
-            <p className="text-sm text-red-700">
-              This content only appears on very small screens (&lt; 640px).
-            </p>
-          </div>
-        )}
-
-        {isMobileDefault && !isMobileSmall && (
-          <div className="rounded border border-orange-200 bg-orange-50 p-4">
-            <h6 className="mb-2 font-medium text-orange-800">Medium Mobile</h6>
-            <p className="text-sm text-orange-700">
-              This appears between 640px and 768px width.
-            </p>
-          </div>
-        )}
-
-        {isMobileLarge && !isMobileDefault && (
-          <div className="rounded border border-yellow-200 bg-yellow-50 p-4">
-            <h6 className="mb-2 font-medium text-yellow-800">Tablet Range</h6>
-            <p className="text-sm text-yellow-700">
-              This appears between 768px and 1024px width.
-            </p>
-          </div>
-        )}
-
-        {!isMobileLarge && (
-          <div className="rounded border border-indigo-200 bg-indigo-50 p-4">
-            <h6 className="mb-2 font-medium text-indigo-800">Desktop Only</h6>
-            <p className="text-sm text-indigo-700">
-              This content only appears on desktop screens (≥ 1024px).
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function BreakpointTester() {
-  const [customBreakpoint, setCustomBreakpoint] = React.useState(768);
-  const isCustomMobile = useMobile(customBreakpoint);
-
-  const presetBreakpoints = [320, 480, 640, 768, 1024, 1280, 1440];
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap justify-center gap-2">
-        <span className="self-center text-sm font-medium">Quick Presets:</span>
-        {presetBreakpoints.map((bp) => (
-          <Button
-            key={bp}
-            onClick={() => setCustomBreakpoint(bp)}
-            variant={customBreakpoint === bp ? "default" : "outline"}
-            size="sm"
-          >
-            {bp}px
-          </Button>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-center gap-4">
-        <label className="text-sm font-medium">Custom Breakpoint:</label>
-        <input
-          type="number"
-          value={customBreakpoint}
-          onChange={(e) => setCustomBreakpoint(Number(e.target.value))}
-          className="w-20 rounded border px-3 py-1 text-sm"
-          min="200"
-          max="2000"
-          step="10"
-        />
-        <span className="text-muted-foreground text-xs">pixels</span>
-      </div>
-
-      <div className="rounded-lg bg-gray-50 p-4 text-center">
-        <div className="mb-2 text-lg font-semibold">
-          useMobile({customBreakpoint})
-        </div>
-        <Badge
-          variant={isCustomMobile ? "default" : "secondary"}
-          className="text-sm"
-        >
-          {isCustomMobile ? "Mobile" : "Desktop"}
-        </Badge>
-        <p className="text-muted-foreground mt-2 text-xs">
-          Current screen is {isCustomMobile ? "below" : "at or above"}{" "}
-          {customBreakpoint}px
-        </p>
       </div>
     </div>
   );

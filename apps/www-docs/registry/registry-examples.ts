@@ -570,6 +570,47 @@ export const examples: Registry = [
     ),
   },
   {
+    name: "use-mobile-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "https://unlogg.com/r/use-mobile.json",
+      "badge",
+      "button",
+      "card",
+    ],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-mobile-ex-02")
+    ),
+  },
+
+  {
+    name: "use-mobile-ex-03",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "https://unlogg.com/r/use-mobile.json",
+      "badge",
+      "button",
+      "card",
+    ],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-03.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-mobile-ex-03")
+    ),
+  },
+  {
     name: "use-scroll-into-view-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
@@ -587,6 +628,26 @@ export const examples: Registry = [
     ],
     component: React.lazy(
       () => import("@unlogg/ui/hooks/unlogg-hooks/use-scroll-into-view-ex-01")
+    ),
+  },
+  {
+    name: "use-scroll-into-view-ex-02",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "https://unlogg.com/r/use-scroll-into-view.json",
+      "badge",
+      "button",
+      "card",
+    ],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view-ex-02.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-scroll-into-view-ex-02")
     ),
   },
 

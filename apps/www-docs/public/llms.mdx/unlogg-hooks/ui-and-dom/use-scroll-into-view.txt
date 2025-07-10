@@ -5,8 +5,6 @@ A custom React hook that handles scroll behavior for any scrollable element with
 
 `useScrollIntoView` is a custom React hook that provides smooth scrolling functionality to any element. It works similarly to the native `element.scrollIntoView()` method but with enhanced features including automatic reduced-motion detection and customizable scroll behavior.
 
-## Example
-
 <ComponentPreview name="use-scroll-into-view-ex-01" classNameComponentContainer="min-h-[700px]" />
 
 ## Install
@@ -36,6 +34,12 @@ A custom React hook that handles scroll behavior for any scrollable element with
 * Provides cancel functionality for ongoing scroll animations
 * Works with any scrollable container
 * Supports all native `scrollIntoView` options
+
+## Examples
+
+### Scroll navigation between sections
+
+<ComponentPreview name="use-scroll-into-view-ex-02" classNameComponentContainer="min-h-[700px]" />
 
 ## API Reference
 

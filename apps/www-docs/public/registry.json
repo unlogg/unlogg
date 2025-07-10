@@ -584,6 +584,44 @@
       ]
     },
     {
+      "name": "use-mobile-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-mobile.json",
+        "badge",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-02.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-mobile-ex-03",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-mobile.json",
+        "badge",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-mobile-ex-03.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-scroll-into-view-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -598,6 +636,25 @@
       "files": [
         {
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "use-scroll-into-view-ex-02",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-scroll-into-view.json",
+        "badge",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-scroll-into-view-ex-02.tsx",
           "type": "registry:example"
         }
       ]

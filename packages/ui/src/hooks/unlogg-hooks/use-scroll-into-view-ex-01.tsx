@@ -67,7 +67,7 @@ export default function UseScrollIntoView_Ex_01() {
       </div>
 
       {/* Scrollable container */}
-      <Card className="mx-auto w-full max-w-2xl">
+      <Card className="bg-background mx-auto w-full max-w-2xl">
         <div
           ref={scrollableRef}
           className="h-96 overflow-y-auto rounded-lg border"
@@ -81,7 +81,7 @@ export default function UseScrollIntoView_Ex_01() {
                 see the targets.
               </p>
               {Array.from({ length: 5 }, (_, i) => (
-                <div key={i} className="rounded bg-gray-50 p-3">
+                <div key={i} className="bg-card rounded p-3">
                   <p className="text-sm">Filler content block {i + 1}</p>
                 </div>
               ))}
@@ -90,13 +90,13 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 1 - Top alignment */}
             <div
               ref={target1Ref}
-              className="rounded-lg border-2 border-blue-200 bg-blue-50 p-4"
+              className="bg-card rounded-lg border-2 border-blue-500 p-4"
             >
               <div className="mb-2 flex items-center gap-2">
                 <Badge variant="default">Target 1</Badge>
                 <span className="text-sm font-medium">Top Aligned</span>
               </div>
-              <p className="text-sm text-blue-700">
+              <p className="text-sm">
                 This target scrolls to the <strong>top</strong> of the viewport
                 when clicked. It uses <code>block: "start"</code> alignment.
               </p>
@@ -104,7 +104,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 8 }, (_, i) => (
-              <div key={`mid-${i}`} className="rounded bg-gray-50 p-3">
+              <div key={`mid-${i}`} className="bg-card rounded p-3">
                 <p className="text-sm">More content block {i + 1}</p>
               </div>
             ))}
@@ -112,13 +112,13 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 2 - Center alignment */}
             <div
               ref={target2Ref}
-              className="rounded-lg border-2 border-green-200 bg-green-50 p-4"
+              className="bg-card rounded-lg border-2 border-green-500 p-4"
             >
               <div className="mb-2 flex items-center gap-2">
                 <Badge variant="secondary">Target 2</Badge>
                 <span className="text-sm font-medium">Center Aligned</span>
               </div>
-              <p className="text-sm text-green-700">
+              <p className="text-sm">
                 This target scrolls to the <strong>center</strong> of the
                 viewport. It uses <code>block: "center"</code> alignment.
               </p>
@@ -126,7 +126,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 8 }, (_, i) => (
-              <div key={`end-${i}`} className="rounded bg-gray-50 p-3">
+              <div key={`end-${i}`} className="bg-card rounded p-3">
                 <p className="text-sm">Additional content block {i + 1}</p>
               </div>
             ))}
@@ -134,13 +134,13 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Target 3 - Bottom alignment */}
             <div
               ref={target3Ref}
-              className="rounded-lg border-2 border-purple-200 bg-purple-50 p-4"
+              className="bg-card rounded-lg border-2 border-purple-500 p-4"
             >
               <div className="mb-2 flex items-center gap-2">
                 <Badge variant="outline">Target 3</Badge>
                 <span className="text-sm font-medium">Bottom Aligned</span>
               </div>
-              <p className="text-sm text-purple-700">
+              <p className="text-sm">
                 This target scrolls to the <strong>bottom</strong> of the
                 viewport. It uses <code>block: "end"</code> alignment.
               </p>
@@ -148,7 +148,7 @@ export default function UseScrollIntoView_Ex_01() {
 
             {/* More content */}
             {Array.from({ length: 6 }, (_, i) => (
-              <div key={`final-${i}`} className="rounded bg-gray-50 p-3">
+              <div key={`final-${i}`} className="bg-card rounded p-3">
                 <p className="text-sm">Final content block {i + 1}</p>
               </div>
             ))}
@@ -156,13 +156,13 @@ export default function UseScrollIntoView_Ex_01() {
             {/* Auto scroll target */}
             <div
               ref={autoTargetRef}
-              className="rounded-lg border-2 border-orange-200 bg-orange-50 p-4"
+              className="bg-card rounded-lg border-2 border-orange-500 p-4"
             >
               <div className="mb-2 flex items-center gap-2">
                 <Badge variant="destructive">Auto Target</Badge>
                 <span className="text-sm font-medium">No Animation</span>
               </div>
-              <p className="text-sm text-orange-700">
+              <p className="text-sm">
                 This target uses <code>behavior: "auto"</code> for instant
                 scrolling without animation. Also used when reduced motion is
                 preferred.
