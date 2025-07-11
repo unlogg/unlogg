@@ -29,7 +29,6 @@ import { FloatingToolbarKit } from "@unlogg/ui/components/editor/plugins/floatin
 import { LinkKit } from "@unlogg/ui/components/editor/plugins/link-kit";
 import { SlashKit } from "@unlogg/ui/components/editor/plugins/slash-kit";
 import { SlateEditor, Value } from "platejs";
-import { useEffect, useState } from "react";
 
 export type MarkdownEditorProps = {
   onChangeContent?: (value: Value) => void;

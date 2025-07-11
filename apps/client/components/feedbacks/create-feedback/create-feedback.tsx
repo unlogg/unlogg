@@ -1,9 +1,12 @@
 import { Button } from "@unlogg/ui/components/button";
-import { Input } from "@unlogg/ui/components/input";
-import { ScrollArea } from "@unlogg/ui/components/scroll-area";
-import { Separator } from "@unlogg/ui/components/separator";
-import { Textarea } from "@unlogg/ui/components/textarea";
-import { MarkdownEditor } from "@unlogg/ui/components/unlogg-ui/markdown-editor/markdown-editor";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@unlogg/ui/components/command";
 import {
   Form,
   FormControl,
@@ -13,31 +16,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@unlogg/ui/components/form";
+import { Input } from "@unlogg/ui/components/input";
 import { UseFormReturn } from "react-hook-form";
-import {
-  formSchema,
-  FormValues,
-  maxCharacters,
-} from "../create-feedback-modal";
-import { z } from "zod";
-import { Select } from "@unlogg/ui/components/select";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@unlogg/ui/components/command";
+import { FormValues, maxCharacters } from "../create-feedback-modal";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@unlogg/ui/components/popover";
-import { CheckIcon, ChevronsUpDown } from "lucide-react";
 import { cn } from "@unlogg/ui/lib/utils";
-import { SiMarkdown } from "react-icons/si";
+import { CheckIcon, ChevronsUpDown } from "lucide-react";
 import { DescriptionEditor } from "./description-editor";
 
 const feedbackType = [

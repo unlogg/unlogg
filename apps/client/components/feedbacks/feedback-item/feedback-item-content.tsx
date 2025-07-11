@@ -5,13 +5,12 @@ import {
 } from "@unlogg/ui/components/avatar";
 import { Badge } from "@unlogg/ui/components/badge";
 import { Button } from "@unlogg/ui/components/button";
-import { Maximize, Maximize2, MessageCircle, X } from "lucide-react";
-import { Upvote } from "../feedback-card.client";
+import { Label } from "@unlogg/ui/components/label";
 import { ScrollArea } from "@unlogg/ui/components/scroll-area";
 import { Separator } from "@unlogg/ui/components/separator";
-import { Collapsible } from "@unlogg/ui/components/collapsible-animated";
+import { MessageCircle } from "lucide-react";
+import { Upvote } from "../feedback-card.client";
 import { FeedbackItemDescriptionCollapsible } from "./feedback-item-content.client";
-import { Label } from "@unlogg/ui/components/label";
 
 export type FeedbackItemProps = {
   id: string;

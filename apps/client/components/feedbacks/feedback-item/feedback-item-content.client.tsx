@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { Button } from "@unlogg/ui/components/button";
-import { ChevronDown, ChevronsUpDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export const FeedbackItemDescriptionCollapsible = ({
   description,
