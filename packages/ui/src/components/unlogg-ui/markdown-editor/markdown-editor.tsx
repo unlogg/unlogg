@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BlockquotePlugin,
   BoldPlugin,
@@ -26,23 +28,27 @@ import { CodeBlockKit } from "@unlogg/ui/components/editor/plugins/code-block-ki
 import { FloatingToolbarKit } from "@unlogg/ui/components/editor/plugins/floating-toolbar-kit";
 import { LinkKit } from "@unlogg/ui/components/editor/plugins/link-kit";
 import { SlashKit } from "@unlogg/ui/components/editor/plugins/slash-kit";
-import { Value } from "platejs";
+import { SlateEditor, Value } from "platejs";
+import { useEffect, useState } from "react";
 
 export type MarkdownEditorProps = {
   onChangeContent?: (value: Value) => void;
   variant: "comment" | "default";
+  maxCharacters?: number;
+  onCharactersCountChange?: (count: number) => void;
+  onEditorFocus?: () => void;
+  onEditorBlur?: () => void;
+  initialValue?: string;
 };
-
-const initialValue: Value = [
-  //   {
-  //     type: "paragraph",
-  //     children: [{ text: "Type your amazing content here..." }],
-  //   },
-];
 
 function MarkdownEditor({
   onChangeContent,
   variant = "comment",
+  maxCharacters = 1000,
+  onCharactersCountChange = () => {},
+  onEditorFocus = () => {},
+  onEditorBlur = () => {},
+  initialValue,
 }: MarkdownEditorProps) {
   const editor = usePlateEditor({
     plugins: [
@@ -65,28 +71,36 @@ function MarkdownEditor({
       BlockquotePlugin.withComponent(BlockquoteElement),
     ], // Add the mark plugins
     value: () => {
-      const savedValue = localStorage.getItem("installation-next-demo");
-      return savedValue ? JSON.parse(savedValue) : initialValue;
+      // const savedValue = localStorage.getItem("installation-next-demo");
+      // return savedValue
+      //   ? JSON.parse(savedValue)
+      //   : JSON.parse(initialValue ?? "[]");
+      return initialValue ? JSON.parse(initialValue) : [];
     },
+    maxLength: maxCharacters, // Set the maximum character limit
   }); // Initializes the editor instance
+
   return (
     <Plate
       editor={editor}
       onChange={({ value }) => {
+        console.log("Editor value changed:", value);
         localStorage.setItem("installation-next-demo", JSON.stringify(value));
         if (onChangeContent) {
           onChangeContent(value);
         }
+        if (onCharactersCountChange) {
+          onCharactersCountChange(getEditorCharacterCount(editor));
+        }
       }}
     >
-      <div className="flex-1" />
-
-      <EditorContainer className="active:border-primary focus:border">
-        {" "}
+      <EditorContainer className="active:border-primary relative focus:border">
         {/* Styles the editor area */}
         <Editor
           placeholder="Your feedback description..."
           variant={variant}
+          onFocus={onEditorFocus}
+          onBlur={onEditorBlur}
           className="selection:bg-primary selection:text-primary-foreground text-md text-foreground min-h-30 p-2"
         />
       </EditorContainer>
@@ -94,4 +108,15 @@ function MarkdownEditor({
   );
 }
 
-export { MarkdownEditor };
+export { MarkdownEditor, getEditorWordCount };
+
+function getEditorWordCount(editor: SlateEditor) {
+  const text = editor.api.string([]);
+
+  return text ? text.trim().split(/\s+/).filter(Boolean).length : 0;
+}
+
+export function getEditorCharacterCount(editor: SlateEditor) {
+  const text = editor.api.string([]);
+  return text ? text.length : 0;
+}
