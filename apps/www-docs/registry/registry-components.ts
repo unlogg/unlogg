@@ -3,6 +3,21 @@ import * as React from "react";
 
 export const components: Registry = [
   {
+    name: "active-button",
+    type: "registry:component",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/active-button/active-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import("@unlogg/ui/components/unlogg-ui/active-button/active-button")
+    ),
+  },
+  {
     name: "user-selector",
     type: "registry:component",
     dependencies: ["lucide-react"],
@@ -67,6 +82,24 @@ export const components: Registry = [
       () =>
         import(
           "../../../packages/ui/src/components/unlogg-ui/date-selector/date-selector"
+        )
+    ),
+  },
+
+  {
+    name: "upvote-button",
+    type: "registry:component",
+    dependencies: ["lucide-react", "chrono-node"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button"
         )
     ),
   },

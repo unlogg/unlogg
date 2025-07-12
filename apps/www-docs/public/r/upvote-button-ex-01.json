@@ -1,0 +1,15 @@
+{
+  "name": "upvote-button-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport UpvoteButton from \"@/components/ui/upvote-button\";\n\nconst UpvoteButtonExample = () => {\n  const [upvotes, setUpvotes] = useState(10);\n  const [upvoted, setUpvoted] = useState(false);\n\n  const handleVoteChange = (newState: {\n    upvotes: number;\n    upvoted: boolean;\n  }) => {\n    setUpvotes(newState.upvotes);\n    setUpvoted(newState.upvoted);\n  };\n\n  return (\n    <div className=\"p-4\">\n      <UpvoteButton\n        upvotes={upvotes}\n        upvoted={upvoted}\n        onVoteChange={handleVoteChange}\n      />\n    </div>\n  );\n};\n\nexport default UpvoteButtonExample;\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button-ex-01.tsx",
+      "target": "/components/unlogg-ui/upvote-button-ex-01.tsx"
+    }
+  ]
+}

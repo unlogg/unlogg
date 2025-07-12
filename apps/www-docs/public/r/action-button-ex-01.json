@@ -1,0 +1,15 @@
+{
+  "name": "action-button-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport ActionButton from \"@/components/ui/action-button\";\n\nexport default function ActionButton_Ex_01() {\n  return (\n    <div>\n      <ActionButton>Click me</ActionButton>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/action-button/action-button-ex-01.tsx",
+      "target": "/components/unlogg-ui/action-button-ex-01.tsx"
+    }
+  ]
+}

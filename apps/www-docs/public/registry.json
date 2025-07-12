@@ -1,6 +1,19 @@
 {
   "registry": [
     {
+      "name": "active-button",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/active-button/active-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "user-selector",
       "type": "registry:component",
       "dependencies": [
@@ -49,6 +62,46 @@
       "files": [
         {
           "path": "../../packages/ui/src/components/unlogg-ui/date-selector/date-selector.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "upvote-button",
+      "type": "registry:component",
+      "dependencies": [
+        "lucide-react",
+        "chrono-node"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "active-button-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/active-button/active-button-ex-01.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "upvote-button-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button-ex-01.tsx",
           "type": "registry:component"
         }
       ]

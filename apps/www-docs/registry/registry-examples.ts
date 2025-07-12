@@ -3,6 +3,41 @@ import * as React from "react";
 
 export const examples: Registry = [
   {
+    name: "active-button-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/active-button/active-button-ex-01.tsx",
+        type: "registry:component",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/active-button/active-button-ex-01"
+        )
+    ),
+  },
+
+  {
+    name: "upvote-button-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button-ex-01.tsx",
+        type: "registry:component",
+      },
+    ],
+    component: React.lazy(
+      () =>
+        import(
+          "../../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button-ex-01"
+        )
+    ),
+  },
+  {
     name: "user-selector-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],

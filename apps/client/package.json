@@ -1,0 +1,37 @@
+{
+  "name": "client",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001 --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@number-flow/react": "^0.5.10",
+    "@unlogg/ui": "workspace:*",
+    "lucide-react": "^0.475.0",
+    "next": "^15.2.3",
+    "next-navigation-guard": "^0.2.0",
+    "next-themes": "^0.4.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.58.1",
+    "react-icons": "^5.5.0",
+    "use-scramble": "^2.2.15",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@unlogg/eslint-config": "workspace:^",
+    "@unlogg/typescript-config": "workspace:*",
+    "typescript": "^5.7.3"
+  }
+}
