@@ -5,7 +5,6 @@ import {
 } from "@unlogg/ui/components/avatar";
 import { Badge } from "@unlogg/ui/components/badge";
 import { Button } from "@unlogg/ui/components/button";
-import UpvoteRating_Animated from "@unlogg/ui/components/unlogg-ui/upvote/upvote";
 import { MessageCircle } from "lucide-react";
 import { Upvote } from "./feedback-card.client";
 import Link from "next/link";

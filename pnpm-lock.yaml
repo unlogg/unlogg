@@ -95,6 +95,9 @@ importers:
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.0)
+      use-scramble:
+        specifier: ^2.2.15
+        version: 2.2.15(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       zod:
         specifier: ^3.25.67
         version: 3.25.67

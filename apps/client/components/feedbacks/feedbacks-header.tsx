@@ -1,11 +1,16 @@
+"use client";
+
 import { Button } from "@unlogg/ui/components/button";
 import { Clock, PlusIcon, Sparkle, TrendingUp } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function FeedbacksHeader() {
   return (
-    <div className="flex items-center justify-between py-4 bg-background border-b sticky top-[50px] z-10">
+    <div className="flex items-center justify-between bg-background py-4  border-b sticky top-[50px] z-10">
       <div className="flex items-center gap-2">
-        <FeedbackView />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FeedbackView />
+        </Suspense>
       </div>
       <div>
         {/* <Button>
@@ -29,19 +34,43 @@ import {
   TabsTrigger,
 } from "@unlogg/ui/components/tabs";
 import { CreateFeedbackButton } from "./create-feedback-modal";
+import ActiveButton from "@unlogg/ui/components/unlogg-ui/active-button/active-button";
+import { Suspense } from "react";
 
 export default function FeedbackView() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentView = searchParams.get("view") || "top";
+
+  const setView = (view: string) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.set("view", view);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outlineSecondary">
+      <ActiveButton
+        size="sm"
+        isActive={currentView === "top"}
+        onClick={() => setView("top")}
+      >
         <Sparkle /> Top
-      </Button>
-      <Button variant="outlineSecondary">
+      </ActiveButton>
+      <ActiveButton
+        size="sm"
+        isActive={currentView === "new"}
+        onClick={() => setView("new")}
+      >
         <Clock /> New
-      </Button>
-      <Button variant="outlineSecondary">
+      </ActiveButton>
+      <ActiveButton
+        size="sm"
+        isActive={currentView === "trending"}
+        onClick={() => setView("trending")}
+      >
         <TrendingUp /> Trending
-      </Button>
+      </ActiveButton>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function FeedbackLayout({
   modal: ReactNode;
 }) {
   return (
-    <div className="mx-auto max-w-6xl relative">
+    <div className="mx-auto max-w-7xl relative">
       {children}
       {modal}
     </div>

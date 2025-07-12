@@ -1,6 +1,12 @@
-import { DM_Sans, Geist, Geist_Mono, Public_Sans } from "next/font/google";
-
-import "@unlogg/ui/globals.css";
+import {
+  DM_Sans,
+  Geist,
+  Geist_Mono,
+  Public_Sans,
+  Sora,
+} from "next/font/google";
+import "./global.css";
+// import "@unlogg/ui/globals.css";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/header/site-header";
 
@@ -14,6 +20,11 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 });
 
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${fontSans.variable} ${fontMono.variable} ${sora.variable}  font-sans antialiased`}
       >
         <Providers>
           <SiteHeader />
