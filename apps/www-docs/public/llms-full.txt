@@ -3748,6 +3748,36 @@ This will allow you to specify the path to the project where you want to install
 Read more about monorepo support using the `shadcn` CLI in the [shadcn/ui documentation](https://ui.shadcn.com/docs/monorepo).
 
 
+# Active Button
+URL: /unlogg-ui/components/active-button
+
+A button component with active functionality
+
+A button component that can toggle its active state, providing visual feedback when pressed.
+
+<ComponentPreview name="active-button-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="active-button" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="active-button" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="active-button" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+
 # Combobox Add
 URL: /unlogg-ui/components/combobox-add
 
@@ -3850,6 +3880,42 @@ The Date Selector component uses [chrono-node](https://github.com/wanasit/chrono
 <ComponentPreview name="date-selector-ex-02" classNameComponentContainer="min-h-[400px]" />
 
 
+# Upvote Button
+URL: /unlogg-ui/components/upvote-button
+
+A button component with upvote functionality
+
+A button component that allows users to upvote content, providing visual feedback on the number of upvotes received.
+
+<ComponentPreview name="upvote-button-ex-01" classNameComponentContainer="min-h-[200px]" />
+
+## Install
+
+<ComponentInstall name="upvote-button" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="upvote-button" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="upvote-button" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Features
+
+* **Upvote Count**: Displays the number of upvotes.
+* **Upvote State**: Changes appearance when the content is upvoted.
+* **Customizable**: Easily integrate into your project with customizable styles.
+
+
 # User Selector
 URL: /unlogg-ui/components/user-selector
 
@@ -3947,7 +4013,7 @@ For more info see the [LICENSE](https://github.com/unlogg/blob/main/LICENSE) fil
 # Installation
 URL: /unlogg-ui/installation
 
-A simple guide to set up commerce ui with the required dependencies and structure.
+A simple guide to set up unlogg/ui with the required dependencies and structure.
 
 This project is built with **Next.js**, using **TypeScript** and **Tailwind CSS** for all components.
 
