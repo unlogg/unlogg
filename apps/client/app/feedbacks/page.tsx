@@ -14,7 +14,7 @@ import { Suspense } from "react";
 export default function FeedbacksPage() {
   return (
     <div className="mt-0 ">
-      <div className="grid grid-cols-4 gap-4 relative">
+      <div className="grid grid-cols-3 gap-4 relative">
         <Suspense fallback={<div>Loading...</div>}>
           <Boards />
         </Suspense>
@@ -26,7 +26,6 @@ export default function FeedbacksPage() {
             ))}
           </div>
         </div>
-        <Latests />
       </div>
     </div>
   );
