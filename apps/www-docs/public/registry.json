@@ -422,6 +422,22 @@
       ]
     },
     {
+      "name": "use-in-viewport-ex-01",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://unlogg.com/r/use-in-viewport.json"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport-ex-01.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "use-interval-ex-01",
       "type": "registry:example",
       "dependencies": [
@@ -966,6 +982,20 @@
           "path": "../../packages/ui/src/hooks/unlogg-hooks/use-leave-page.ts",
           "type": "registry:hook",
           "target": "/hooks/use-leave-page.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-in-viewport",
+      "type": "registry:hook",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport.ts",
+          "type": "registry:hook",
+          "target": "/hooks/use-in-viewport.ts"
         }
       ]
     },

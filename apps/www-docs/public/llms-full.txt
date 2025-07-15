@@ -1306,6 +1306,105 @@ function ConditionalStyling() {
 * **Progressive Disclosure**: Reveal additional content on hover
 
 
+# useInViewport
+URL: /unlogg-hooks/ui-and-dom/use-in-viewport
+
+A custom React hook that detects if an element is in the viewport.
+
+`useInViewport` is a custom React hook that detects when an element is in the viewport. It accepts a ref object pointing to the element you want to monitor and returns a boolean indicating the visibility state. This is useful for creating lazy-loaded components or triggering animations when an element comes into view.
+
+## Example
+
+<ComponentPreview name="use-in-viewport-ex-01" classNameComponentContainer="min-h-[600px]" />
+
+## Install
+
+<ComponentInstall name="use-in-viewport" classNameComponentContainer="min-h-[200px]">
+  <CLIInstall name="use-in-viewport" />
+
+  <ManualInstall>
+    <Steps>
+      <Step>
+        Copy and paste the following code into your project
+      </Step>
+
+      <ComponentSource name="use-in-viewport" />
+
+      <Step>
+        Update the import paths to match your project setup
+      </Step>
+    </Steps>
+  </ManualInstall>
+</ComponentInstall>
+
+## Notes
+
+* Returns an object with a callback `ref` to attach to the element you want to observe.
+* Returns a boolean `inView` indicating if the element is currently in the viewport.
+* Uses the Intersection Observer API under the hood.
+
+## API Reference
+
+### Parameters
+
+<TypeTable
+  type={{
+  // No parameters; hook does not accept arguments.
+}}
+/>
+
+### Returns
+
+<TypeTable
+  type={{
+  ref: {
+    description: "A callback ref to be attached to the target element.",
+    type: "React.RefCallback<T | null>",
+  },
+  inView: {
+    description: "A boolean indicating whether the element is currently in the viewport.",
+    type: "boolean",
+  },
+}}
+/>
+
+## Usage
+
+```tsx
+import { useInViewport } from "@/hooks/use-in-viewport";
+
+function InViewportComponent() {
+  const { ref, inView } = useInViewport<HTMLDivElement>();
+
+  return (
+    <div 
+      ref={ref}
+      className={inView ? "bg-green-100" : "bg-gray-100"}
+    >
+      {inView ? "In viewport!" : "Out of viewport"}
+    </div>
+  );
+}
+```
+
+## Use Cases
+
+* **Lazy Loading**: Load images or components only when they enter the viewport
+* **Animations**: Trigger animations when elements scroll into view
+* **Infinite Scroll**: Detect when the user reaches the end of a list
+* **Analytics**: Track when elements are actually viewed by users
+* **Sticky Headers**: Activate sticky headers when they enter/leave the viewport
+* **Progress Indicators**: Show progress as sections enter the viewport
+* **Ad Visibility**: Measure ad impressions based on viewport entry
+* **Reveal Effects**: Gradually reveal content as it scrolls into view
+* **Button States**: Create enhanced button hover states
+* **Image Overlays**: Show overlays when images are hovered
+* **Navigation Items**: Highlight navigation items on hover
+* **Form Field Enhancement**: Show additional information on form field hover
+* **Data Visualization**: Highlight chart elements on hover
+* **Progressive Disclosure**: Reveal additional content on hover
+
+
 # useIsClient
 URL: /unlogg-hooks/ui-and-dom/use-is-client
 

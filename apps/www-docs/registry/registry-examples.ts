@@ -377,6 +377,22 @@ export const examples: Registry = [
   },
 
   {
+    name: "use-in-viewport-ex-01",
+    type: "registry:example",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["https://unlogg.com/r/use-in-viewport.json"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport-ex-01.tsx",
+        type: "registry:example",
+      },
+    ],
+    component: React.lazy(
+      () => import("@unlogg/ui/hooks/unlogg-hooks/use-in-viewport-ex-01")
+    ),
+  },
+
+  {
     name: "use-interval-ex-01",
     type: "registry:example",
     dependencies: ["lucide-react"],
