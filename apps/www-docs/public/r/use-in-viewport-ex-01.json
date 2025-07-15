@@ -1,0 +1,18 @@
+{
+  "name": "use-in-viewport-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://unlogg.com/r/use-in-viewport.json"
+  ],
+  "files": [
+    {
+      "type": "registry:example",
+      "content": "\"use client\";\n\nimport { Badge } from \"@/components/ui/badge\";\nimport { Button } from \"@/components/ui/button\";\nimport { Card } from \"@/components/ui/card\";\nimport * as React from \"react\";\nimport { useInViewport } from \"@/hooks/use-in-viewport\";\n\nexport default function UseInViewport_Ex_01() {\n  const [show, setShow] = React.useState(true);\n  const { ref, inView } = useInViewport<HTMLDivElement>();\n\n  return (\n    <div className=\"flex flex-col items-center gap-6 p-6\">\n      {/* Fixed status badge */}\n      <div className=\"bg-card border-primary fixed top-25 left-1/2 z-[9999] -translate-x-1/2 rounded border p-4 shadow-md\">\n        <Badge variant={inView ? \"default\" : \"secondary\"}>\n          {inView ? \"In viewport\" : \"Out of viewport\"}\n        </Badge>\n      </div>\n      <Card className=\"w-full max-w-2xl p-6\">\n        <div className=\"space-y-6\">\n          <div className=\"text-center\">\n            <h3 className=\"mb-2 text-lg font-semibold\">\n              Element In Viewport Observer\n            </h3>\n          </div>\n          <div className=\"flex justify-center gap-2\">\n            <Button\n              onClick={() => setShow((prev) => !prev)}\n              variant=\"outline\"\n              size=\"sm\"\n            >\n              {show ? \"Hide\" : \"Show\"} Element\n            </Button>\n          </div>\n          <div className=\"flex justify-center\">\n            {show && (\n              <div\n                ref={ref}\n                className=\"bg-card-foreground min-h-[100px] w-[300px] rounded-lg border-2 border-dashed border-purple-500 p-4 text-center\"\n              >\n                <div className=\"mb-2 text-sm font-medium text-purple-700\">\n                  Observed Element\n                </div>\n                <div className=\"text-xs text-purple-600\">\n                  Scroll this element in and out of view to see the status\n                  change.\n                </div>\n              </div>\n            )}\n          </div>\n          <div className=\"text-muted-foreground text-center text-xs\">\n            Try scrolling the page so the observed element enters or leaves the\n            viewport. The status badge above will always remain visible.\n          </div>\n        </div>\n      </Card>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport-ex-01.tsx",
+      "target": "/components/unlogg-ui/use-in-viewport-ex-01.tsx"
+    }
+  ]
+}

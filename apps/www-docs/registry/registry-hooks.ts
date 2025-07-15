@@ -23,6 +23,7 @@ import { useStateHistory } from "@unlogg/ui/hooks/unlogg-hooks/use-state-history
 import { useTimeout } from "@unlogg/ui/hooks/unlogg-hooks/use-timeout";
 import { useToggle } from "@unlogg/ui/hooks/unlogg-hooks/use-toggle";
 import { useWindowSize } from "@unlogg/ui/hooks/unlogg-hooks/use-window-size";
+import { useInViewport } from "@unlogg/ui/hooks/unlogg-hooks/use-in-viewport";
 
 export const hooks: Registry = [
   {
@@ -234,6 +235,20 @@ export const hooks: Registry = [
       },
     ],
     component: useLeavePage,
+  },
+
+  {
+    name: "use-in-viewport",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport.ts",
+        type: "registry:hook",
+        target: "/hooks/use-in-viewport.ts",
+      },
+    ],
+    component: useInViewport,
   },
 
   {

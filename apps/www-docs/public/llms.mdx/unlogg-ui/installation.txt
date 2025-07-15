@@ -1,7 +1,7 @@
 # Installation
 URL: /unlogg-ui/installation
 
-A simple guide to set up commerce ui with the required dependencies and structure.
+A simple guide to set up unlogg/ui with the required dependencies and structure.
 
 This project is built with **Next.js**, using **TypeScript** and **Tailwind CSS** for all components.
 

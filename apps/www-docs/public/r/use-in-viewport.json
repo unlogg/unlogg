@@ -1,0 +1,15 @@
+{
+  "name": "use-in-viewport",
+  "type": "registry:hook",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "\"use client\";\n\nimport { useCallback, useRef, useState } from \"react\";\n\nexport interface UseInViewportReturnValue<T extends HTMLElement = any> {\n  inView: boolean;\n  ref: React.RefCallback<T | null>;\n}\n\n/**\n * Custom React hook to determine if a DOM element is currently visible within the viewport using the Intersection Observer API.\n *\n * @template T - The type of the HTMLElement to observe.\n * @returns {UseInViewportReturnValue<T>} An object containing:\n *   - `ref`: A callback ref to be attached to the target element.\n *   - `inView`: A boolean indicating whether the element is in the viewport.\n *\n * @example\n * const { ref, inView } = useInViewport<HTMLDivElement>();\n * return <div ref={ref}>{inView ? \"Visible\" : \"Not visible\"}</div>;\n *\n * @remarks\n * - Automatically disconnects the observer when the element is unmounted.\n * - Falls back gracefully if IntersectionObserver is not available.\n */\nfunction useInViewport<\n  T extends HTMLElement = any,\n>(): UseInViewportReturnValue<T> {\n  const observer = useRef<IntersectionObserver | null>(null);\n  const [inView, setInView] = useState(false);\n\n  const ref: React.RefCallback<T | null> = useCallback((node) => {\n    if (typeof IntersectionObserver !== \"undefined\") {\n      if (node && !observer.current) {\n        observer.current = new IntersectionObserver((entries) =>\n          setInView(entries.some((entry) => entry.isIntersecting))\n        );\n      } else {\n        observer.current?.disconnect();\n      }\n\n      if (node) {\n        observer.current?.observe(node);\n      } else {\n        setInView(false);\n      }\n    }\n  }, []);\n\n  return { ref, inView };\n}\n\nexport { useInViewport };\n",
+      "path": "/../../packages/ui/src/hooks/unlogg-hooks/use-in-viewport.ts",
+      "target": "/hooks/use-in-viewport.ts"
+    }
+  ]
+}

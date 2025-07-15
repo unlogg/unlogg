@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+@plugin "tailwind-scrollbar-hide";
 @source "../../../apps/**/*.{ts,tsx}";
 @source "../../../components/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
@@ -8,6 +10,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --brand: oklch(0.65 0.18 132);
   --color-fd-primary: oklch(0.65 0.18 132);
   --background: oklch(0.9979 0.0066 115.7004);
   --foreground: oklch(0.423 0.0426 123.7122);
@@ -58,9 +61,11 @@
   --shadow-xl:
     0px 4px 8px -1px hsl(0 0% 0% / 0.1), 0px 8px 10px -2px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+  --highlight: oklch(0.852 0.199 91.936);
 }
 
 .dark {
+  --brand: oklch(0.8972 0.1786 126.6652);
   --color-fd-primary: oklch(0.8972 0.1786 126.6652);
   --background: oklch(0.1591 0 0);
   --foreground: oklch(0.8871 0.0136 115.8605);
@@ -111,12 +116,16 @@
   --shadow-xl:
     0px 4px 8px -1px hsl(0 0% 0% / 0.1), 0px 8px 10px -2px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+  --highlight: oklch(0.852 0.199 91.936);
 }
 
 @theme inline {
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
     alternate;
   --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+
+  --animate-collapsible-down: collapsible-down 0.2s ease-out;
+  --animate-collapsible-up: collapsible-up 0.2s ease-out;
 
   @keyframes shimmer-slide {
     to {
@@ -137,6 +146,28 @@
     }
     100% {
       transform: translateZ(0) rotate(360deg);
+    }
+  }
+
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
     }
   }
   --color-background: var(--background);
@@ -189,6 +220,7 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+  --color-highlight: var(--highlight);
 }
 @layer base {
   * {

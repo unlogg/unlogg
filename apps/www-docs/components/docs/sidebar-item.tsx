@@ -15,7 +15,7 @@ export const SidebarItem = ({
       {isNew && (
         <Badge
           variant="outline"
-          className="grow-0 border-teal-500/50 text-teal-500"
+          className="ml-1 grow-0 border-teal-500/50 text-teal-500"
         >
           New
         </Badge>
@@ -23,7 +23,7 @@ export const SidebarItem = ({
       {isAlpha && (
         <Badge
           variant="secondary"
-          className="grow-0 border-yellow-500/50 text-yellow-500"
+          className="ml-1 grow-0 border-yellow-500/50 text-yellow-500"
         >
           Alpha
         </Badge>

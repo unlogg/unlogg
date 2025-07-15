@@ -1,0 +1,15 @@
+{
+  "name": "active-button-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport ActiveButton from \"@/components/ui/active-button\";\nimport { useBoolean } from \"@/hooks/use-boolean\";\nexport default function ActiveButton_Ex_01() {\n  const { value: value1, toggle: toggle1 } = useBoolean(false);\n  const { value: value2, toggle: toggle2 } = useBoolean(false);\n  const { value: value3, toggle: toggle3 } = useBoolean(false);\n  return (\n    <div className=\"flex items-center justify-center gap-2\">\n      <ActiveButton isActive={value1} onClick={toggle1}>\n        ✨ Show Features\n      </ActiveButton>\n      <ActiveButton isActive={value2} onClick={toggle2}>\n        🪲 Show Bugs\n      </ActiveButton>\n      <ActiveButton isActive={value3} onClick={toggle3}>\n        💬 Show Comments\n      </ActiveButton>\n    </div>\n  );\n}\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/active-button/active-button-ex-01.tsx",
+      "target": "/components/unlogg-ui/active-button-ex-01.tsx"
+    }
+  ]
+}

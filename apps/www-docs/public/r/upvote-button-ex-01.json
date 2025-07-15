@@ -1,0 +1,15 @@
+{
+  "name": "upvote-button-ex-01",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport UpvoteButton from \"@/components/ui/upvote-button\";\n\nconst UpvoteButtonExample = () => {\n  const [upvotes, setUpvotes] = useState(10);\n  const [upvoted, setUpvoted] = useState(false);\n\n  const [upvotes2, setUpvotes2] = useState(199);\n  const [upvoted2, setUpvoted2] = useState(true);\n\n  const [upvotes3, setUpvotes3] = useState(2566);\n  const [upvoted3, setUpvoted3] = useState(false);\n\n  const handleVoteChange = (newState: {\n    upvotes: number;\n    upvoted: boolean;\n  }) => {\n    setUpvotes(newState.upvotes);\n    setUpvoted(newState.upvoted);\n  };\n\n  return (\n    <div className=\"flex flex-row items-center justify-center gap-4 p-4\">\n      <UpvoteButton\n        upvotes={upvotes}\n        upvoted={upvoted}\n        onVoteChange={(newState) => {\n          setUpvotes(newState.upvotes);\n          setUpvoted(newState.upvoted);\n        }}\n      />\n      <UpvoteButton\n        upvotes={upvotes2}\n        upvoted={upvoted2}\n        onVoteChange={(newState) => {\n          setUpvotes2(newState.upvotes);\n          setUpvoted2(newState.upvoted);\n        }}\n      />\n      <UpvoteButton\n        upvotes={upvotes3}\n        upvoted={upvoted3}\n        onVoteChange={(newState) => {\n          setUpvotes3(newState.upvotes);\n          setUpvoted3(newState.upvoted);\n        }}\n      />\n    </div>\n  );\n};\n\nexport default UpvoteButtonExample;\n",
+      "path": "/../../packages/ui/src/components/unlogg-ui/upvote-button/upvote-button-ex-01.tsx",
+      "target": "/components/unlogg-ui/upvote-button-ex-01.tsx"
+    }
+  ]
+}
